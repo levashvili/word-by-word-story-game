@@ -4,7 +4,8 @@
  - Express
  - Http (to run Express)
  - Underscore (because it's cool)
- - Socket.IO(Note: we need a web server to attach Socket.IO to
+ - Socket.IO(Note: we need a web server to attach Socket.IO to)
+
 
  It is a common practice to name the variables after the module name.
  Ex: http is the "http" module, express is the "express" module, etc.
