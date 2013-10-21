@@ -1,0 +1,29 @@
+doctype 5
+html
+    head
+        link(rel='stylesheet', href='http://fonts.googleapis.com/css?family=Open+Sans')
+        link(rel='stylesheet', href='/css/style.css')
+        script(src='/js/socket.io.js')
+        script(src='/js/jquery-1.10.2.js')
+        script(src='/js/index.js')
+        title Word-By-Word Story Game
+    body
+        h1 Word-By-Word Story Game
+        div
+            h2 Rules of the Game
+            p The intent of the game is to compose a story together with other players, one word at a time. Each player submits one word only on his/her turn. The player is given 10 seconds to provide a word, after which time the turn moves to the next player. After missing his turn three times in a row, the player is assumed MIA and removed from the game.
+            input(type="textarea", rows="1", cols="20", placeholder="Your Name", maxlength=30)#name
+            input(type="button", value="Join Game", disabled="true")#join-game
+        div
+            h2 Players
+            div#players
+            div
+                input(type="button", value="Be Right Back")#be-right-back
+                input(type="button", value="Back From Break")#back-from-break
+        div
+            h2 Story
+            p#story-text No story in progress.
+        div
+            div#timer
+            input(type="textarea", rows="1", cols="20", placeholder="Type in word!", maxlength=30)#word
+            input(type="button", value="Submit Word", disabled="true")#submit-word
