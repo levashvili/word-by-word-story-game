@@ -18,7 +18,9 @@ var express = require("express")
     , app = express()
     , http = require("http").createServer(app)
     , io = require("socket.io").listen(http)
-    , _ = require("underscore");
+    , _ = require("underscore")
+    , gameRoom = require("./gameRoom")
+    , util = require('util');
 
 /*
  The list of participants in our game (both observers and players).
@@ -63,70 +65,20 @@ app.get("/", function(request, response) {
 });
 
 /* Socket.IO events */
-io.on("connection", function(socket){
 
-    /*
-     When a new user connects to our server, we expect an event called "newUser"
-     and then we'll emit an event called "beginObservingGame" to the new user
-     with the story text and a list of all players.
-     */
-    socket.on("newUser", function(data) {
-        participants.push({id: data.id, name: "", isPlaying: false, status:"active"});
-        console.log("received newUser request with id: " + data.id);
-        socket.emit('beginObservingGame', {storyText: "Sample story text from the server", players: getPlayers()});
-        //io.sockets.emit("newConnection", {participants: participants});
-    });
-
-    socket.on('playerJoinsGame', function(data) {
-        console.log('player joins game');
-        //emit begin playing event
-        socket.emit('beginPlaying', {});
-    });
-
-    socket.on('playerSubmitsWord', function(data) {
-        console.log('player submits word');
-        //send the word to everybody observing or playing game
-        io.sockets.emit('incomingWord', { word: data.word, id: data.id });
-    });
-
-    socket.on('playerRequestsBreak', function(data) {
-        console.log('player requests break');
-        //remove player from active players queue
-        //notify everyone involved that player is on break
-        io.sockets.emit('playerTakingBreak', {players: getPlayers()});
-    });
-
-    socket.on('playerReturnsFromBreak', function(data) {
-        console.log('player back from break');
-        io.sockets.emit('playerReturningFromBreak', {players: getPlayers()});
-    });
-    /*
-     When a client disconnects from the server, the event "disconnect" is automatically
-     captured by the server. It will then emit an event called "userDisconnected" to
-     all participants with the id of the client that disconnected
-     */
-    socket.on("disconnect", function() {
-        participants = _.without(participants,_.findWhere(participants, {id: socket.id}));
-        io.sockets.emit("playerLeavesGame", {id: socket.id, sender:"system"});
+io.on("connection", function(socket) {
+    var sessionId = socket.id;
+    //console.log(util.inspect(socket.id));
+    //console.log("connected with id " + sessionId);
+    console.log(util.inspect(gameRoom));
+    socket.on('playerEvent', function(data) {
+        //gameRoom.playerJoinsGameRoom(sessionId);
+        gameRoom.respondToPlayerEvent(data);
     });
 });
-//Helper functions
-//returns a list of players only
-function getPlayers(participants) {
-    return [
-     {
-       id: "1000",
-       name: "Jonathan",
-       status: ""
-     },
-     {
-       id: "2000",
-       name: "Emory",
-       status: "brb"
-    }
-    ];
-}
+
 //Start the http server at port and IP defined before
 http.listen(app.get("port"), app.get("ipaddr"), function() {
     console.log("Server up and running. Go to http://" + app.get("ipaddr") + ":" + app.get("port"));
 });
+
