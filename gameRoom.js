@@ -91,6 +91,8 @@ GameRoom.prototype.playerLeaves = function(playerId) {
             break;
         }
     }
+    //update next turn
+    this.gameTurnPlayerId = this.getNextPlayerId();
 };
 
 GameRoom.prototype.getPlayers = function() {
@@ -137,6 +139,10 @@ GameRoom.prototype.playerTakesBreak = function(playerId) {
             break;
         }
     }
+    //if it is this player's turn
+    if(playerId == this.gameTurnPlayerId) {
+        this.gameTurnPlayerId = this.getNextPlayerId();
+    }
    //console.log("2. players inside playerTakesBreak " + util.inspect(this.players));
 };
 
@@ -159,19 +165,20 @@ GameRoom.prototype.newPlayerJoins = function(id) {
 };
 
 GameRoom.prototype.playerSubmitsWord = function(playerId, word) {
-    //update story
+    //update story only if correct player
+    if(playerId != this.gameTurnPlayerId) return;
     this.storyText = this.storyText + " " + word;
     //notify other players
     var notify = _(this.players).pluck('id');
-    console.log("id array " + util.inspect(notify))
-    this.emit('gameRoomEvent', null, {
+    var event = {
         name: 'playerSubmittedWord',
         data: {
-            id: playerId,
-            story: this.storyText,
-            notify: notify
+            id:playerId,
+            story: this.getStoryText(),
+            notify:notify
         }
-    });
+    };
+    this.emit('gameRoomEvent', null, event);
     //move to next player
     this.gameTurnPlayerId = this.getNextPlayerId();
 };
