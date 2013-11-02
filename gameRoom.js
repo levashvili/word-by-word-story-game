@@ -22,6 +22,7 @@
  */
 var events = require('events');
 var util = require('util');
+var _ = require('underscore');
 /*
 id: player id
 isPlaying: true/false
@@ -29,18 +30,44 @@ isOnBreak: true/false
 */
 
 function GameRoom (arg) {
-
     this.players = [];
     this.storyText = "";
     //index of the current player (whose turn it is) in the players array
     //-1 means the game hasn't started yet
     this.currentPlayerIndex = -1;
+    this.gameTurnPlayerId = null;
     events.EventEmitter.call(this);
     this.id = arg;
-    console.log("new instance of game room created with id: " + this.id);
+    //var sources = [];
+    //sources.push(arg);
+    if(typeof arg == 'object') {
+        _.extend(this, arg);
+    }
+    console.log("new instance of game room created: " + util.inspect(this));
 }
 
 util.inherits(GameRoom, events.EventEmitter);
+
+GameRoom.prototype.respondToPlayerEvent = function(event) {
+    switch (event.name) {
+        case 'newPlayerJoins':
+            this.newPlayerJoins(event.data.id);
+            //this.emit('gameRoomEvent', null, data);
+            break;
+        case 'playerSubmitsWord':
+            this.playerSubmitsWord(event.data.id, event.data.word);
+        default:
+            break;
+    }
+}
+
+GameRoom.prototype.getPlayerIdsArray = function() {
+    var playerIds = [];
+    for(var index = 0; index < this.players.length; index++) {
+        playerIds[index] = this.players[index].id;
+    }
+    return playerIds;
+}
 
 GameRoom.prototype.getId = function() {
     console.log("id of this game room is " + this.id);
@@ -53,13 +80,8 @@ GameRoom.prototype.generateEvent = function(message) {
     console.log('emitted gameRoomEvent: ' + message);
 };
 
-GameRoom.prototype.newPlayerJoins = function(id) {
-    console.log("inspect players inside newPlayerJoins: " + util.inspect(this.players));
-    this.players.push({id:id});
-};
-
 GameRoom.prototype.playerLeaves = function(playerId) {
-    console.log("inspect players of the cloned object: " + util.inspect(this.players))
+    //console.log("inspect players of the cloned object: " + util.inspect(this.players))
     var numberOfPlayers = this.players.length;
     for(index = 0; index < numberOfPlayers; index++) {
         var player = this.players[index];
@@ -76,22 +98,82 @@ GameRoom.prototype.getPlayers = function() {
     return JSON.parse(JSON.stringify(this.players));
 };
 
+GameRoom.prototype.getStoryText = function() {
+    return this.storyText;
+};
+
+GameRoom.prototype.getGameTurnPlayerId = function() {
+    return this.gameTurnPlayerId;
+};
+
 GameRoom.prototype.getNextPlayerId = function() {
     //console.log("what is players here? " + message + " " + util.inspect(this.players));
     var numberOfPlayers = this.players.length;
-    var currentPlayerIndex = this.currentPlayerIndex;
+    var currentPlayerIndex = _(this.players).pluck('id').indexOf(this.gameTurnPlayerId);
+    //in case all players are on break
+    var moveToNext = 0
     var nextPlayerIndex = (numberOfPlayers > 0) ? (currentPlayerIndex + 1) % numberOfPlayers : -1;
-    this.currentPlayerIndex = (nextPlayerIndex >= 0) ? nextPlayerIndex : this.currentPlayerIndex;
+    do {
+        var nextPlayerIndex = (numberOfPlayers > 0) ? (currentPlayerIndex + 1) % numberOfPlayers : -1;
+        var isOnBreak = (nextPlayerIndex >= 0) ? this.players[nextPlayerIndex].isOnBreak : false;
+        currentPlayerIndex = nextPlayerIndex;
+        moveToNext ++;
+    } while (isOnBreak && (moveToNext <= numberOfPlayers))
+    this.currentPlayerIndex = (currentPlayerIndex >= 0) ? currentPlayerIndex : this.currentPlayerIndex;
     return (nextPlayerIndex >= 0) ? (this.players[nextPlayerIndex].id) : null;
 };
 
-GameRoom.prototype.playerTakesBreak = function(id) {
-    var i = this.players.indexOf({id:id, isOnBreak: false});
-    var player = this.player[i];
-    player.isOnBreak = true;
-    this.players[i] = player;
+GameRoom.prototype.getCurrentTurnPlayerId = function() {
+    return (this.currentPlayerIndex >= 0) ? this.players[this.currentPlayerIndex].id : null;
 };
 
+GameRoom.prototype.playerTakesBreak = function(playerId) {
+    //console.log("1. players inside playerTakesBreak " + util.inspect(this.players));
+    var numberOfPlayers = this.players.length;
+    for(index = 0; index < numberOfPlayers; index++) {
+        var player = this.players[index];
+        if(player.id == playerId) {
+            player.isOnBreak = true;
+            break;
+        }
+    }
+   //console.log("2. players inside playerTakesBreak " + util.inspect(this.players));
+};
 
+GameRoom.prototype.newPlayerJoins = function(id) {
+    //console.log("inspect players inside newPlayerJoins: " + util.inspect(this.players));
+    if(this.players.length == 0) {
+        this.currentPlayerIndex = 0;
+    }
+    this.players.push({id:id});
+    //notify other players
+    var notify = this.getPlayerIdsArray();
+    var event = {
+        name: 'newPlayerJoined',
+        data: {
+            id:id,
+            notify:notify
+        }
+    };
+    this.emit('gameRoomEvent', null, event);
+};
+
+GameRoom.prototype.playerSubmitsWord = function(playerId, word) {
+    //update story
+    this.storyText = this.storyText + " " + word;
+    //notify other players
+    var notify = _(this.players).pluck('id');
+    console.log("id array " + util.inspect(notify))
+    this.emit('gameRoomEvent', null, {
+        name: 'playerSubmittedWord',
+        data: {
+            id: playerId,
+            story: this.storyText,
+            notify: notify
+        }
+    });
+    //move to next player
+    this.gameTurnPlayerId = this.getNextPlayerId();
+};
 
 exports.GameRoom = GameRoom;
