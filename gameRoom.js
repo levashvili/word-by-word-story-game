@@ -122,16 +122,22 @@ GameRoom.prototype.getNextPlayerId = function() {
     var nextPlayerId = null;
     var gameTurnPlayerIndex = _(this.players).pluck('id').indexOf(gameTurnPlayerId);
     var indexOfId = 0;
-    var indexOfIndex = 1;
-    var indexOfIsOnBreak = 2
-    var otherPlayersArrGrouped = _.zip(_(this.players).pluck('id'), _(this.players).pluck('isOnBreak'),
-        _.range(0, numberOfPlayers)).filter(function(playerArr){ return playerArr[indexOfId]!=gameTurnPlayerId;}).groupBy(
-            function(playerArr) {return playerArr[indexOfIndex] > gameTurnPlayerIndex;}
-        );
-    var otherPlayersArrSorted = _.union(otherPlayersArrGrouped[0], otherPlayersArrGrouped[1]);
+    var indexOfIndex = 2;
+    var indexOfIsOnBreak = 1
+    var playersZip = _.zip(_(this.players).pluck('id'), _(this.players).pluck('isOnBreak'),
+        _.range(0, numberOfPlayers));
+    var otherPlayersZip = _(playersZip).filter(function(playerArr){ return playerArr[indexOfId]!=gameTurnPlayerId;});
+    var otherPlayersZipGroup = _(otherPlayersZip).groupBy(
+        function(playerArr) {return (playerArr[indexOfIndex] > gameTurnPlayerIndex) ? 0 : 1;}
+    );
+    //var otherPlayersArrGrouped = _.zip(_(this.players).pluck('id'), _(this.players).pluck('isOnBreak'),
+    //    _.range(0, numberOfPlayers)).filter(function(playerArr){ return playerArr[indexOfId]!=gameTurnPlayerId;}).groupBy(
+    //        function(playerArr) {return playerArr[indexOfIndex] > gameTurnPlayerIndex;}
+    //    );
+    var otherPlayersArrSorted = _.union(otherPlayersZipGroup[0], otherPlayersZipGroup[1]).filter(function(elem){return _(elem).isArray()});
     //next player not on break
     var nextPlayer = _(otherPlayersArrSorted).find(function(playerArr) {return !playerArr[indexOfIsOnBreak];});
-    if(!nextPlayerNotOnBreak) { //there is no such player
+    if(!nextPlayer) { //there is no such player
         //get the first player
         nextPlayer = _(otherPlayersArrSorted).first();
     }
@@ -155,7 +161,8 @@ GameRoom.prototype.newPlayerJoins = function(id, name) {
         return;
     }
     //if gameTurnPlayerId is null, set it here for the first time
-    if(!this.gameTurnPlayerId) {
+    //or if current gameTurnPlayer is on break, give this player turn
+    if(!this.gameTurnPlayerId || this.players[_(this.players).pluck('id').indexOf(this.gameTurnPlayerId)].isOnBreak) {
         this.gameTurnPlayerId = id;
     }
     //also if all other players are on break, give this player turn
@@ -249,6 +256,11 @@ GameRoom.prototype.playerTakesBreak = function(playerId) {
     this.emit('gameRoomEvent', null, event);
 };
 
+GameRoom.prototype.isOnBreak = function(playerId) {
+    var playerIndex = _(this.players).pluck('id').indexOf(playerId);
+    return (this.players[playerIndex].isOnBreak) ? true : false;
+}
+
 GameRoom.prototype.playerReturnsFromBreak = function(playerId) {
     //console.log("1. players inside playerTakesBreak " + util.inspect(this.players));
     var numberOfPlayers = this.players.length;
@@ -258,6 +270,10 @@ GameRoom.prototype.playerReturnsFromBreak = function(playerId) {
             player.isOnBreak = false;
             break;
         }
+    }
+    //if current game turn is with a player who's on break, give turn to this player
+    if(!this.gameTurnPlayerId || this.isOnBreak(this.gameTurnPlayerId)) {
+        this.gameTurnPlayerId = playerId;
     }
     //notify players that player returns from break
     var notify = _(this.players).pluck('id');

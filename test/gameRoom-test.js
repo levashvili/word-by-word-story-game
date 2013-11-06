@@ -124,6 +124,13 @@ var contexts = {
         }
         return context;
     },
+    playerReturnsFromBreak: function (options) {
+        var context = {
+            topic: topicActions.playerReturnsFromBreak(options.playerId),
+        }
+        applyOptions(context, options);
+        return context;
+    },
     newPlayerJoins: function (options) {
         var context = {
             topic: topicActions.newPlayerJoins(options.playerId, options.doEventCapture, options.expectedNoEventTimeout)
@@ -192,6 +199,12 @@ var topicActions = {
             return gameRoom;
         }
     },
+    playerReturnsFromBreak: function(playerId) {
+        return function (gameRoom) {
+            gameRoom.playerReturnsFromBreak(playerId);
+            return gameRoom;
+        }
+    },
     newPlayerJoins: function(playerId, doEventCapture, expectedNoEventTimeoutSecs) {
         return function (gameRoom) {
             if(doEventCapture) {
@@ -208,9 +221,9 @@ var topicActions = {
 suite.addBatch({
     'create new game room - ': {
         topic: topicActions.createGameRoom({
-            players: [{id:1},{id:2},{id:3}],
+            players: [{id:'id1'},{id:'id2'},{id:'id3'}],
             storyText: "Once upon a time, in the kingdom of Dawn",
-            gameTurnPlayerId: 1,
+            gameTurnPlayerId: 'id1',
             id:1
         }),
         'assert number of players - ': {
@@ -223,7 +236,7 @@ suite.addBatch({
         },
         'assert proper player turn - ': {
             topic: topicActions.getGameTurnPlayerId(),
-            'should be 1': vows.assertPlayerId(1)
+            'should be id1': vows.assertPlayerId('id1')
         }
     },
     'game room with 3 players - ': {
@@ -316,25 +329,25 @@ suite.addBatch({
     },
     'capture event after new player joins': {
         topic: topicActions.createGameRoom({
-            players: [{id:1},{id:2},{id:3}],
+            players: [{id:'id1'},{id:'id2'},{id:'id3'}],
             storyText: "Once upon a time, in the kingdom of Dawn",
-            gameTurnPlayerId: 3,
+            gameTurnPlayerId: 'id3',
             id:1
         }),
         'new player joins - ': contexts.newPlayerJoins({
-            playerId: 4,
+            playerId: 'id4',
             doEventCapture: true
         })
     },
     'capture event after player submits word - ': {
         topic: topicActions.createGameRoom({
-            players: [{id:1},{id:2},{id:3}],
+            players: [{id:'id1'},{id:'id2'},{id:'id3'}],
             storyText: "Once upon a time, in the kingdom of Dawn",
-            gameTurnPlayerId: 1,
+            gameTurnPlayerId: 'id1',
             id:1
         }),
-        'new player joins - ': contexts.playerSubmitsWord({
-            playerId: 1,
+        'player submits word - ': contexts.playerSubmitsWord({
+            playerId: 'id1',
             word: "there",
             doEventCapture: true
         })
@@ -414,6 +427,18 @@ suite.addBatch({
             id:1
         }),
         'third player joins - ': contexts.newPlayerJoins({
+            playerId: 3,
+            expectedNextPlayerId: 3
+        })
+    },
+    'three players, two on break, turn with player on break - ': {
+        topic: topicActions.createGameRoom({
+            players: [{id:1, isOnBreak:true}, {id:2, isOnBreak:false}, {id:3, isOnBreak:true}],
+            storyText: "Once upon a time, in the kingdom of Dawn",
+            gameTurnPlayerId: 1,
+            id:1
+        }),
+        'third player returns from break - ': contexts.playerReturnsFromBreak({
             playerId: 3,
             expectedNextPlayerId: 3
         })
