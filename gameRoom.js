@@ -51,11 +51,21 @@ util.inherits(GameRoom, events.EventEmitter);
 GameRoom.prototype.respondToPlayerEvent = function(event) {
     switch (event.name) {
         case 'newPlayerJoins':
-            this.newPlayerJoins(event.data.id);
+            this.newPlayerJoins(event.data.id, event.data.name);
             //this.emit('gameRoomEvent', null, data);
             break;
         case 'playerSubmitsWord':
             this.playerSubmitsWord(event.data.id, event.data.word);
+            break;
+        case 'playerTakesBreak':
+            this.playerTakesBreak(event.data.id);
+            break;
+        case 'playerReturnsFromBreak':
+            this.playerReturnsFromBreak(event.data.id);
+            break;
+        case 'playerLeaves':
+            this.playerLeaves(event.data.id);
+            break;
         default:
             break;
     }
@@ -80,21 +90,6 @@ GameRoom.prototype.generateEvent = function(message) {
     console.log('emitted gameRoomEvent: ' + message);
 };
 
-GameRoom.prototype.playerLeaves = function(playerId) {
-    //console.log("inspect players of the cloned object: " + util.inspect(this.players))
-    var numberOfPlayers = this.players.length;
-    for(index = 0; index < numberOfPlayers; index++) {
-        var player = this.players[index];
-        //console.log("player inside playerLeaves is :" + util.inspect(player));
-        if(player.id == playerId) {
-            this.players.splice(index,1);
-            break;
-        }
-    }
-    //update next turn
-    this.gameTurnPlayerId = this.getNextPlayerId();
-};
-
 GameRoom.prototype.getPlayers = function() {
     //deep clone players
     return JSON.parse(JSON.stringify(this.players));
@@ -109,30 +104,127 @@ GameRoom.prototype.getGameTurnPlayerId = function() {
 };
 
 GameRoom.prototype.getNextPlayerId = function() {
-    //console.log("what is players here? " + message + " " + util.inspect(this.players));
+    /*
+    turn goes to next player who is not on break,
+    if there is only one such player in the game, and he has had his turn already,
+    move to next player who is on break
+
+    if the turn belongs to a player who is on break, and another player returns from break,
+    or joins game, move turn to that player
+    */
     var numberOfPlayers = this.players.length;
-    var currentPlayerIndex = _(this.players).pluck('id').indexOf(this.gameTurnPlayerId);
-    //in case all players are on break
-    var moveToNext = 0
-    var nextPlayerIndex = (numberOfPlayers > 0) ? (currentPlayerIndex + 1) % numberOfPlayers : -1;
-    do {
-        var nextPlayerIndex = (numberOfPlayers > 0) ? (currentPlayerIndex + 1) % numberOfPlayers : -1;
-        var isOnBreak = (nextPlayerIndex >= 0) ? this.players[nextPlayerIndex].isOnBreak : false;
-        currentPlayerIndex = nextPlayerIndex;
-        moveToNext ++;
-    } while (isOnBreak && (moveToNext <= numberOfPlayers))
-    this.currentPlayerIndex = (currentPlayerIndex >= 0) ? currentPlayerIndex : this.currentPlayerIndex;
-    return (nextPlayerIndex >= 0) ? (this.players[nextPlayerIndex].id) : null;
+    //if no players, exit
+    if(numberOfPlayers == 0) {
+        return -1;
+    }
+
+    var gameTurnPlayerId = (this.gameTurnPlayerId) ? this.gameTurnPlayerId : _(this.players).first().id;
+    var nextPlayerId = null;
+    var gameTurnPlayerIndex = _(this.players).pluck('id').indexOf(gameTurnPlayerId);
+    var indexOfId = 0;
+    var indexOfIndex = 1;
+    var indexOfIsOnBreak = 2
+    var otherPlayersArrGrouped = _.zip(_(this.players).pluck('id'), _(this.players).pluck('isOnBreak'),
+        _.range(0, numberOfPlayers)).filter(function(playerArr){ return playerArr[indexOfId]!=gameTurnPlayerId;}).groupBy(
+            function(playerArr) {return playerArr[indexOfIndex] > gameTurnPlayerIndex;}
+        );
+    var otherPlayersArrSorted = _.union(otherPlayersArrGrouped[0], otherPlayersArrGrouped[1]);
+    //next player not on break
+    var nextPlayer = _(otherPlayersArrSorted).find(function(playerArr) {return !playerArr[indexOfIsOnBreak];});
+    if(!nextPlayerNotOnBreak) { //there is no such player
+        //get the first player
+        nextPlayer = _(otherPlayersArrSorted).first();
+    }
+
+    if(nextPlayer) {
+        nextPlayerId = nextPlayer[indexOfId];
+    } else {
+        nextPlayerId = this.gameTurnPlayerId;
+    }
+
+    return nextPlayerId;
 };
 
 GameRoom.prototype.getCurrentTurnPlayerId = function() {
     return (this.currentPlayerIndex >= 0) ? this.players[this.currentPlayerIndex].id : null;
 };
 
+GameRoom.prototype.newPlayerJoins = function(id, name) {
+    //if player with this id exists, exit
+    if(_(_(this.players).pluck('id')).intersection([id]).length > 0) {
+        return;
+    }
+    //if gameTurnPlayerId is null, set it here for the first time
+    if(!this.gameTurnPlayerId) {
+        this.gameTurnPlayerId = id;
+    }
+    //also if all other players are on break, give this player turn
+    if(_(this.players).pluck('isOnBreak').filter(function(isOnBreak) {return !(isOnBreak);}).length == 0) {
+        this.gameTurnPlayerId = id;
+    }
+    //if(_(_(this.players).pluck('isOnBreak')).intersection([id]).length > 0) {
+    //    return;
+    //}
+
+    //console.log("inspect players inside newPlayerJoins: " + util.inspect(this.players));
+    if(this.players.length == 0) {
+        this.currentPlayerIndex = 0;
+    }
+    this.players.push({id:id, name: name});
+    //notify other players
+    var notifyOthers =_(_(this.players).pluck('id')).without([id]);
+    var notifyNewPlayer = [id];
+    var events = [
+        {
+            name: 'newPlayerJoined',
+            data: {
+                id:id,
+                name: name,
+                players: this.getPlayers(),
+                gameTurnPlayerId:this.gameTurnPlayerId
+            },
+            notify: notifyOthers
+        },
+        {
+            name: 'beginPlaying',
+            data: {
+                players: this.getPlayers(),
+                story: this.getStoryText(),
+                gameTurnPlayerId:this.gameTurnPlayerId
+            },
+            notify: notifyNewPlayer
+        }
+    ];
+    console.log("emit game room events " + util.inspect(events));
+    this.emit('gameRoomEvent', null, events);
+
+};
+
+GameRoom.prototype.playerSubmitsWord = function(playerId, word) {
+    //update story only if correct player
+    if(playerId != this.gameTurnPlayerId) return;
+    this.storyText = this.storyText + " " + word;
+    //notify other players
+    this.gameTurnPlayerId = this.getNextPlayerId();
+    var notify = _(this.players).pluck('id');
+    var events = [{
+            name: 'playerSubmittedWord',
+            data: {
+                id: playerId,
+                story: this.getStoryText(),
+                gameTurnPlayerId: this.gameTurnPlayerId,
+                players: this.getPlayers()
+            },
+            notify: notify
+        }];
+    this.emit('gameRoomEvent', null, events);
+    //move to next player and notify of turn
+};
+
 GameRoom.prototype.playerTakesBreak = function(playerId) {
     //console.log("1. players inside playerTakesBreak " + util.inspect(this.players));
     var numberOfPlayers = this.players.length;
-    for(index = 0; index < numberOfPlayers; index++) {
+    for(var index = 0; index < numberOfPlayers; index++) {
         var player = this.players[index];
         if(player.id == playerId) {
             player.isOnBreak = true;
@@ -143,44 +235,78 @@ GameRoom.prototype.playerTakesBreak = function(playerId) {
     if(playerId == this.gameTurnPlayerId) {
         this.gameTurnPlayerId = this.getNextPlayerId();
     }
-   //console.log("2. players inside playerTakesBreak " + util.inspect(this.players));
-};
-
-GameRoom.prototype.newPlayerJoins = function(id) {
-    //console.log("inspect players inside newPlayerJoins: " + util.inspect(this.players));
-    if(this.players.length == 0) {
-        this.currentPlayerIndex = 0;
-    }
-    this.players.push({id:id});
-    //notify other players
-    var notify = this.getPlayerIdsArray();
-    var event = {
-        name: 'newPlayerJoined',
-        data: {
-            id:id,
-            notify:notify
-        }
-    };
-    this.emit('gameRoomEvent', null, event);
-};
-
-GameRoom.prototype.playerSubmitsWord = function(playerId, word) {
-    //update story only if correct player
-    if(playerId != this.gameTurnPlayerId) return;
-    this.storyText = this.storyText + " " + word;
-    //notify other players
+    //notify players that player takes break
     var notify = _(this.players).pluck('id');
-    var event = {
-        name: 'playerSubmittedWord',
+    var event = [{
+        name: 'playerTookBreak',
         data: {
             id:playerId,
-            story: this.getStoryText(),
-            notify:notify
-        }
-    };
+            gameTurnPlayerId:this.gameTurnPlayerId,
+            players: this.getPlayers()
+        },
+        notify: notify
+    }];
     this.emit('gameRoomEvent', null, event);
-    //move to next player
-    this.gameTurnPlayerId = this.getNextPlayerId();
+};
+
+GameRoom.prototype.playerReturnsFromBreak = function(playerId) {
+    //console.log("1. players inside playerTakesBreak " + util.inspect(this.players));
+    var numberOfPlayers = this.players.length;
+    for(var index = 0; index < numberOfPlayers; index++) {
+        var player = this.players[index];
+        if(player.id == playerId) {
+            player.isOnBreak = false;
+            break;
+        }
+    }
+    //notify players that player returns from break
+    var notify = _(this.players).pluck('id');
+    var event = [{
+        name: 'playerReturnedFromBreak',
+        data: {
+            id:playerId,
+            gameTurnPlayerId: this.gameTurnPlayerId,
+            players: this.getPlayers()
+        },
+        notify: notify
+    }];
+    this.emit('gameRoomEvent', null, event);
+};
+
+GameRoom.prototype.playerLeaves = function(playerId) {
+    //console.log("inspect players of the cloned object: " + util.inspect(this.players))
+    //check if valid player, otherwise exit
+    if(_(_(this.players).pluck('id')).intersection([playerId]).length == 0) {
+        return;
+    }
+
+    var numberOfPlayers = this.players.length;
+    for(var index = 0; index < numberOfPlayers; index++) {
+        var player = this.players[index];
+        //console.log("player inside playerLeaves is :" + util.inspect(player));
+        if(player.id == playerId) {
+            this.players.splice(index,1);
+            break;
+        }
+    }
+
+    //update next turn if if was this players turn
+    if(this.gameTurnPlayerId == playerId) {
+        this.gameTurnPlayerId = this.getNextPlayerId();
+    }
+    var notify = _(this.players).pluck('id');
+    var events = [{
+        name: 'playerLeft',
+        data: {
+            id:playerId,
+            gameTurnPlayerId: this.gameTurnPlayerId,
+            players:this.getPlayers()
+        },
+        notify: notify
+    }];
+
+
+    this.emit('gameRoomEvent', null, events);
 };
 
 exports.GameRoom = GameRoom;

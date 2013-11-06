@@ -1,6 +1,7 @@
 function init() {
 
     var serverBaseUrl = document.domain;
+    var isMyTurn = false;
     console.log("server domain: " + document.domain);
     /*
      On client init, try to connect to the socket.IO server.
@@ -19,16 +20,30 @@ function init() {
         for (var i = 0; i < players.length; i++) {
             $('#players').append('<span id="' + players[i].id + '">' +
                 players[i].name + ' ' + (players[i].id === sessionId ? '(You)' : '') +
-                (players[i].status === 'brb' ? '(brb)' : '') + '<br /></span>');
+                (players[i].isOnBreak ? '(brb)' : '') + '<br /></span>');
         }
     }
     //Helper function to update whose turn it is
-    function updateTurn(playerId) {
-        if(playerId === sessionId) {
-            $('#story-text').html($('#story-text').val() +
-                "<span><input type=\"textarea\" rows=\"1\" cols=\"30\" id=\"word\" /></span>");
+    function updateTurn(gameTurnPlayerId) {
+
+        if( (gameTurnPlayerId === sessionId) && !isMyTurn) {
+            console.log("showing word text field");
+            $('#word').show();
+            $('#submit-word').show();
+            isMyTurn = true;
+        } else if((gameTurnPlayerId !== sessionId) && isMyTurn) {
+            console.log("hiding word text field");
+            $('#word').hide();
+            $('#submit-word').hide();
+            isMyTurn = false;
+        } else {
+            //do nothing
         }
         console.log('updating turn for next player');
+    }
+
+    function updateStory(storyText) {
+        $('#story-text').text(storyText);
     }
     /*On
 
@@ -41,70 +56,67 @@ function init() {
      */
     socket.on('connect', function () {
         sessionId = socket.socket.sessionid;
-        console.log('Connected ' + sessionId);
-        socket.emit('newUser', {id: sessionId});
+        //console.log('Connected ' + sessionId);
+        //socket.emit('newUser', {id: sessionId});
+        console.log('client connected with session id ' + sessionId);
     });
     /*
-     Server provides information on the game in progress
+
      */
-    socket.on('beginObservingGame', function(data) {
-        //update story text
-        $('story-text').val(data.storyText);
-        //update list of players
+    socket.on('beginPlaying', function (data) {
+        console.log('begin  playing ');// + util.inspect(data));
         updatePlayers(data.players);
-        console.log('began observing game');
+        updateStory(data.story);
+        updateTurn(data.gameTurnPlayerId);
     });
     /*
-     When the server sends beginPlaying event
-     */
-    socket.on('beginPlaying', function(data) {
-        //do whatever needs to be done to begin playing
-        //updatePlayers(data.players);
-        console.log('began playing');
-    });
-    /*
-     When the server emits the "newPlayerJoinsGame" event, we'll reset
+    When the server emits the "newPlayerJoined" event, we'll reset
      the players section and display the participating players.
      Note we are assigning the sessionId as the span ID.
      */
-    socket.on('newPlayerJoinsGame', function (data) {
+    socket.on('newPlayerJoined', function (data) {
+        //updatePlayers(data.players);
+        console.log('new player joined game ' + data.id);
         updatePlayers(data.players);
-        console.log('new player joined game');
+        updateTurn(data.gameTurnPlayerId);
     });
-
     /*
      When the player is taking a break, update status of players
      */
-    socket.on('playerTakingBreak', function(data) {
+    socket.on('playerTookBreak', function(data) {
+        //updatePlayers(data.players);
+        console.log('player taking a break ' + data.id);
         updatePlayers(data.players);
-        console.log('player taking a break');
+        updateTurn(data.gameTurnPlayerId)
     });
     /*
      When the player is back from the break, update status of players
      */
-    socket.on('playerReturningFromBreak', function(data) {
+    socket.on('playerReturnedFromBreak', function(data) {
+        //updatePlayers(data.players);
+        console.log('player comes back from break ' + data.id);
         updatePlayers(data.players);
-        console.log('player comes back from break');
+        updateTurn(data.gameTurnPlayerId);
     });
     /*
      When the server emits the "playerLeavesGame" event, we'll
      remove the span element from the participants element
      */
-    socket.on('playerLeavesGame', function(data) {
-        $('#' + data.id).remove();
-        console.log('player leaves game');
+    socket.on('playerLeft', function(data) {
+        //$('#' + data.id).remove();
+        console.log('player leaves game ' + data.id);
+        updatePlayers(data.players);
+        updateTurn(data.gameTurnPlayerId);
     });
-
     /*
      When receiving a new word event,
      we'll prepend it to the story
      */
-    socket.on('incomingWord', function (data) {
-        var word = data.word;
-        $('#story-text').append(' ' + word + ' ');
-        //update turn
-        updateTurn(data.id);
-        console.log('word submitted by a player');
+    socket.on('playerSubmittedWord', function (data) {
+        updateStory(data.story);
+        updatePlayers(data.players);
+        updateTurn(data.gameTurnPlayerId);
+        console.log('word submitted by a player ' + data.id);
     });
     /*
      Log an error if unable to connect to server
@@ -113,64 +125,97 @@ function init() {
         console.log('Unable to connect to server', reason);
     });
 
-    /*
-    Helper function to disable/enable Join Game button
-     */
-    function nameKeyUp() {
+    function joinGame(id, name) {
+        socket.emit('playerEvent',
+            {
+                name: 'newPlayerJoins',
+                data: {
+                    id: id,
+                    name:name
+                }
+            });
+        console.log("emitted newPlayerJoins event");
+    }
+
+    /*UI item handlers*/
+    function onJoinGameBtnClick() {
+        var id = sessionId;
+        var name = $('#name').val();
+        joinGame(id, name);
+    }
+
+    function onNameKeyUp() {
         var nameValue = $('#name').val();
         $('#join-game').attr('disabled', (nameValue.trim()).length > 0 ? false : true);
     }
-    /*
-    Helper function to enable/disable Submit Word button
-    */
-    function wordKeyUp() {
+
+    function onWordKeyUp() {
         var wordValue = $('#word').val();
         $('#submit-word').attr('disabled', (wordValue.trim()).length > 0 ? false : true);
     }
     /*
-    Allow Word submit on enter
+     Allow Word submit on enter
      */
-    function wordKeyDown(event) {
+    function onWordKeyDown(event) {
         if (event.which == 13) {
             event.preventDefault();
             if ($('#word').val().trim().length <= 0) {
                 return;
             }
             var word = $('#word').val();
-            socket.emit('playerSubmitsWord', { word: word, id: sessionId });
+            socket.emit('playerEvent', {
+                name: 'playerSubmitsWord',
+                data: {
+                    word: word,
+                    id: sessionId
+                }
+            });
         }
     }
 
-    function joinGame() {
-        socket.emit('playerJoinsGame', { id: sessionId });
-    }
-
-    function submitWord() {
+    function onSubmitWordBtnClick() {
         var word = $('#word').val();
-        socket.emit('playerSubmitsWord', { word: word, id: sessionId });
+        socket.emit('playerEvent', {
+            name: 'playerSubmitsWord',
+            data: {
+               word: word,
+                id: sessionId
+            }
+        });
     }
 
-    function requestBreak() {
-        socket.emit('playerRequestsBreak', { id: sessionId });
+    function onRequestBreakBtnClick() {
+        socket.emit('playerEvent', {
+            name: 'playerTakesBreak',
+            data: {
+                id: sessionId
+            }
+        });
     }
 
-    function returnFromBreak() {
-        socket.emit('playerReturnsFromBreak', {id: sessionId });
+    function onReturnFromBreakBtnClick() {
+        socket.emit('playerEvent', {
+            name: 'playerReturnsFromBreak',
+            data: {
+                id: sessionId
+            }
+        });
     }
     /* Elements setup */
-    $('#name').on('keyup', nameKeyUp);
-    $('#word').on('keyup', wordKeyUp);
+    $('#name').on('keyup', onNameKeyUp);
+    $('#word').on('keyup', onWordKeyUp);
+    $('#word').on('keydown', onWordKeyDown);
     /*When user presses the 'Join Game' button, emit the  event to the server.*/
-    $('#join-game').on('click', joinGame);
+    $('#join-game').on('click', onJoinGameBtnClick);
 
     /*When user submits the word, emit the event to the server*/
-    $('#submit-word').on('click', submitWord);
+    $('#submit-word').on('click', onSubmitWordBtnClick);
 
     /*when player wants to take a break, emit the event*/
-    $('#be-right-back').on('click', requestBreak);
+    $('#be-right-back').on('click', onRequestBreakBtnClick);
 
     /*When player comes back from break, emit event*/
-    $('#back-from-break').on('click', returnFromBreak);
+    $('#back-from-break').on('click', onReturnFromBreakBtnClick);
 }
 
 $(document).on('ready', init);

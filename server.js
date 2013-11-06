@@ -19,20 +19,8 @@ var express = require("express")
     , http = require("http").createServer(app)
     , io = require("socket.io").listen(http)
     , _ = require("underscore")
-    , gameRoom = require("./gameRoom")
+    , g = require("./gameRoom")
     , util = require('util');
-
-/*
- The list of participants in our game (both observers and players).
- The format of each participant will be:
- {
- id: "sessionId",
- name: "participantName" (null for observers),
- isPlaying: true/false (true after the participant joins the game)
- status: "active"/"brb"
- }
- */
-var participants = [];
 
 /* Server config */
 
@@ -64,16 +52,38 @@ app.get("/", function(request, response) {
 
 });
 
+var gameRoom = new g.GameRoom(1);
+gameRoom.on('gameRoomEvent', function(err, events) {
+
+    _(events).each(function(event, index, events) {
+        var connections = event.notify;
+        _(connections).each(function(connection, index, connections) {
+            console.log("element is " + util.inspect(connection));
+            if(io.sockets.socket(connection)) {
+                console.log("emitting to " + util.inspect(connection) + " event " + event.name + " data " + util.inspect(event.data));
+                io.sockets.socket(connection).emit(event.name, event.data);
+            }
+        })
+    });
+})
 /* Socket.IO events */
 
 io.on("connection", function(socket) {
     var sessionId = socket.id;
-    //console.log(util.inspect(socket.id));
-    //console.log("connected with id " + sessionId);
-    console.log(util.inspect(gameRoom));
     socket.on('playerEvent', function(data) {
         //gameRoom.playerJoinsGameRoom(sessionId);
+        console.log("received playerEvent " + util.inspect(data));
         gameRoom.respondToPlayerEvent(data);
+    });
+    socket.on('disconnect', function () {
+
+        gameRoom.respondToPlayerEvent({
+            name: 'playerLeaves',
+            data: {
+                id: sessionId
+            }
+        });
+
     });
 });
 
