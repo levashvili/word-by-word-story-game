@@ -41,6 +41,11 @@ function applyOptions(context, options) {
             context['assert receive event - '] = vows.receiveGameRoomEvent();
         }
     }
+    if(options.subContexts) {
+        for(subContextTag in options.subContexts) {
+            context[subContextTag] = options.subContexts[subContextTag];
+        }
+    }
 }
 
 var vows = {
@@ -441,6 +446,24 @@ suite.addBatch({
         'third player returns from break - ': contexts.playerReturnsFromBreak({
             playerId: 3,
             expectedNextPlayerId: 3
+        })
+    },
+    'new player joins after the only player leaves game - ': {
+        topic: topicActions.createGameRoom({
+            players: [{id:1}],
+            storyText: "",
+            gameTurnPlayerId: 1,
+            id:1
+        }),
+        'player leaves game - ': contexts.playerLeavesGame({
+            playerId: 1,
+            subContexts: {
+                'new player joins - ': contexts.newPlayerJoins({
+                    playerId: 2,
+                    expectedNextPlayerId: 2,
+                    expectedNumberOfPlayers: 1
+                })
+            }
         })
     }
 });

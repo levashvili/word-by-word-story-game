@@ -305,24 +305,28 @@ GameRoom.prototype.playerLeaves = function(playerId) {
             break;
         }
     }
+    //if no players left in the game
+    if(this.players.length == 0) {
+        this.gameTurnPlayerId = null;
+    } else {
+        //update next turn if if was this players turn
+        if(this.gameTurnPlayerId == playerId) {
+            this.gameTurnPlayerId = this.getNextPlayerId();
+        }
+        var notify = _(this.players).pluck('id');
+        var events = [{
+            name: 'playerLeft',
+            data: {
+                id:playerId,
+                gameTurnPlayerId: this.gameTurnPlayerId,
+                players:this.getPlayers()
+            },
+            notify: notify
+        }];
 
-    //update next turn if if was this players turn
-    if(this.gameTurnPlayerId == playerId) {
-        this.gameTurnPlayerId = this.getNextPlayerId();
+
+        this.emit('gameRoomEvent', null, events);
     }
-    var notify = _(this.players).pluck('id');
-    var events = [{
-        name: 'playerLeft',
-        data: {
-            id:playerId,
-            gameTurnPlayerId: this.gameTurnPlayerId,
-            players:this.getPlayers()
-        },
-        notify: notify
-    }];
-
-
-    this.emit('gameRoomEvent', null, events);
 };
 
 exports.GameRoom = GameRoom;
