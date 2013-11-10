@@ -20,15 +20,16 @@ var express = require("express")
     , io = require("socket.io").listen(http)
     , _ = require("underscore")
     , g = require("./gameRoom")
-    , util = require('util');
+    , util = require('util')
+    , port = process.env.PORT || 5000
+    , hostname = process.env.HOSTNAME || "leena-lemur-ultra.local";
 
 /* Server config */
-
 //Server's IP address
-app.set("ipaddr", "leena-lemur-ultra.local");
+app.set("hostname", hostname);
 
 //Server's port number 
-app.set("port", 8080);
+app.set("port", port);
 
 //Specify the views folder
 app.set("views", __dirname + "/views");
@@ -89,6 +90,6 @@ io.on("connection", function(socket) {
 
 //Start the http server at port and IP defined before
 http.listen(app.get("port"), app.get("ipaddr"), function() {
-    console.log("Server up and running. Go to http://" + app.get("ipaddr") + ":" + app.get("port"));
+    console.log("Server up and running. Go to http://" + app.get("hostname") + ":" + app.get("port"));
 });
 

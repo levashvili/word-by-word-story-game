@@ -7,5 +7,18 @@
         "underscore": "*",
         "spell": "0.3.0",
         "vows": "0.7.0"
+    },
+    "domains": [
+        "leena-levashvili.com",
+        "www.leena-levashvili.com"
+    ],
+    "name": "Chat",
+    "subdomain": "word-by-word-story-game",
+    "scripts": {
+        "start": "node server.js"
+    },
+    "version": "0.0.0-1",
+    "engines": {
+        "node": "0.10.20"
     }
 }
