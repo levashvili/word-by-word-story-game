@@ -1,17 +1,48 @@
 doctype 5
 html
     head
+        meta(name="viewport", content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no")
         link(rel='stylesheet', href='http://fonts.googleapis.com/css?family=Open+Sans')
         link(rel='stylesheet', href='/css/style.css')
+        link(rel='stylesheet', href='/js/vendor/bootstrap/css/bootstrap.css')
+        link(rel='stylesheet', href='/js/vendor/bootstrap/css/bootstrap-theme.css')
         script(src='/js/socket.io.js')
         script(src='/js/jquery-1.10.2.js')
         script(src='/js/index.js')
+        script(src='/js/vendor/bootstrap.js')
         title Word-By-Word Story Game
     body
-        h1 Word-By-Word Story Game
+        ul.nav.nav-pills
+            li.active
+                a(href='#') Home
+            li
+                a(href='#') Contact
+        div.panel.panel-default
+            div.panel-heading
+                h3.panel-title Players
+            div.panel-body
+                div.row
+                    div.col-sm-6.col-md-4
+                        a.thumbnail(href='#')
+                            img(src='/images/default.jpg', alt='...')
+                            div.caption Leena
+                    div.col-sm-6.col-md-4
+                        a.thumbnail(href='#')
+                            img(src='/images/default.jpg', alt='...')
+                            div.caption Leena
+                    div.col-sm-6.col-md-4
+                        a.thumbnail(href='#')
+                            img(src='/images/default.jpg', alt='...')
+                            div.caption Leena
+        div.container
+            img.img-responsive(src="/images/default.jpg", alt='...')
+            img.img-responsive(src="/images/default.jpg", alt='...')
+            img.img-responsive(src="/images/default.jpg", alt='...')
+        div.container
+            div.jumbotron
+                h1.page-header Word-By-Word Story Game
+                p The intent of the game is to compose a story together with other players, one word at a time. Each player submits one word only on his/her turn. The player is given 10 seconds to provide a word, after which time the turn moves to the next player. After missing his turn three times in a row, the player is assumed MIA and removed from the game.
         div
-            h2 Rules of the Game
-            p The intent of the game is to compose a story together with other players, one word at a time. Each player submits one word only on his/her turn. The player is given 10 seconds to provide a word, after which time the turn moves to the next player. After missing his turn three times in a row, the player is assumed MIA and removed from the game.
             input(type="textarea", rows="1", cols="20", placeholder="Your Name", maxlength=30)#name
             input(type="button", value="Join Game", disabled="true")#join-game
         div
