@@ -6,42 +6,128 @@ html
         link(rel='stylesheet', href='/css/style.css')
         link(rel='stylesheet', href='/js/vendor/bootstrap/css/bootstrap.css')
         link(rel='stylesheet', href='/js/vendor/bootstrap/css/bootstrap-theme.css')
+
+        //link(rel='stylesheet', href='/js/vendor/jquery/plugins/CircularContentCarousel/css/style.css')
+        //link(rel='stylesheet', href='/js/vendor/jquery/plugins/CircularContentCarousel/css/reset.css')
+        //link(rel='stylesheet', href='/js/vendor/jquery/plugins/CircularContentCarousel/css/jquery.jscrollpane.css')
+        //link(rel='stylesheet', href='/js/vendor/jquery/plugins/CircularContentCarousel/css/demo.css')
         script(src='/js/socket.io.js')
-        script(src='/js/jquery-1.10.2.js')
+        script(src='/js/vendor/jquery/jquery-1.10.2.js')
         script(src='/js/index.js')
-        script(src='/js/vendor/bootstrap.js')
+        script(src='/js/vendor/bootstrap/js/bootstrap.js')
+        //script(src='/js/vendor/jquery/plugins/CircularContentCarousel/js/jquery.contentcarousel.js')
+        //script(src='/js/vendor/jquery/plugins/CircularContentCarousel/js/jquery.easing.1.3.js')
+        //script(src='/js/vendor/jquery/plugins/CircularContentCarousel/js/jquery.mousewheel.js')
+
         title Word-By-Word Story Game
     body
-        ul.nav.nav-pills
+        //Nav tabs
+        ul.nav.nav-pills.navbar-fixed-top.navbar-inverse
             li.active
-                a(href='#') Home
+                a(href='#game-rooms', data-toggle='tab') Game Rooms
             li
-                a(href='#') Contact
+                a(href='#stories', data-toggle='tab') Stories
+            li
+                a(href='#players', data-toggle='tab') Players
+            li
+                a(href='#rules', data-toggle='tab') Rules
+            li
+                a(href='#profile', data-toggle='tab') Profile
+        //Tab panes
+        .tab-content
+            #players.tab-pane ...
+            #rules.tab-pane.fade ...
+            #stories.tab-pane.fade ...
+            #profile.tab-pane.fade ...
+            #game-rooms.tab-pane.active.fade.in
+                div.panel.panel-default
+                    div.panel-body
+                        ul(data-spy='affix', data-offset-top='30', data-offset-bottom='200')
+                            li.active
+                                a(href='#game-room-1', data-toggle='tab') Game Rooms 1
+                            li
+                                a(href='#game-room-2', data-toggle='tab') Game Room 2
+                            li
+                                a(href='#game-room-3', data-toggle='tab') Game Room 3
+                            li
+                                a(href='#game-room-4', data-toggle='tab') Game Room 4
+                            li
+                                a(href='#game-room-5', data-toggle='tab') Game Room 5
+                        //Tab panes
+                        .tab-content
+                            #game-room-1.tab-pane ...
+                            #game-room-2.tab-pane.fade ...
+                            #game-room-3.tab-pane.fade ...
+                            #game-room-4.tab-pane.fade ...
+                            #game-room-5.tab-pane.active.fade.in
+                                div.panel.panel-default
+                                    div.panel-body
+                                        div.row
+                                            div.col-sm-6.col-md-4
+                                                a.thumbnail(href='#')
+                                                    img.img-rounded(src='/images/default.jpg', alt='...')
+                                                    div.caption Leena
+                                            div.col-sm-6.col-md-4
+                                                a.thumbnail(href='#')
+                                                    img.img-circle(src='/images/default.jpg', alt='...')
+                                                    div.caption Leena
+                                            div.col-sm-6.col-md-4
+                                                a.thumbnail(href='#')
+                                                    img.img-thumbnail(src='/images/default.jpg', alt='...')
+                                                    div.caption Leena
+                                        div.row
+                                            div.panel.panel-default.col-sm-6.col-md-6
+                                                div.panel-body
+                                                    div.row
+                                                        div.col-md-1
+                                                            a.thumbnail(href='#')
+                                                                img.img-rounded(src='/images/default.jpg', alt='...')
+                                                                div.caption Leena
+                                                        div.col-md-1
+                                                            a.thumbnail(href='#')
+                                                                img.img-rounded(src='/images/default.jpg', alt='...')
+                                                                div.caption Leena
+                                                        div.col-md-1
+                                                            a.thumbnail(href='#')
+                                                                img.img-rounded(src='/images/default.jpg', alt='...')
+                                                                div.caption Leena
+                                                        div.col-md-1
+                                                            a.thumbnail(href='#')
+                                                                img.img-rounded(src='/images/default.jpg', alt='...')
+                                                                div.caption Leena
+                                                        div.col-md-1
+                                                            a.thumbnail(href='#')
+                                                                img.img-rounded(src='/images/default.jpg', alt='...')
+                                                                div.caption Leena
+                                                        div.col-md-1
+                                                            a.thumbnail(href='#')
+                                                                img.img-rounded(src='/images/default.jpg', alt='...')
+                                                                div.caption Leena
+                                                        div.col-md-1
+                                                            a.thumbnail(href='#')
+                                                                img.img-rounded(src='/images/default.jpg', alt='...')
+                                                                div.caption Leena
+                                                        div.col-md-1
+                                                            a.thumbnail(href='#')
+                                                                img.img-rounded(src='/images/default.jpg', alt='...')
+                                                                div.caption Leena
+                                                        div.col-md-4
+                                                            a.thumbnail(href='#')
+                                                                img.img-rounded(src='/images/default.jpg', alt='...')
+                                                                div.caption Leena
+                                            div.panel.panel-default.col-sm-6.col-md-6
+                                                div.panel-body
+                                                    a.thumbnail(href='#')
+                                                        img.img-circle(src='/images/default.jpg', alt='...')
+                                                        div.caption Leena
+                                            div.panel.panel-default.col-sm-6.col-md-6
+                                                div.panel-body
+                                                    a.thumbnail(href='#')
+                                                        img.img-thumbnail(src='/images/default.jpg', alt='...')
+                                                        div.caption Leena
         div.panel.panel-default
-            div.panel-heading
-                h3.panel-title Players
             div.panel-body
-                div.row
-                    div.col-sm-6.col-md-4
-                        a.thumbnail(href='#')
-                            img(src='/images/default.jpg', alt='...')
-                            div.caption Leena
-                    div.col-sm-6.col-md-4
-                        a.thumbnail(href='#')
-                            img(src='/images/default.jpg', alt='...')
-                            div.caption Leena
-                    div.col-sm-6.col-md-4
-                        a.thumbnail(href='#')
-                            img(src='/images/default.jpg', alt='...')
-                            div.caption Leena
-        div.container
-            img.img-responsive(src="/images/default.jpg", alt='...')
-            img.img-responsive(src="/images/default.jpg", alt='...')
-            img.img-responsive(src="/images/default.jpg", alt='...')
-        div.container
-            div.jumbotron
-                h1.page-header Word-By-Word Story Game
-                p The intent of the game is to compose a story together with other players, one word at a time. Each player submits one word only on his/her turn. The player is given 10 seconds to provide a word, after which time the turn moves to the next player. After missing his turn three times in a row, the player is assumed MIA and removed from the game.
+                p Once upon a time, there lived a young prince. His name was Elijah.
         div
             input(type="textarea", rows="1", cols="20", placeholder="Your Name", maxlength=30)#name
             input(type="button", value="Join Game", disabled="true")#join-game
@@ -55,6 +141,5 @@ html
             h2 Story
             p#story-text No story in progress.
         div
-            div#timer
             input(type="textarea", rows="1", cols="20", placeholder="Type in word!", maxlength=30, hidden=true)#word
             input(type="button", value="Submit Word", disabled="true", hidden=true)#submit-word

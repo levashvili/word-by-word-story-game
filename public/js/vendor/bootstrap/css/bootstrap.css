@@ -5506,7 +5506,8 @@ a.thumbnail.active {
 }
 
 .media,
-.media-body {
+.media-body
+{
   overflow: hidden;
   zoom: 1;
 }
