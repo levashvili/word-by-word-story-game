@@ -33,6 +33,44 @@ html
                 a(href='#rules', data-toggle='tab') Rules
             li
                 a(href='#profile', data-toggle='tab') Profile
+            li
+                a(href='#admin', data-toggle='tab') Admin
+        //players view
+        .container
+            .row
+                .col-md-5
+                    .row
+                        .col-md-2
+                            a.thumbnail
+                                img.img-circle(src="/images/default.jpg", alt="...", height="50", width="50")
+                                div.caption
+                                    h6 Leena
+                        .col-md-2
+                            a.thumbnail
+                                img.img-circle(src="/images/default.jpg", alt="...", height="50", width="50")
+                                div.caption
+                                    h6 Leena
+                        .col-md-2
+                            a.thumbnail
+                                img.img-circle(src="/images/default.jpg", alt="...", height="50", width="50")
+                                div.caption
+                                    h6 Leena
+                        .col-md-2
+                            a.thumbnail
+                                img.img-circle(src="/images/default.jpg", alt="...", height="50", width="50")
+                                div.caption
+                                    h6 Leena
+                        .col-md-2
+                            a.thumbnail
+                                img.img-circle(src="/images/default.jpg", alt="...", height="50", width="50")
+                                div.caption
+                                    h6 Leena
+                        .col-md-2
+                            a.thumbnail
+                                img.img-circle(src="/images/default.jpg", alt="...", height="50", width="50")
+                                div.caption
+                                    h6 Leena
+        .container
         //Tab panes
         .tab-content
             #players.tab-pane ...
@@ -40,11 +78,11 @@ html
             #stories.tab-pane.fade ...
             #profile.tab-pane.fade ...
             #game-rooms.tab-pane.active.fade.in
-                div.panel.panel-default
-                    div.panel-body
-                        ul(data-spy='affix', data-offset-top='30', data-offset-bottom='200')
+                .row
+                    .col-md-2
+                        ul.nav.nav-divider(data-spy="affix" data-offset-top="0" data-offset-bottom="0")
                             li.active
-                                a(href='#game-room-1', data-toggle='tab') Game Rooms 1
+                                a(href='#game-room-1', data-toggle='tab') Game Room 1
                             li
                                 a(href='#game-room-2', data-toggle='tab') Game Room 2
                             li
@@ -53,6 +91,8 @@ html
                                 a(href='#game-room-4', data-toggle='tab') Game Room 4
                             li
                                 a(href='#game-room-5', data-toggle='tab') Game Room 5
+                    .col-md-10
+                        p Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text Some text
                         //Tab panes
                         .tab-content
                             #game-room-1.tab-pane ...
@@ -60,71 +100,18 @@ html
                             #game-room-3.tab-pane.fade ...
                             #game-room-4.tab-pane.fade ...
                             #game-room-5.tab-pane.active.fade.in
-                                div.panel.panel-default
-                                    div.panel-body
-                                        div.row
-                                            div.col-sm-6.col-md-4
-                                                a.thumbnail(href='#')
-                                                    img.img-rounded(src='/images/default.jpg', alt='...')
-                                                    div.caption Leena
-                                            div.col-sm-6.col-md-4
-                                                a.thumbnail(href='#')
-                                                    img.img-circle(src='/images/default.jpg', alt='...')
-                                                    div.caption Leena
-                                            div.col-sm-6.col-md-4
-                                                a.thumbnail(href='#')
-                                                    img.img-thumbnail(src='/images/default.jpg', alt='...')
-                                                    div.caption Leena
-                                        div.row
-                                            div.panel.panel-default.col-sm-6.col-md-6
-                                                div.panel-body
-                                                    div.row
-                                                        div.col-md-1
-                                                            a.thumbnail(href='#')
-                                                                img.img-rounded(src='/images/default.jpg', alt='...')
-                                                                div.caption Leena
-                                                        div.col-md-1
-                                                            a.thumbnail(href='#')
-                                                                img.img-rounded(src='/images/default.jpg', alt='...')
-                                                                div.caption Leena
-                                                        div.col-md-1
-                                                            a.thumbnail(href='#')
-                                                                img.img-rounded(src='/images/default.jpg', alt='...')
-                                                                div.caption Leena
-                                                        div.col-md-1
-                                                            a.thumbnail(href='#')
-                                                                img.img-rounded(src='/images/default.jpg', alt='...')
-                                                                div.caption Leena
-                                                        div.col-md-1
-                                                            a.thumbnail(href='#')
-                                                                img.img-rounded(src='/images/default.jpg', alt='...')
-                                                                div.caption Leena
-                                                        div.col-md-1
-                                                            a.thumbnail(href='#')
-                                                                img.img-rounded(src='/images/default.jpg', alt='...')
-                                                                div.caption Leena
-                                                        div.col-md-1
-                                                            a.thumbnail(href='#')
-                                                                img.img-rounded(src='/images/default.jpg', alt='...')
-                                                                div.caption Leena
-                                                        div.col-md-1
-                                                            a.thumbnail(href='#')
-                                                                img.img-rounded(src='/images/default.jpg', alt='...')
-                                                                div.caption Leena
-                                                        div.col-md-4
-                                                            a.thumbnail(href='#')
-                                                                img.img-rounded(src='/images/default.jpg', alt='...')
-                                                                div.caption Leena
-                                            div.panel.panel-default.col-sm-6.col-md-6
-                                                div.panel-body
-                                                    a.thumbnail(href='#')
-                                                        img.img-circle(src='/images/default.jpg', alt='...')
-                                                        div.caption Leena
-                                            div.panel.panel-default.col-sm-6.col-md-6
-                                                div.panel-body
-                                                    a.thumbnail(href='#')
-                                                        img.img-thumbnail(src='/images/default.jpg', alt='...')
-                                                        div.caption Leena
+                                p Some other content Some other content Some other content Some other content Some other content Some other content Some other content Some other content Some other content Some other content Some other content Some other content Some other content Some other content Some other content Some other content Some other content Some other content Some other content Some other content Some other content Some other content Some other content Some other content Some other content Some other content Some other content Some other content Some other content Some other content Some other content Some other content Some other content Some other content Some other content Some other content Some other content Some other content Some other content Some other content Some other content Some other content Some other content Some other content Some other content Some other content Some other content Some other content Some other content Some other content Some other content Some other content Some other content Some other content
+                        ul.pagination
+                            li
+                                a(href="#") &laquo;
+                            li.active
+                                a(href="#") 1
+                            li
+                                a(href="#") 2
+                            li
+                                a(href="#") 3
+                            li
+                                a(href="#") &raquo;
         div.panel.panel-default
             div.panel-body
                 p Once upon a time, there lived a young prince. His name was Elijah.
