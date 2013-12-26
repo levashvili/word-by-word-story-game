@@ -2,21 +2,88 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e751f12d-1dce-4660-921e-7753d44146a1" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/js/bootstrap/fonts/glyphicons-halflings-regular.eot" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/js/bootstrap/fonts/glyphicons-halflings-regular.ttf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/js/bootstrap/fonts/glyphicons-halflings-regular.woff" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/js/templates/app.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/js/bootstrap/css/bootstrap-theme.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/js/bootstrap/css/bootstrap-theme.min.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/js/bootstrap/css/bootstrap.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/js/bootstrap/js/bootstrap.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/js/bootstrap/css/bootstrap.min.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/js/bootstrap/js/bootstrap.min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/js/templates/game-controls-toolbar.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/js/bootstrap/fonts/glyphicons-halflings-regular.svg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/js/text.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/app.js" afterPath="$PROJECT_DIR$/public/js/app.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/app/app.js" afterPath="$PROJECT_DIR$/public/js/app/app.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/js/tests/jasmine-2.0.0/jasmine_favicon.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/public/js/jasmine-2.0.0/jasmine_favicon.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/js/tests/SpecRunner.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/public/js/SpecRunner.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/js/tests/SpecRunner.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/js/lib/backbone.localStorage.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/js/tests/jasmine-2.0.0/boot.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/public/js/jasmine-2.0.0/boot.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/js/tests/jasmine-2.0.0/console.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/public/js/jasmine-2.0.0/console.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/js/tests/jasmine-2.0.0/jasmine-html.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/js/tests/lib/jasmine-html.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/public/js/jasmine-2.0.0/jasmine-html.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/js/lib/jasmine.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/js/tests/jasmine-2.0.0/jasmine.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/public/js/jasmine-2.0.0/jasmine.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/js/tests/jasmine-2.0.0/jasmine.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/js/tests/lib/jasmine.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/public/js/jasmine-2.0.0/jasmine.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/js/tests/jasmine/spec/player-test.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/js/tests/models/player-test.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/public/js/models/player-test.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/js/models/player.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/js/templates/story.html" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/app.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/app/app.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/jquery/jquery.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/vendor/bootstrap/css/bootstrap-theme.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/vendor/bootstrap/css/bootstrap-theme.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/vendor/bootstrap/css/bootstrap.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/vendor/bootstrap/css/bootstrap.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/vendor/bootstrap/fonts/glyphicons-halflings-regular.eot" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/vendor/bootstrap/fonts/glyphicons-halflings-regular.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/vendor/bootstrap/fonts/glyphicons-halflings-regular.ttf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/vendor/bootstrap/fonts/glyphicons-halflings-regular.woff" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/vendor/bootstrap/js/bootstrap.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/vendor/bootstrap/js/bootstrap.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/public/js/vendor/underscore/underscore-min.js" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/public/js/backbone-min.js" afterPath="$PROJECT_DIR$/public/js/lib/backbone-min.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/public/js/bootstrap/css/bootstrap-theme.css" afterPath="$PROJECT_DIR$/public/js/lib/bootstrap/css/bootstrap-theme.css" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/public/js/bootstrap/css/bootstrap-theme.min.css" afterPath="$PROJECT_DIR$/public/js/lib/bootstrap/css/bootstrap-theme.min.css" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/public/js/bootstrap/css/bootstrap.css" afterPath="$PROJECT_DIR$/public/js/lib/bootstrap/css/bootstrap.css" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/public/js/bootstrap/css/bootstrap.min.css" afterPath="$PROJECT_DIR$/public/js/lib/bootstrap/css/bootstrap.min.css" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/public/js/bootstrap/fonts/glyphicons-halflings-regular.eot" afterPath="$PROJECT_DIR$/public/js/lib/bootstrap/fonts/glyphicons-halflings-regular.eot" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/public/js/bootstrap/fonts/glyphicons-halflings-regular.svg" afterPath="$PROJECT_DIR$/public/js/lib/bootstrap/fonts/glyphicons-halflings-regular.svg" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/public/js/bootstrap/fonts/glyphicons-halflings-regular.ttf" afterPath="$PROJECT_DIR$/public/js/lib/bootstrap/fonts/glyphicons-halflings-regular.ttf" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/public/js/bootstrap/fonts/glyphicons-halflings-regular.woff" afterPath="$PROJECT_DIR$/public/js/lib/bootstrap/fonts/glyphicons-halflings-regular.woff" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/public/js/bootstrap/js/bootstrap.js" afterPath="$PROJECT_DIR$/public/js/lib/bootstrap/js/bootstrap.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/public/js/bootstrap/js/bootstrap.min.js" afterPath="$PROJECT_DIR$/public/js/lib/bootstrap/js/bootstrap.min.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/public/js/jquery.js" afterPath="$PROJECT_DIR$/public/js/lib/jquery.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/public/js/text.js" afterPath="$PROJECT_DIR$/public/js/lib/require/text.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/public/js/underscore-min.js" afterPath="$PROJECT_DIR$/public/js/lib/underscore/underscore-min.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/public/js/underscore.js" afterPath="$PROJECT_DIR$/public/js/lib/underscore.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/public/js/vendor/backbone/backbone-min.js" afterPath="$PROJECT_DIR$/public/js/lib/backbone/backbone-min.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/public/js/vendor/backbone/backbone.js" afterPath="$PROJECT_DIR$/public/js/lib/backbone/backbone.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/public/js/vendor/jquery/jquery-1.10.2.js" afterPath="$PROJECT_DIR$/public/js/lib/jquery/jquery-1.10.2.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/public/js/vendor/jquery/plugins/CircularContentCarousel/css/demo.css" afterPath="$PROJECT_DIR$/public/js/lib/jquery/plugins/CircularContentCarousel/css/demo.css" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/public/js/vendor/jquery/plugins/CircularContentCarousel/css/jquery.jscrollpane.css" afterPath="$PROJECT_DIR$/public/js/lib/jquery/plugins/CircularContentCarousel/css/jquery.jscrollpane.css" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/public/js/vendor/jquery/plugins/CircularContentCarousel/css/reset.css" afterPath="$PROJECT_DIR$/public/js/lib/jquery/plugins/CircularContentCarousel/css/reset.css" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/public/js/vendor/jquery/plugins/CircularContentCarousel/css/style.css" afterPath="$PROJECT_DIR$/public/js/lib/jquery/plugins/CircularContentCarousel/css/style.css" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/public/js/vendor/jquery/plugins/CircularContentCarousel/images/ImageAttribution.txt" afterPath="$PROJECT_DIR$/public/js/lib/jquery/plugins/CircularContentCarousel/images/ImageAttribution.txt" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/public/js/vendor/jquery/plugins/CircularContentCarousel/images/Thumbs.db" afterPath="$PROJECT_DIR$/public/js/lib/jquery/plugins/CircularContentCarousel/images/Thumbs.db" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/public/js/vendor/jquery/plugins/CircularContentCarousel/images/animal1.png" afterPath="$PROJECT_DIR$/public/js/lib/jquery/plugins/CircularContentCarousel/images/animal1.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/public/js/vendor/jquery/plugins/CircularContentCarousel/images/animal2.png" afterPath="$PROJECT_DIR$/public/js/lib/jquery/plugins/CircularContentCarousel/images/animal2.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/public/js/vendor/jquery/plugins/CircularContentCarousel/images/animal3.png" afterPath="$PROJECT_DIR$/public/js/lib/jquery/plugins/CircularContentCarousel/images/animal3.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/public/js/vendor/jquery/plugins/CircularContentCarousel/images/animal4.png" afterPath="$PROJECT_DIR$/public/js/lib/jquery/plugins/CircularContentCarousel/images/animal4.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/public/js/vendor/jquery/plugins/CircularContentCarousel/images/animal5.png" afterPath="$PROJECT_DIR$/public/js/lib/jquery/plugins/CircularContentCarousel/images/animal5.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/public/js/vendor/jquery/plugins/CircularContentCarousel/images/animal6.png" afterPath="$PROJECT_DIR$/public/js/lib/jquery/plugins/CircularContentCarousel/images/animal6.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/public/js/vendor/jquery/plugins/CircularContentCarousel/images/animal7.png" afterPath="$PROJECT_DIR$/public/js/lib/jquery/plugins/CircularContentCarousel/images/animal7.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/public/js/vendor/jquery/plugins/CircularContentCarousel/images/animal8.png" afterPath="$PROJECT_DIR$/public/js/lib/jquery/plugins/CircularContentCarousel/images/animal8.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/public/js/vendor/jquery/plugins/CircularContentCarousel/images/arrows.png" afterPath="$PROJECT_DIR$/public/js/lib/jquery/plugins/CircularContentCarousel/images/arrows.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/public/js/vendor/jquery/plugins/CircularContentCarousel/images/cross.png" afterPath="$PROJECT_DIR$/public/js/lib/jquery/plugins/CircularContentCarousel/images/cross.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/public/js/vendor/jquery/plugins/CircularContentCarousel/images/pattern.png" afterPath="$PROJECT_DIR$/public/js/lib/jquery/plugins/CircularContentCarousel/images/pattern.png" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/public/js/vendor/jquery/plugins/CircularContentCarousel/index.html" afterPath="$PROJECT_DIR$/public/js/lib/jquery/plugins/CircularContentCarousel/index.html" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/public/js/vendor/jquery/plugins/CircularContentCarousel/js/jquery.contentcarousel.js" afterPath="$PROJECT_DIR$/public/js/lib/jquery/plugins/CircularContentCarousel/js/jquery.contentcarousel.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/public/js/vendor/jquery/plugins/CircularContentCarousel/js/jquery.contentcarousel.js.bak" afterPath="$PROJECT_DIR$/public/js/lib/jquery/plugins/CircularContentCarousel/js/jquery.contentcarousel.js.bak" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/public/js/vendor/jquery/plugins/CircularContentCarousel/js/jquery.easing.1.3.js" afterPath="$PROJECT_DIR$/public/js/lib/jquery/plugins/CircularContentCarousel/js/jquery.easing.1.3.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/public/js/vendor/jquery/plugins/CircularContentCarousel/js/jquery.mousewheel.js" afterPath="$PROJECT_DIR$/public/js/lib/jquery/plugins/CircularContentCarousel/js/jquery.mousewheel.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/public/js/vendor/require/require.js" afterPath="$PROJECT_DIR$/public/js/lib/require/require.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/public/js/vendor/require/text.js" afterPath="$PROJECT_DIR$/public/js/lib/text.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/public/js/vendor/socket.io/socket.io.js" afterPath="$PROJECT_DIR$/public/js/lib/socket.io/socket.io.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/views/app.js" afterPath="$PROJECT_DIR$/public/js/views/app.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/index.html" afterPath="$PROJECT_DIR$/public/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/js/main.js" afterPath="$PROJECT_DIR$/public/js/main.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
@@ -45,14 +112,14 @@
       <file leaf-file-name="main.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/js/main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="6" column="44" selection-start="189" selection-end="189" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="420">
+            <state line="22" column="3" selection-start="424" selection-end="524" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="420">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="text.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/js/text.js">
+        <entry file="file://$PROJECT_DIR$/public/js/lib/text.js">
           <provider selected="true" editor-type-id="text-editor">
             <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="5805">
               <folding />
@@ -60,76 +127,67 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="app.js" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/public/js/app.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="31" column="65" selection-start="895" selection-end="895" vertical-scroll-proportion="0.83035713" vertical-offset="0" max-vertical-offset="630">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="app.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/js/templates/app.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="4" column="5" selection-start="155" selection-end="155" vertical-scroll-proportion="-2.5" vertical-offset="0" max-vertical-offset="150">
-              <folding>
-                <marker date="1388013894083" expanded="true" signature="24:154" placeholder="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="index.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/js/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="14" column="23" selection-start="460" selection-end="460" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3390">
+            <state line="11" column="14" selection-start="344" selection-end="350" vertical-scroll-proportion="-6.3461537" vertical-offset="0" max-vertical-offset="3390">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="game-controls-toolbar.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/js/templates/game-controls-toolbar.html">
+      <file leaf-file-name="player-test.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test/public/js/models/player-test.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="4" column="25" selection-start="321" selection-end="321" vertical-scroll-proportion="-2.5" vertical-offset="0" max-vertical-offset="165">
+            <state line="13" column="0" selection-start="292" selection-end="292" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="315">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/index.html">
+      <file leaf-file-name="SpecRunner.js" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/public/js/tests/SpecRunner.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="21" selection-start="439" selection-end="439" vertical-scroll-proportion="-7.5" vertical-offset="0" max-vertical-offset="315">
+            <state line="49" column="35" selection-start="1249" selection-end="1249" vertical-scroll-proportion="1.2803571" vertical-offset="18" max-vertical-offset="1080">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="bootstrap-theme.css" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/js/bootstrap/css/bootstrap-theme.css">
+      <file leaf-file-name="player-test.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/js/tests/jasmine/spec/player-test.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="11" column="9" selection-start="262" selection-end="264" vertical-scroll-proportion="-6.3461537" vertical-offset="0" max-vertical-offset="6960">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="375">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="bootstrap.css" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/js/bootstrap/css/bootstrap.css">
+      <file leaf-file-name="jasmine.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/js/tests/lib/jasmine.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="2635" column="26" selection-start="43617" selection-end="43627" vertical-scroll-proportion="-6.6538463" vertical-offset="39352" max-vertical-offset="106560">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="35805">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="app.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/public/js/app/app.js">
+      <file leaf-file-name="backbone.localStorage.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/js/lib/backbone.localStorage.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="9" column="36" selection-start="231" selection-end="231" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="825">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3420">
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SpecRunner.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/js/tests/SpecRunner.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="5" column="64" selection-start="203" selection-end="203" vertical-scroll-proportion="-3.125" vertical-offset="0" max-vertical-offset="255">
+              <folding>
+                <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -152,22 +210,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/public/js/vendor/require/text.js" />
-        <option value="$PROJECT_DIR$/public/js/templates/todos.html" />
-        <option value="$PROJECT_DIR$/public/js/templates/stats.html" />
-        <option value="$PROJECT_DIR$/public/js/views/todos.js" />
-        <option value="$PROJECT_DIR$/public/js/collections/todos.js" />
-        <option value="$PROJECT_DIR$/public/js/models/todo.js" />
-        <option value="$PROJECT_DIR$/public/css/base.css" />
-        <option value="$PROJECT_DIR$/public/js/vendor/require/require.js" />
         <option value="$PROJECT_DIR$/public/js/views/app.js" />
         <option value="$PROJECT_DIR$/public/js/underscore.js" />
         <option value="$PROJECT_DIR$/public/js/app/app.js" />
         <option value="$PROJECT_DIR$/public/js/templates/app.html" />
-        <option value="$PROJECT_DIR$/public/js/main.js" />
         <option value="$PROJECT_DIR$/public/js/templates/game-controls-toolbar.html" />
-        <option value="$PROJECT_DIR$/public/index.html" />
         <option value="$PROJECT_DIR$/public/js/app.js" />
+        <option value="$PROJECT_DIR$/public/index.html" />
+        <option value="$PROJECT_DIR$/public/js/templates/story.html" />
+        <option value="$PROJECT_DIR$/test/public/js/models/player-test.js" />
+        <option value="$PROJECT_DIR$/public/js/tests/models/player-test.js" />
+        <option value="$PROJECT_DIR$/public/js/models/player.js" />
+        <option value="$PROJECT_DIR$/public/js/tests/main.js" />
+        <option value="$PROJECT_DIR$/test/public/js/SpecRunner.html" />
+        <option value="$PROJECT_DIR$/public/js/main.js" />
+        <option value="$PROJECT_DIR$/public/js/tests/SpecRunner.html" />
+        <option value="$PROJECT_DIR$/public/js/tests/SpecRunner.js" />
       </list>
     </option>
   </component>
@@ -321,161 +379,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="vendor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Chat" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Chat" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="vendor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="require" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Chat" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Chat" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="templates" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Chat" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Chat" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bootstrap" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Chat" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Chat" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bootstrap" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fonts" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Chat" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Chat" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="public" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="bootstrap" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="css" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Chat" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Chat" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="node_modules" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Chat" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Chat" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="node_modules" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="underscore" />
+              <option name="myItemId" value="tests" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -514,11 +418,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/public/js" />
-      <recent name="$PROJECT_DIR$/public/js/app" />
-      <recent name="$PROJECT_DIR$/public/js/jquery" />
-      <recent name="$PROJECT_DIR$/public/images" />
-      <recent name="$PROJECT_DIR$/public/css" />
+      <recent name="$PROJECT_DIR$/public/js/lib" />
+      <recent name="$PROJECT_DIR$/public/js/tests/jasmine/spec" />
+      <recent name="$PROJECT_DIR$/public/js/tests/lib" />
+      <recent name="$PROJECT_DIR$/public/js/views" />
+      <recent name="$PROJECT_DIR$/public/js/tests" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/public/js/templates" />
@@ -646,13 +550,13 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="27" width="1368" height="742" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3213763" sideWeight="0.88780487" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32576868" sideWeight="0.88780487" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.41640866" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.38373983" sideWeight="0.5936777" order="7" side_tool="true" content_ui="tabs" />
@@ -666,6 +570,25 @@
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
+    <layout-to-restore>
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32972136" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.41640866" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.38373983" sideWeight="0.5936777" order="9" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32972136" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32576868" sideWeight="0.88780487" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.11219512" sideWeight="0.40632227" order="2" side_tool="false" content_ui="tabs" />
+    </layout-to-restore>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
@@ -701,67 +624,49 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/test/public/js/SpecRunner.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="41" selection-start="861" selection-end="861" vertical-scroll-proportion="0.5317164" vertical-offset="0" max-vertical-offset="536">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/lib/jquery.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="146745">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/lib/underscore.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="19170">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/lib/backbone-min.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="547">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/public/js/views/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="26" selection-start="82" selection-end="82" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="810">
-          <folding>
-            <marker date="1387958265201" expanded="true" signature="-1:-1" placeholder="[...]" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/underscore-min.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="478">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="660">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/backbone-min.js">
+    <entry file="file://$PROJECT_DIR$/public/js/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="478">
+        <state line="11" column="14" selection-start="344" selection-end="350" vertical-scroll-proportion="-6.3461537" vertical-offset="0" max-vertical-offset="3390">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/vendor/require/require.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1981" column="9" selection-start="79526" selection-end="79526" vertical-scroll-proportion="0.0" vertical-offset="29700" max-vertical-offset="30885">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/underscore.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1275" column="14" selection-start="47993" selection-end="47993" vertical-scroll-proportion="0.0" vertical-offset="18664" max-vertical-offset="19215">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/bootstrap/js/bootstrap.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="30030">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/app/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="36" selection-start="231" selection-end="231" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="825">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/templates/app.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="5" selection-start="155" selection-end="155" vertical-scroll-proportion="-2.5" vertical-offset="0" max-vertical-offset="150">
-          <folding>
-            <marker date="1388013894083" expanded="true" signature="24:154" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/text.js">
+    <entry file="file://$PROJECT_DIR$/public/js/lib/text.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="5805">
           <folding />
@@ -770,49 +675,65 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/public/js/main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="44" selection-start="189" selection-end="189" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="420">
+        <state line="22" column="3" selection-start="424" selection-end="524" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="420">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/bootstrap/css/bootstrap-theme.css">
+    <entry file="file://$PROJECT_DIR$/test/public/js/models/player-test.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="9" selection-start="262" selection-end="264" vertical-scroll-proportion="-6.3461537" vertical-offset="0" max-vertical-offset="6960">
+        <state line="13" column="0" selection-start="292" selection-end="292" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="315">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/bootstrap/css/bootstrap.css">
+    <entry file="file://$PROJECT_DIR$/public/js/lib/backbone.localStorage.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="2635" column="26" selection-start="43617" selection-end="43627" vertical-scroll-proportion="-6.6538463" vertical-offset="39352" max-vertical-offset="106560">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3420">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/index.js">
+    <entry file="file://$PROJECT_DIR$/public/js/tests/lib/jasmine.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="23" selection-start="460" selection-end="460" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3390">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="35805">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/templates/game-controls-toolbar.html">
+    <entry file="file://$PROJECT_DIR$/public/js/tests/lib/jasmine-html.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="25" selection-start="321" selection-end="321" vertical-scroll-proportion="-2.5" vertical-offset="0" max-vertical-offset="165">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="5160">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/index.html">
+    <entry file="file://$PROJECT_DIR$/public/js/tests/jasmine/spec/player-test.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="21" selection-start="439" selection-end="439" vertical-scroll-proportion="-7.5" vertical-offset="0" max-vertical-offset="315">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="560">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/app.js">
+    <entry file="file://$PROJECT_DIR$/public/js/lib/jasmine.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="65" selection-start="895" selection-end="895" vertical-scroll-proportion="0.83035713" vertical-offset="0" max-vertical-offset="630">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="915">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/tests/SpecRunner.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="64" selection-start="203" selection-end="203" vertical-scroll-proportion="-3.125" vertical-offset="0" max-vertical-offset="255">
+          <folding>
+            <element signature="n#style#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/tests/SpecRunner.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="49" column="35" selection-start="1249" selection-end="1249" vertical-scroll-proportion="1.2803571" vertical-offset="18" max-vertical-offset="1080">
           <folding />
         </state>
       </provider>

@@ -1,11 +1,11 @@
 require.config({
     //baseUrl:'../',
     paths: {
-        jquery: 'jquery',
-        underscore: 'underscore',
-        backbone: 'backbone-min',
-        bootstrap: 'bootstrap/js/bootstrap',
-        text: 'text'
+        jquery: 'lib/jquery',
+        underscore: 'lib/underscore',
+        backbone: 'lib/backbone-min',
+        bootstrap: 'lib/bootstrap/js/bootstrap',
+        text: 'lib/text'
     },
     shim: {
         underscore: {
@@ -17,7 +17,7 @@ require.config({
         }
     }
 });
-require(['app'], function(AppView){
+require(['views/app'], function(AppView){
     var app_view = new AppView;
     app_view.render();
 });
