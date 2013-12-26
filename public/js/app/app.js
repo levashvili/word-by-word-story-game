@@ -1,11 +1,12 @@
 define([
     'jquery',
     'underscore',
-    'backbone'
+    'backbone',
+    'bootstrap'
     //'collections/todos',
     //'views/todos',
     //'text!templates/stats.html'
-], function($, _, Backbone){
+], function($, _, Backbone, Bootstrap){
     AppView = Backbone.View.extend({
 
         el: $("#collaborative_storytelling_app"),

@@ -3,9 +3,9 @@ require.config({
     paths: {
         jquery: 'jquery',
         underscore: 'underscore',
-        backbone: 'backbone-min'
-        //bootstrap: 'vendor/bootstrap/js/bootstrap.min',
-        //text: 'vendor/require/text'
+        backbone: 'backbone-min',
+        bootstrap: 'bootstrap/js/bootstrap',
+        text: 'text'
     },
     shim: {
         underscore: {
