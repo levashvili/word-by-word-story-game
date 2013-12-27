@@ -6,9 +6,9 @@ require.config({
         underscore: '../lib/underscore/underscore',
         backbone: '../lib/backbone/backbone',
         'backbone.localStorage': '../lib/backbone/backbone.localStorage',
-        jasmine: '../lib/jasmine-2.0.0/jasmine',
-        'jasmine-html': '../lib/jasmine-2.0.0/jasmine-html',
-        'jasmine-boot': '../lib/jasmine-2.0.0/boot',
+        jasmine: '../lib/jasmine-1.3.1/jasmine',
+        'jasmine-html': '../lib/jasmine-1.3.1/jasmine-html',
+        //'jasmine-boot': '../lib/jasmine-2.0.0/boot',
         spec: 'spec/'
     },
     shim: {
@@ -30,6 +30,10 @@ require.config({
             deps: ['jasmine'],
             exports: 'jasmine'
         }
+//        'jasmine-boot': {
+//            deps: ['jasmine', 'jasmine-html'],
+//            exports: 'jasmine'
+//        }
     }
 });
 
@@ -45,7 +49,21 @@ require(['underscore', 'jquery', 'jasmine-html'], function(_, $, jasmine){
     jasmineEnv.specFilter = function(spec) {
         return htmlReporter.specFilter(spec);
     };
-
+    //--------------------------------------
+//    var currentWindowOnload = window.onload;
+//    window.onload = function() {
+//        if (currentWindowOnload) {
+//            currentWindowOnload();
+//        }
+//
+//        document.querySelector('.version').innerHTML = jasmineEnv.versionString();
+//        execJasmine();
+//    };
+//
+//    function execJasmine() {
+//        jasmineEnv.execute();
+//    }
+    //---------------------------------------
     var specs = [];
 
     specs.push('spec/models/player-test');
