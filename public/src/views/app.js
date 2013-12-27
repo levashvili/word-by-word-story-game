@@ -5,18 +5,16 @@ define([
     'bootstrap',
     //'collections/todos',
     //'views/todos',
+    //'text!templates/app.html',
+    //'text!templates/game-controls-toolbar.html',
     'text!templates/app.html',
-    'text!templates/game-controls-toolbar.html',
-    'text!templates/story.html'
-], function($, _, Backbone, Bootstrap, AppTemplate, GameControlsTemplate, StoryTemplate){
-    AppView = Backbone.View.extend({
+    'views/game-room'
+], function($, _, Backbone, Bootstrap, AppTemplate, GameRoomView){
+    var AppView = Backbone.View.extend({
 
         el: $("#collaborative_storytelling_app"),
 
         template: AppTemplate,
-        //tagName: "li",
-
-        //className: "document-row",
 
         events: {
             "click .icon":          "open",
@@ -29,9 +27,11 @@ define([
         },
 
         render: function() {
-            this.$('#nav_section').html(this.template);
-            this.$('#story').html(StoryTemplate);
-            this.$('#controls').html(GameControlsTemplate);
+            //this.$('#nav_section').html(this.template);
+            var game_room_view = new GameRoomView({el: $('#game-room')});
+            game_room_view.render()
+            //this.$('#collaborative_storytelling_app').html(AppTemplate);
+            //this.$('#controls').html(GameControlsTemplate);
         }
     });
 
