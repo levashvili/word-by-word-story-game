@@ -1,14 +1,15 @@
 require.config({
-    //baseUrl: "/js/",
+    //baseUrl: "js/",
     urlArgs: 'cb=' + Math.random(),
     paths: {
-        jquery: 'lib/jquery',
-        underscore: 'lib/underscore',
-        backbone: 'lib/backbone-min',
-        'backbone.localStorage': 'lib/backbone.localStorage',
-        jasmine: 'tests/lib/jasmine',
-        'jasmine-html': 'tests/lib/jasmine-html',
-        spec: 'tests/jasmine/spec/'
+        jquery: '../lib/jquery/jquery-1.10.2',
+        underscore: '../lib/underscore/underscore',
+        backbone: '../lib/backbone/backbone',
+        'backbone.localStorage': '../lib/backbone/backbone.localStorage',
+        jasmine: '../lib/jasmine-2.0.0/jasmine',
+        'jasmine-html': '../lib/jasmine-2.0.0/jasmine-html',
+        'jasmine-boot': '../lib/jasmine-2.0.0/boot',
+        spec: 'spec/'
     },
     shim: {
         underscore: {
@@ -47,7 +48,7 @@ require(['underscore', 'jquery', 'jasmine-html'], function(_, $, jasmine){
 
     var specs = [];
 
-    specs.push('spec/player-test');
+    specs.push('spec/models/player-test');
     //specs.push('spec/models/TodoSpec');
     //specs.push('spec/views/ClearCompletedSpec');
     //specs.push('spec/views/CountViewSpec');

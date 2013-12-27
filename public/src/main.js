@@ -1,11 +1,11 @@
 require.config({
     //baseUrl:'../',
     paths: {
-        jquery: 'lib/jquery',
-        underscore: 'lib/underscore',
-        backbone: 'lib/backbone-min',
-        bootstrap: 'lib/bootstrap/js/bootstrap',
-        text: 'lib/text'
+        jquery: '../lib/jquery/jquery-1.10.2',
+        underscore: '../lib/underscore/underscore',
+        backbone: '../lib/backbone/backbone',
+        bootstrap: '../lib/bootstrap/js/bootstrap',
+        text: '../lib/require/text'
     },
     shim: {
         underscore: {
