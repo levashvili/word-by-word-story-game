@@ -2,8 +2,9 @@ define([
     'jquery',
     'underscore',
     'backbone',
-    'text!templates/game-room.html'
-], function($, _, Backbone, GameRoomTemplate){
+    'text!templates/game-room.html',
+    'text!templates/text-area.html'
+], function($, _, Backbone, GameRoomTemplate, TextAreaTemplate){
     var GameRoomView = Backbone.View.extend({
         //... is a list tag.
         //tagName:  'li',
@@ -41,6 +42,10 @@ define([
 //            return this;
 
             this.$el.html(GameRoomTemplate);
+            $("#text-area").html(_.template(TextAreaTemplate, {
+                storyText: 'Some html go here. Some html go here. Some html go here. Some html go here. Some html go here. Some html go here. Some html go here. Some html go here. Some html go here. Some html go here. Some html go here. Some html go here. Some html go here. Some html go here. Some html go here. Some html go here. Some html go here. <br>Some html go here. Some html go here. Some html go here. Some html go here. Some html go here. Some html go here. Some html go here. Some html go here. Some html go here. Some html go here. Some html go here. Some html go here. Some html go here. Some html go here. Some html go here. Some html go here. Some html go here. <br>',
+                placeholder: 'Start typing here...'
+            }));
             return this;
         },
 

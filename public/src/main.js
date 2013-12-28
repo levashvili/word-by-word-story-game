@@ -18,9 +18,11 @@ require.config({
         }
     }
 });
-require(['views/app', 'views/game-room'], function(AppView, GameRoomView){
+require(['views/app', 'views/game-room', 'views/text-area'], function(AppView, GameRoomView, TextAreaView){
     //var app_view = new AppView();
     //app_view.render();
-    var game_room_view = new GameRoomView();
-    game_room_view.render();
+    //var game_room_view = new GameRoomView();
+    //game_room_view.render();
+    var text_area_view = new TextAreaView({el: $('#text-area')});
+    text_area_view.render();
 });

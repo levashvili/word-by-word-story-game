@@ -9,7 +9,8 @@ require.config({
         jasmine: '../lib/jasmine-1.3.1/jasmine',
         'jasmine-html': '../lib/jasmine-1.3.1/jasmine-html',
         //'jasmine-boot': '../lib/jasmine-2.0.0/boot',
-        spec: 'spec/'
+        spec: 'spec'
+        //'text-area-view': '../src/views/text-area'
     },
     shim: {
         underscore: {
@@ -66,7 +67,9 @@ require(['underscore', 'jquery', 'jasmine-html'], function(_, $, jasmine){
     //---------------------------------------
     var specs = [];
 
-    specs.push('spec/models/player-test');
+    //specs.push('spec/models/player-test');
+    specs.push('spec/views/text-area-spec');
+    //specs.push('../src/views/text-area');
     //specs.push('spec/models/TodoSpec');
     //specs.push('spec/views/ClearCompletedSpec');
     //specs.push('spec/views/CountViewSpec');
