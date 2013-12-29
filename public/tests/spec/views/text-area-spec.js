@@ -1,4 +1,4 @@
-describe("Text area view", function() {
+xdescribe("Text area view", function() {
 
     var text_area_view = new TextAreaView();
 
@@ -28,7 +28,7 @@ describe("A suite", function() {
     });
 });
 
-describe("A suite is just a function", function() {
+xdescribe("A suite is just a function", function() {
     var a;
 
     it("and so is a spec", function() {
@@ -38,7 +38,7 @@ describe("A suite is just a function", function() {
     });
 });
 
-describe("The 'toBe' matcher compares with ===", function() {
+xdescribe("The 'toBe' matcher compares with ===", function() {
 
         it("and has a positive case ", function() {
             expect(true).toBe(true);
@@ -49,7 +49,7 @@ describe("The 'toBe' matcher compares with ===", function() {
         });
 });
 
-describe("Included matchers:", function() {
+xdescribe("Included matchers:", function() {
 
     it("The 'toBe' matcher compares with ===", function() {
         var a = 12;
@@ -169,7 +169,7 @@ describe("Included matchers:", function() {
     });
 });
 
-describe("A spec", function() {
+xdescribe("A spec", function() {
     it("is just a function, so it can contain any code", function() {
         var foo = 0;
         foo += 1;
@@ -186,7 +186,7 @@ describe("A spec", function() {
     });
 });
 
-describe("A spec (with setup and tear-down)", function() {
+xdescribe("A spec (with setup and tear-down)", function() {
     var foo;
 
     beforeEach(function() {
@@ -208,7 +208,7 @@ describe("A spec (with setup and tear-down)", function() {
     });
 });
 
-describe("A spec", function() {
+xdescribe("A spec", function() {
     var foo;
 
     beforeEach(function() {
@@ -242,7 +242,7 @@ describe("A spec", function() {
     });
 });
 
-describe("A spy", function() {
+xdescribe("A spy", function() {
     var foo, bar = null;
 
     beforeEach(function() {
@@ -284,7 +284,7 @@ describe("A spy", function() {
     });
 });
 
-describe("A spy, when configured to call through", function() {
+xdescribe("A spy, when configured to call through", function() {
     var foo, bar, fetchedBar;
 
     beforeEach(function() {
@@ -316,7 +316,7 @@ describe("A spy, when configured to call through", function() {
     });
 });
 
-describe("A spy, when faking a return value", function() {
+xdescribe("A spy, when faking a return value", function() {
     var foo, bar, fetchedBar;
 
     beforeEach(function() {
@@ -348,7 +348,7 @@ describe("A spy, when faking a return value", function() {
     });
 });
 
-describe("A spy, when faking a return value", function() {
+xdescribe("A spy, when faking a return value", function() {
     var foo, bar, fetchedBar;
 
     beforeEach(function() {
@@ -382,7 +382,7 @@ describe("A spy, when faking a return value", function() {
     });
 });
 
-describe("A spy, when created manually", function() {
+xdescribe("A spy, when created manually", function() {
     var whatAmI;
 
     beforeEach(function() {
@@ -412,7 +412,7 @@ describe("A spy, when created manually", function() {
     });
 });
 
-describe("Multiple spies, when created manually", function() {
+xdescribe("Multiple spies, when created manually", function() {
     var tape;
 
     beforeEach(function() {
@@ -442,7 +442,7 @@ describe("Multiple spies, when created manually", function() {
     });
 });
 
-describe("jasmine.any", function() {
+xdescribe("jasmine.any", function() {
     it("matches any value", function() {
         expect({}).toEqual(jasmine.any(Object));
         expect(12).toEqual(jasmine.any(Number));
@@ -460,7 +460,7 @@ describe("jasmine.any", function() {
     });
 });
 
-describe("Manually ticking the Jasmine Mock Clock", function() {
+xdescribe("Manually ticking the Jasmine Mock Clock", function() {
     var timerCallback;
 
     beforeEach(function() {
@@ -498,7 +498,7 @@ describe("Manually ticking the Jasmine Mock Clock", function() {
     });
 });
 
-describe("Asynchronous specs", function() {
+xdescribe("Asynchronous specs", function() {
     var value, flag;
 
     it("should support async execution of test preparation and expectations", function() {

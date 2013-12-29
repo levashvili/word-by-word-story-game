@@ -1,5 +1,5 @@
 require.config({
-    //baseUrl: "js/",
+    baseUrl: "../src/",
     urlArgs: 'cb=' + Math.random(),
     paths: {
         jquery: '../lib/jquery/jquery-1.10.2',
@@ -9,7 +9,7 @@ require.config({
         jasmine: '../lib/jasmine-1.3.1/jasmine',
         'jasmine-html': '../lib/jasmine-1.3.1/jasmine-html',
         //'jasmine-boot': '../lib/jasmine-2.0.0/boot',
-        spec: 'spec'
+        spec: '../tests/spec'
         //'text-area-view': '../src/views/text-area'
     },
     shim: {
@@ -69,7 +69,7 @@ require(['underscore', 'jquery', 'jasmine-html'], function(_, $, jasmine){
 
     //specs.push('spec/models/player-test');
     specs.push('spec/views/text-area-spec');
-    //specs.push('../src/views/text-area');
+    specs.push('spec/models/story-spec');
     //specs.push('spec/models/TodoSpec');
     //specs.push('spec/views/ClearCompletedSpec');
     //specs.push('spec/views/CountViewSpec');

@@ -1,5 +1,5 @@
 require.config({
-    //baseUrl:'../',
+    baseUrl:'../src/',
     urlArgs: 'cb=' + Math.random(),
     paths: {
         jquery: '../lib/jquery/jquery-1.10.2',
