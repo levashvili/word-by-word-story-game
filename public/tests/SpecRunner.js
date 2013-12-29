@@ -70,7 +70,7 @@ require(['underscore', 'jquery', 'jasmine-html'], function(_, $, jasmine){
     //specs.push('spec/models/player-test');
     specs.push('spec/views/text-area-spec');
     specs.push('spec/models/story-spec');
-    //specs.push('spec/models/TodoSpec');
+    specs.push('spec/views/text-area/text-editor-spec');
     //specs.push('spec/views/ClearCompletedSpec');
     //specs.push('spec/views/CountViewSpec');
     //specs.push('spec/views/FooterViewSpec');
