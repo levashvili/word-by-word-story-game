@@ -22,21 +22,21 @@ describe('View :: Text Editor', function() {
 
     describe('Can Be Clicked and keyPressed', function() {
         it('was not clicked', function() {
-            expect(this.view.$el.get('clicked')).toEqual(false);
+            expect(this.view.getClicked()).toEqual(false);
         });
 
         it('was clicked', function() {
             this.view.$el.click();
-            expect(this.view.$el.get('clicked')).toEqual(true);
+            expect(this.view.getClicked()).toEqual(true);
         });
 
         it('was not keyPressed', function() {
-            expect(this.view.$el.get('keyPressed')).toEqual(false);
+            expect(this.view.getKeyPressed()).toEqual(false);
         });
 
-        it('was clicked', function() {
-            this.view.$el.keyUp();
-            expect(this.view.$el.get('keyPressed')).toEqual(true);
+        it('was key pressed', function() {
+            this.view.$el.keyup();
+            expect(this.view.getKeyPressed()).toEqual(true);
         });
     });
 

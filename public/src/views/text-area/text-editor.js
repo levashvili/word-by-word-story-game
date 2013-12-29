@@ -9,6 +9,10 @@ define(['backbone', 'underscore'], function(Backbone, _) {
 
         keyPressed: false,
 
+        attributes: {
+            contenteditable: true
+        },
+
         initialize: function(){
 //            var events = 'add reset remove change:completed';
 //            this.collection.on(events, this.render, this);
@@ -19,13 +23,21 @@ define(['backbone', 'underscore'], function(Backbone, _) {
         },
         events: {
             //ui events
-            keyUp: function() {
+            keyup: function() {
                 this.keyPressed = true;
             },
 
             click: function() {
                 this.clicked = true;
             }
+        },
+
+        getClicked: function() {
+            return this.clicked;
+        },
+
+        getKeyPressed: function() {
+            return this.keyPressed;
         }
     });
 
