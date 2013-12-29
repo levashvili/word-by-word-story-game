@@ -1,5 +1,7 @@
 var connect = require('connect')
-    , http = require('http');
+    , http = require('http')
+    , port = process.env.PORT || 5000
+    , hostname = process.env.HOSTNAME || "leena-lemur-ultra.local";
 
 var app = connect()
     .use(connect.logger('dev'))
@@ -11,4 +13,4 @@ var app = connect()
         res.end('Hello from Connect!\n');
     });
 
-http.createServer(app).listen(3000);
+http.createServer(app).listen(port);
