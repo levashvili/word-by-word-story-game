@@ -63,6 +63,13 @@ describe('View :: Text Editor', function() {
 
     });
 
+    describe('should be able to alter edit mode', function() {
+        it('should exit edit mode on successful submit', function() {
+            this.customEvents.trigger('game-room:entryReceived');
+            expect(this.view.isEditable()).toEqual(false);
+        });
+    });
+
     xdescribe('Shows And Hides', function() {
 
         it('should be hidden', function() {

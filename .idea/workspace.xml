@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e751f12d-1dce-4660-921e-7753d44146a1" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/src/main.js" afterPath="$PROJECT_DIR$/public/src/main.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/src/templates/text-area.html" afterPath="$PROJECT_DIR$/public/src/templates/text-area.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/tests/spec/views/text-area/text-editor-spec.js" afterPath="$PROJECT_DIR$/public/tests/spec/views/text-area/text-editor-spec.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/src/views/text-area/text-editor.js" afterPath="$PROJECT_DIR$/public/src/views/text-area/text-editor.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Chat.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -41,7 +38,7 @@
       <file leaf-file-name="text-editor.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/src/views/text-area/text-editor.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="960">
+            <state line="23" column="89" selection-start="629" selection-end="629" vertical-scroll-proportion="0.45535713" vertical-offset="90" max-vertical-offset="1095">
               <folding />
             </state>
           </provider>
@@ -50,7 +47,7 @@
       <file leaf-file-name="text-editor-spec.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/tests/spec/views/text-area/text-editor-spec.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="58" column="29" selection-start="1597" selection-end="1597" vertical-scroll-proportion="0.0" vertical-offset="535" max-vertical-offset="2595">
+            <state line="68" column="12" selection-start="1879" selection-end="1879" vertical-scroll-proportion="0.0" vertical-offset="700" max-vertical-offset="2700">
               <folding />
             </state>
           </provider>
@@ -141,9 +138,9 @@
         <option value="$PROJECT_DIR$/static-server.js" />
         <option value="$PROJECT_DIR$/public/src/templates/text-area.html" />
         <option value="$PROJECT_DIR$/public/lib/jquery/plugins/caret/jcaret.1.0.2.js" />
+        <option value="$PROJECT_DIR$/public/src/main.js" />
         <option value="$PROJECT_DIR$/public/tests/spec/views/text-area/text-editor-spec.js" />
         <option value="$PROJECT_DIR$/public/src/views/text-area/text-editor.js" />
-        <option value="$PROJECT_DIR$/public/src/main.js" />
       </list>
     </option>
   </component>
@@ -762,13 +759,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/tests/spec/views/text-area/text-editor-spec.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="58" column="29" selection-start="1597" selection-end="1597" vertical-scroll-proportion="0.0" vertical-offset="535" max-vertical-offset="2595">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/src/main.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="29" column="38" selection-start="998" selection-end="998" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="585">
@@ -776,9 +766,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/public/tests/spec/views/text-area/text-editor-spec.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="68" column="12" selection-start="1879" selection-end="1879" vertical-scroll-proportion="0.0" vertical-offset="700" max-vertical-offset="2700">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/public/src/views/text-area/text-editor.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="960">
+        <state line="23" column="89" selection-start="629" selection-end="629" vertical-scroll-proportion="0.45535713" vertical-offset="90" max-vertical-offset="1095">
           <folding />
         </state>
       </provider>

@@ -21,6 +21,15 @@ define(['backbone', 'underscore'], function(Backbone, _) {
 
         initialize: function(obj){
             _(this).extend(obj);
+            this.customEvents.on('game-room:entryReceived', this.stopEditing.bind(this));
+        },
+
+        stopEditing: function() {
+            this.attributes.contenteditable = false;
+        },
+
+        isEditable: function() {
+            return this.attributes.contenteditable;
         },
 
         render: function() {
