@@ -1,43 +1,57 @@
 define(['backbone', 'underscore'], function(Backbone, _) {
 
-    var template = _.template('enter text here');
+    //var template = _.template(this.contentText);
 
     var TextEditorView = Backbone.View.extend({
         tagName: 'span',
 
-        clicked: false,
+        id: 'text-editor',
 
-        keyPressed: false,
+        customEvents: _.extend({}, Backbone.Events),
+
+        parentEl: $('#text-area'),
+
+        contentText: '2.enter text here',
+
+        template: function() {return this.contentText},
 
         attributes: {
             contenteditable: true
         },
 
-        initialize: function(){
-//            var events = 'add reset remove change:completed';
-//            this.collection.on(events, this.render, this);
+        initialize: function(obj){
+            _(this).extend(obj);
         },
+
         render: function() {
-            this.$el.show().html( template({}) );
+            this.$el.show().html( this.template({}) );
+            this.parentEl.html(this.el);
+            this.$el.focus();
+            //this.$el.blur();
             return this;
         },
         events: {
             //ui events
-            keyup: function() {
-                this.keyPressed = true;
-            },
+            keydown: function(event) {
+                if(event.which == 13) { //submit on enter
+                    event.preventDefault();
 
-            click: function() {
-                this.clicked = true;
+//                    this.trigger('text-editor:submit', {
+//                        text: this.getText()
+//                    });
+                    this.customEvents.trigger('text-editor:submit', {
+                        text: this.getText()
+                    });
+                }
             }
         },
 
-        getClicked: function() {
-            return this.clicked;
+        getId: function() {
+            return this.id;
         },
 
-        getKeyPressed: function() {
-            return this.keyPressed;
+        getText: function() {
+            return this.$el.html();
         }
     });
 

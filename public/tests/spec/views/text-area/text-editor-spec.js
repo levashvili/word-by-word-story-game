@@ -1,3 +1,5 @@
+debugger;
+
 describe('View :: Text Editor', function() {
 
     beforeEach(function() {
@@ -5,8 +7,16 @@ describe('View :: Text Editor', function() {
             that = this;
 
         require(['views/text-area/text-editor'], function(TextEditorView) {
-            that.view = new TextEditorView();
-            $('#sandbox').html(that.view.render().el);
+            that.customEvents = _.extend({}, Backbone.Events);
+
+            that.view = new TextEditorView({
+                parentEl: $('#sandbox'),
+                customEvents: that.customEvents,
+                contentText: 'enter text here'
+            });
+            that.view.render();
+            //that.view = new TextEditorView({});
+            //$('#sandbox').html(that.view.render().el);
             flag = true;
         });
 
@@ -20,24 +30,37 @@ describe('View :: Text Editor', function() {
         this.view.remove();
     });
 
-    describe('Can Be Clicked and keyPressed', function() {
-        it('was not clicked', function() {
-            expect(this.view.getClicked()).toEqual(false);
+    describe('Can Gain and Lose focus', function() {
+
+        it('has focus by default', function() {
+            expect(this.view.$el.is(":focus")).toEqual(true);
         });
 
-        it('was clicked', function() {
-            this.view.$el.click();
-            expect(this.view.getClicked()).toEqual(true);
-        });
+        it('submits on enter', function() {
+            expect(this.view.$el.is(':focus'), 'element to be focused by default').toEqual(true);
 
-        it('was not keyPressed', function() {
-            expect(this.view.getKeyPressed()).toEqual(false);
-        });
+            var flag = false;
 
-        it('was key pressed', function() {
-            this.view.$el.keyup();
-            expect(this.view.getKeyPressed()).toEqual(true);
-        });
+            var press = jQuery.Event("keydown");
+            press.ctrlKey = false;
+            press.which = 13;
+
+//            this.view.on('text-editor:submit',function() {
+//                flag = true;
+//            });
+            this.customEvents.on('text-editor:submit',function() {
+                flag = true;
+            });
+
+            this.view.$el.trigger(press);
+
+            //expect(flag).toEqual(true);
+
+            waitsFor(function() {
+                return flag;
+            });
+        })
+
     });
 
     xdescribe('Shows And Hides', function() {

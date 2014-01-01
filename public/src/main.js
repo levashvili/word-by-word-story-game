@@ -18,11 +18,17 @@ require.config({
         }
     }
 });
-require(['views/app', 'views/game-room', 'views/text-area'], function(AppView, GameRoomView, TextAreaView){
+require(['views/app', 'views/game-room', 'views/text-area', 'views/text-area/text-editor'],
+    function(AppView, GameRoomView, TextAreaView, TextEditorView){
     //var app_view = new AppView();
     //app_view.render();
     //var game_room_view = new GameRoomView();
     //game_room_view.render();
-    var text_area_view = new TextAreaView({el: $('#text-area')});
-    text_area_view.render();
+        var customEvents = _.extend({}, Backbone.Events);
+        var text_area_view = new TextEditorView({
+            parentEl: $('#text-area'),
+            customEvents: customEvents
+        });
+
+        text_area_view.render();
 });
