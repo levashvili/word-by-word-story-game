@@ -14,44 +14,61 @@
  rest should be named after its module name.
 
  */
-var express = require("express")
-    , app = express()
+var
+//    express = require("express")
+      connect = require('connect')
+//    , http = require('http')
+    , port = process.env.PORT || 5000
+    , hostname = process.env.HOSTNAME || "leena-lemur-ultra.local"
+    , app = connect()
+        .use(connect.logger('dev'))
+        .use(connect.static('public'))
+        .use(connect.directory('public'))
+        .use(connect.cookieParser())
+        .use(connect.session({ secret: 'my secret here' }))
+        .use(function(req, res){
+            res.end('Hello from Connect!\n');
+        })
+//    , app = express()
     , http = require("http").createServer(app)
     , io = require("socket.io").listen(http)
     , _ = require("underscore")
     , g = require("./gameRoom")
-    , util = require('util')
-    , port = process.env.PORT || 5000
-    , hostname = process.env.HOSTNAME || "leena-lemur-ultra.local";
+    , util = require('util');
+//    , port = process.env.PORT || 5000
+//    , hostname = process.env.HOSTNAME || "leena-lemur-ultra.local";
 
-/* Server config */
+
+http.listen(port);/* Server config */
 //Server's IP address
-app.set("hostname", hostname);
+//app.set("hostname", hostname);
 
 //Server's port number 
-app.set("port", port);
+//app.set("port", port);
 
 //Specify the views folder
-app.set("views", __dirname + "/views");
+//app.set("views", __dirname + "/public/src");
 
 //View engine is Jade
-app.set("view engine", "jade");
+//app.set("view engine", "jade");
 
 //Specify where the static content is
-app.use(express.static("public", __dirname + "/public"));
+//app.use(express.static("public", __dirname + "/public"));
 
 //Tells server to support JSON, urlencoded, and multipart requests
-app.use(express.bodyParser());
+//app.use(express.bodyParser());
 
 /* Server routing */
+//app.engine('.html', require('jade').__express);
+//app.engine('html', require('ejs').renderFile);
 
 //Handle route "GET /", as in "http://localhost:8080/"
-app.get("/", function(request, response) {
+//app.get("/", function(request, response) {
 
     //Render the view called "index"
-    response.render("index");
+//    response.render("index.html");
 
-});
+//});
 
 var gameRoom = new g.GameRoom(1);
 gameRoom.on('gameRoomEvent', function(err, events) {
@@ -89,7 +106,7 @@ io.on("connection", function(socket) {
 });
 
 //Start the http server at port and IP defined before
-http.listen(app.get("port"), app.get("ipaddr"), function() {
-    console.log("Server up and running. Go to http://" + app.get("hostname") + ":" + app.get("port"));
-});
+//http.listen(app.get("port"), app.get("ipaddr"), function() {
+//    console.log("Server up and running. Go to http://" + app.get("hostname") + ":" + app.get("port"));
+//});
 

@@ -1,11 +1,8 @@
 define(['backbone', 'underscore'], function(Backbone, _) {
 
-    //var template = _.template(this.contentText);
+    var StoryTextAreaView = Backbone.View.extend({
 
-    var TextEditorView = Backbone.View.extend({
         tagName: 'span',
-
-        id: 'text-editor',
 
         customEvents: _.extend({}, Backbone.Events),
 
@@ -21,15 +18,45 @@ define(['backbone', 'underscore'], function(Backbone, _) {
 
         initialize: function(obj){
             _(this).extend(obj);
-            this.customEvents.on('text-editor:stopEditing', this.stopEditing.bind(this));
+            this.customEvents.on('story-text-area:stopEditing', this.stopEditing.bind(this));
+            this.customEvents.on('story-text-area:startEditing', this.startEditing.bind(this));
+            this.customEvents.on('story-text-area:emptyContents', this.emptyContents.bind(this));
+            this.customEvents.on('story-text-area:setContents', this.setContents.bind(this));
+            this.customEvents.on('story-text-area:appendContents', this.appendContents.bind(this));
+            this.customEvents.on('story-text-area:focus', this.focus.bind(this));
+
         },
 
         stopEditing: function() {
             this.attributes.contenteditable = false;
         },
 
+        startEditing: function() {
+            this.attributes.contenteditable = true;
+        },
+
+        emptyContents: function() {
+            this.$el.html("");
+        },
+
+        setContents: function(contents) {
+            this.$el.html(contents);
+        },
+
+        getContents: function() {
+            return this.$el.html();
+        },
+
+        appendContents: function(contentsToAppend) {
+            this.$el.html(this.$el.html() + contentsToAppend);
+        },
+
         isEditable: function() {
             return this.attributes.contenteditable;
+        },
+
+        focus: function() {
+            this.$el.focus();
         },
 
         render: function() {
@@ -39,6 +66,7 @@ define(['backbone', 'underscore'], function(Backbone, _) {
             //this.$el.blur();
             return this;
         },
+
         events: {
             //ui events
             keydown: function(event) {
@@ -49,7 +77,7 @@ define(['backbone', 'underscore'], function(Backbone, _) {
 //                        text: this.getText()
 //                    });
                     this.customEvents.trigger('text-editor:submit', {
-                        text: this.getText()
+                        text: this.getContents()
                     });
                 }
             }
@@ -57,12 +85,8 @@ define(['backbone', 'underscore'], function(Backbone, _) {
 
         getId: function() {
             return this.id;
-        },
-
-        getText: function() {
-            return this.$el.html();
         }
     });
 
-    return TextEditorView;
+    return StoryTextAreaView;
 });
