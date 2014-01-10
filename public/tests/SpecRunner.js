@@ -5,7 +5,7 @@ require.config({
         jquery: '../lib/jquery/jquery-1.10.2',
         underscore: '../lib/underscore/underscore',
         backbone: '../lib/backbone/backbone',
-        'backbone.localStorage': '../lib/backbone/backbone.localStorage',
+        localStorage: '../lib/backbone/backbone.localStorage',
         jasmine: '../lib/jasmine-1.3.1/jasmine',
         'jasmine-html': '../lib/jasmine-1.3.1/jasmine-html',
         //'jasmine-boot': '../lib/jasmine-2.0.0/boot',
@@ -71,6 +71,7 @@ require(['underscore', 'jquery', 'jasmine-html'], function(_, $, jasmine){
     //specs.push('spec/views/text-area-spec');
     //specs.push('spec/models/story-spec');
     specs.push('spec/views/text-area/story-text-area-spec');
+    specs.push('spec/models/story-spec');
     //specs.push('spec/views/ClearCompletedSpec');
     //specs.push('spec/views/CountViewSpec');
     //specs.push('spec/views/FooterViewSpec');

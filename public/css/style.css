@@ -15,3 +15,12 @@ textarea {
 .topAligned {
     vertical-align: top;
 }
+
+.player-list {
+
+}
+
+.player {
+    display: inline !important;
+    /*list-style-type: none;*/
+}

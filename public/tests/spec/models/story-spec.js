@@ -1,7 +1,9 @@
+debugger;
+
 describe('Model :: Story', function() {
 
     var mockData = { title: 'The Great Gatsby',
-        text: "In my younger and more vulnerable years my father gave me some advice that I’ve been turning over in my mind ever since.",
+        paragraphs: [],
         timestamp: new Date().getTime()
     };
 
@@ -9,16 +11,11 @@ describe('Model :: Story', function() {
         var that = this,
             done = false;
 
-        try {
-            require(['models/story', 'collections/stories'], function(Story, Stories) {
-                that.stories = new Stories();
-                that.story = new Story();
-                done = true;
-            });
-        } catch(error) {
-            console.log(error);
-        }
-
+        require(['models/story'], function(Story) {
+            that.customEvents = _.extend({}, Backbone.Events);
+            that.story = new Story(mockData, {customEvents: that.customEvents});
+            done = true;
+        });
 
         waitsFor(function() {
             return done;
@@ -30,18 +27,6 @@ describe('Model :: Story', function() {
         var done = false,
             isDone = function(){ return done; };
 
-        this.stories.fetch({
-            success: function(c) {
-                c.each(function(m){
-                    m.destroy();
-                });
-                done = true;
-            }
-        });
-
-        waitsFor(isDone);
-
-        done = false;
         this.story.destroy({
             success: function(){
                 done = true;
@@ -49,10 +34,36 @@ describe('Model :: Story', function() {
         });
 
         waitsFor(isDone);
-
     });
 
-    describe('.Create()', function() {
+    describe('Adding a paragraph', function() {
+        it('should add paragraph to story', function() {
+            expect(this.story.numberOfParagraphs(), 'initial number of paragraphs').toEqual(0);
+            this.story.addParagraph();
+            expect(this.story.numberOfParagraphs(), 'number of paragraphs after adding 1').toEqual(1);
+        });
+
+        it('unless there is already an empty paragraph', function() {
+
+            expect(this.story.numberOfParagraphs(), 'number of paragraphs initially').toEqual(1);
+
+            this.story.addParagraph('Paragraph 1');
+            expect(this.story.numberOfParagraphs()).toEqual(1);
+            expect(this.story.getParagraphAt(1)).toEqual('Paragraph 1');
+        });
+
+        it('adds empty paragraph if non-string value is passed', function() {
+            expect(this.story.numberOfParagraphs(), 'number of paragraphs initially').toEqual(1);
+
+            this.story.addParagraph(1234);
+
+            expect(this.story.numberOfParagraphs()).toEqual(2);
+
+            expect(this.story.getParagraphAt(2)).toEqual('');
+        })
+    });
+
+    xdescribe('.Create()', function() {
 
         it('should create a story', function() {
             var done = false;

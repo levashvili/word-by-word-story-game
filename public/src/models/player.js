@@ -13,10 +13,7 @@ define([
         constructor: function() {
             //this.name = name;
             Backbone.Model.apply(this, arguments);
-        },
-        parse: function(data, options) {
-            this.books.reset(data.books);
-            return data.library;
         }
     });
+    return Player;
 });
