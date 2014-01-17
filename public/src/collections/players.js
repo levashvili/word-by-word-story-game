@@ -8,23 +8,15 @@ define([
         // Reference to this collection's model.
         model: Player,
 
-        // Save all of the player items under the `"playes"` namespace.
+        //gameRoomEvents: _.extend({}, Backbone.Events),
+        // Save all of the player items under the `"player"` namespace.
         localStorage: new Backbone.LocalStorage('players-backbone'),
 
-//        // Filter down the list of all todo items that are finished.
-//        completed: function () {
-//            return this.filter(function (todo) {
-//                return todo.get('completed');
-//            });
-//        },
-//
-//        // Filter down the list to only todo items that are still not finished.
-//        remaining: function () {
-//            return this.without.apply(this, this.completed());
-//        },
+        initialize: function(models, obj) {
+            _(this).extend(obj);
+            this.gameRoomEvents.on('gameRoom:playerJoined', this.addPlayer.bind(this));
+        },
 
-        // We keep the Players in sequential order, despite being saved by unordered
-        // GUID in the database. This generates the next order number for new items.
         nextOrder: function () {
             if (!this.length) {
                 return 1;
@@ -35,6 +27,12 @@ define([
         // Players are sorted by their original insertion order.
         comparator: function (player) {
             return player.get('order');
+        },
+
+        addPlayer: function(obj) {
+            this.add({
+                name: obj.name
+            })
         }
 
     });

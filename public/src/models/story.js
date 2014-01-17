@@ -1,8 +1,9 @@
 define([
     'underscore',
     'backbone',
-    'localStorage'
-], function(_, Backbone, Store) {
+    'localStorage',
+    'collections/paragraphs'
+], function(_, Backbone, Store, ParagraphsCollection) {
 
     var store = new Store(window.store || "Story"); // for testing purposes
 
@@ -14,7 +15,7 @@ define([
 
         defaults: {
             title: "",
-            paragraphs: [],
+            paragraphs: new ParagraphsCollection(),
             editableContent: [],
             timestamp: 0,
             completed: false
@@ -23,7 +24,7 @@ define([
         initialize: function(attr, opt) {
             //Backbone.Model.apply(this, arguments);
             _(this).extend(opt);
-            this.customEvents.on('story:addParagraph', this.addParagraph.bind(this));
+            this.on('story:addParagraph', this.addParagraph.bind(this));
         },
 
         getParagraphs: function() {
@@ -42,18 +43,41 @@ define([
             return this.attributes.paragraphs.length;
         },
 
-        addParagraph: function(paragraphText) {
-            if($.trim(_(this.attributes.paragraphs).last()) === '') {
-                this.attributes.paragraphs.pop();
-            }
+        addParagraph: function(obj) {
+            this.attributes.paragraphs.add({
+                number: this.attributes.paragraphs.length + 1,
+                placeholder: 'Start typing here...'
+            });
+//            var paragraphs = this.attributes.paragraphs.slice(0);
 
-            if(paragraphText && typeof(paragraphText) == 'string') {
-                this.attributes.paragraphs.push(paragraphText);
-            } else {
-                this.attributes.paragraphs.push('');
-            }
+//            paragraphs.push(obj);
+
+//            if($.trim(_(paragraphs).last()) === '') {
+//                paragraphs.pop();
+//            }
+//
+//            if(paragraphText && typeof(paragraphText) == 'string') {
+//                paragraphs.push(paragraphText);
+//            } else {
+//                paragraphs.push('');
+//            }
+//
+//            this.set("paragraphs", paragraphs);
+            this.trigger('change:paragraphs');
+            //this.change();
+        },
+
+        setEditableText: function(paragraphNum, text) {
+            var paragraphs = this.getParagraphs();
+            paragraphs[paragraphNum - 1].editableText = text;
+            this.set("paragraphs", paragraphs);
+        },
+
+        setPlaceholder: function(paragraphNum, text) {
+            var paragraphs = this.getParagraphs();
+            paragraphs[paragraphNum - 1].placeholder = text;
+            this.set("paragraphs", paragraphs);
         }
-
     });
 
     return Story;

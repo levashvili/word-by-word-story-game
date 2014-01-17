@@ -24,20 +24,7 @@ require.config({
         }
     }
 });
-//require(['views/app', 'views/game-room', 'views/text-area', 'views/text-area/story-text-area'],
-//    function(AppView, GameRoomView, TextAreaView, StoryTextAreaView){
-//    //var app_view = new AppView();
-//    //app_view.render();
-//    //var game_room_view = new GameRoomView();
-//    //game_room_view.render();
-//        var customEvents = _.extend({}, Backbone.Events);
-//        var text_area_view = new StoryTextAreaView({
-//            parentEl: $('#text-area'),
-//            customEvents: customEvents
-//        });
-//
-//        text_area_view.render();
-//});
+
 require([
     'jquery',
     'backbone',
@@ -45,8 +32,16 @@ require([
     'socket_io',
     'views/master-view',
     'collections/players',
-    'models/story'
-], function($, Backbone, LocalStorage, SocketIO, MasterView, PlayerCollection, Story) {
+    'models/story',
+    'collections/paragraphs'
+], function($,
+            Backbone,
+            LocalStorage,
+            SocketIO,
+            MasterView,
+            PlayerCollection,
+            Story,
+            ParagraphsCollection) {
 
     var Router = Backbone.Router.extend({
         routes: {
@@ -54,12 +49,30 @@ require([
         },
 
         main: function(){
-            var sessionId = ''
-            //var tasks = new Todo.Collection();
+            var sessionId = '';
+
             var socket = SocketIO.connect();
-            //create players collection
-            var players = new PlayerCollection();
+
+            this.gameRoomEvents = _.extend({}, Backbone.Events);
+
+            var players = new PlayerCollection(null, {
+                gameRoomEvents: this.gameRoomEvents
+            });
+
             players.add([{
+                name: 'Siri',
+                age: 12,
+                gender: 'female'
+            }, {
+//                name: 'Alexander Hamilton Tabachnik',
+                name: 'Alexander',
+                age: 23,
+                gender: 'male'
+            }, {
+                name: 'StephaniekjshdgkjhsgdkHJAGSKJDH',
+                age: 21,
+                gender: 'female'
+            },{
                 name: 'Siri',
                 age: 12,
                 gender: 'female'
@@ -67,20 +80,44 @@ require([
                 name: 'Samuel',
                 age: 23,
                 gender: 'male'
-            }, {
-                name: 'Stephanie',
-                age: 21,
-                gender: 'female'
+            },{
+                name: 'Samuel',
+                age: 23,
+                gender: 'male'
+            },{
+                name: 'Samuel',
+                age: 23,
+                gender: 'male'
             }]);
+
 
             var story = new Story({
                 title: "A Series of Unfortunate Events",
-                paragraphs: ['First paragraph. First paragraph. First paragraph. First paragraph. First paragraph. First paragraph. First paragraph. First paragraph. First paragraph. First paragraph. ',
-                    'Second paragraph. Second paragraph. Second paragraph. Second paragraph. Second paragraph. Second paragraph. Second paragraph. Second paragraph. ',
-                    'Third paragraph. Third paragraph. Third paragraph. Third paragraph. Third paragraph. Third paragraph. Third paragraph. '
-                ],
-                unEditableText: "Some text. Some text. Some text. Some text. Some text. Some text. Some text. Some text. Some text. <br>Some text. Some text. Some text. Some text. Some text. Some text. Some text. Some text. Some text. Some text. <br> Some text. Some text. Some text. Some text. Some text. Some text. Some text. <br>",
-                editableText: "This is editable text right here."
+                paragraphs: new ParagraphsCollection([
+                    {
+                        number: 1,
+                        unEditableText: 'First paragraph. First paragraph. First paragraph. First paragraph. First paragraph. First paragraph. First paragraph. First paragraph. First paragraph. First paragraph. '
+                    },
+                    {
+                        number: 2,
+                        unEditableText: 'Second paragraph. Second paragraph. Second paragraph. Second paragraph. Second paragraph. Second paragraph. Second paragraph. Second paragraph. '
+                    },
+                    {
+                        number: 3,
+                        unEditableText: 'Third paragraph. Third paragraph. Third paragraph. Third paragraph. Third paragraph. Third paragraph. Third paragraph. Third paragraph. Third paragraph. ',
+                        editableText: 'This is editable text.'
+                    },
+                    {
+                        number: 4,
+                        editableText: 'This is more editable text. ',
+                        placeholder: 'Start typing here..'
+                    },
+                    {
+                        number: 5,
+                        editableText: '',
+                        placeholder: 'Start typing here..'
+                    }
+                ])
             });
 
             socket.on('connect', function() {
@@ -88,9 +125,10 @@ require([
             });
             var view = new MasterView({
                 playerCollection: players,
-                story: story
+                story: story,
+                gameRoomEvents: this.gameRoomEvents
             });
-            $("#container").html(view.render().el).show();
+            $("#global-container").html(view.render().el).show();
 //            players.fetch({
 //                success: function(tasks){
 //                    $("#container").html(view.render().el).show();

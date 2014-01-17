@@ -1,0 +1,3 @@
+<% if(unEditableText) {%><%= unEditableText %><%} %><% if(editableText || placeholder) {
+    %><span contenteditable="true" id="paragraph_<%= number %>_editable" class="editable <% editableText ? print('text-primary') : print('text-muted') %>"><%= editableText || placeholder
+                    %></span> <% } %>
