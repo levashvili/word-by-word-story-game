@@ -16,7 +16,8 @@ define([
                 }),
                 storyEditor: new StoryEditor({
                     model: this.story,
-                    gameRoomEvents: this.gameRoomEvents
+                    gameRoomEvents: this.gameRoomEvents,
+                    socketEvents: this.socketEvents
                 })
                 //storyToolbar: new StoryToolbar()
             };

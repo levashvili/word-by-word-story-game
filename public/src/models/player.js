@@ -6,7 +6,9 @@ define([
     var Player = Backbone.Model.extend({
 
         defaults: {
+            "id": null,
             "name":  "",
+            "isOnBreak": false,
             "age":     null,
             "gender":    null
         },

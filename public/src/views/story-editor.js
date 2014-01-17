@@ -35,7 +35,8 @@ define([
                 //storyTextView: new StoryTextView({model: this.model}),
                 storyEditorToolbar: new StoryEditorToolbar({
                     model: this.model,
-                    gameRoomEvents: this.gameRoomEvents
+                    gameRoomEvents: this.gameRoomEvents,
+                    socketEvents: this.socketEvents
                 })
             };
             this.$el.hide();

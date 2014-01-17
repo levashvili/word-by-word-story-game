@@ -74,6 +74,7 @@ define([
                 this.gameRoomEvents.trigger('gameRoom:playerJoined', {
                     name: playerName
                 });
+                this.socketEvents.joinGame(playerName);
             }
         }
 

@@ -88,6 +88,11 @@ gameRoom.on('gameRoomEvent', function(err, events) {
 
 io.on("connection", function(socket) {
     var sessionId = socket.id;
+    socket.emit('receiveGameState', {
+        players: gameRoom.getPlayers(),
+        story: gameRoom.getStoryText(),
+        gameTurnPlayerId: gameRoom.getGameTurnPlayerId()
+    });
     socket.on('playerEvent', function(data) {
         //gameRoom.playerJoinsGameRoom(sessionId);
         console.log("received playerEvent " + util.inspect(data));

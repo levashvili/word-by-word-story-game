@@ -33,7 +33,8 @@ require([
     'views/master-view',
     'collections/players',
     'models/story',
-    'collections/paragraphs'
+    'collections/paragraphs',
+    'web-sockets-events-dispatcher'
 ], function($,
             Backbone,
             LocalStorage,
@@ -41,7 +42,9 @@ require([
             MasterView,
             PlayerCollection,
             Story,
-            ParagraphsCollection) {
+            ParagraphsCollection,
+            SocketEventDispatcher
+    ) {
 
     var Router = Backbone.Router.extend({
         routes: {
@@ -49,47 +52,48 @@ require([
         },
 
         main: function(){
-            var sessionId = '';
 
-            var socket = SocketIO.connect();
 
             this.gameRoomEvents = _.extend({}, Backbone.Events);
+
+            this.dispatcher = new SocketEventDispatcher({
+                gameRoomEvents: this.gameRoomEvents
+            });
 
             var players = new PlayerCollection(null, {
                 gameRoomEvents: this.gameRoomEvents
             });
 
-            players.add([{
-                name: 'Siri',
-                age: 12,
-                gender: 'female'
-            }, {
-//                name: 'Alexander Hamilton Tabachnik',
-                name: 'Alexander',
-                age: 23,
-                gender: 'male'
-            }, {
-                name: 'StephaniekjshdgkjhsgdkHJAGSKJDH',
-                age: 21,
-                gender: 'female'
-            },{
-                name: 'Siri',
-                age: 12,
-                gender: 'female'
-            }, {
-                name: 'Samuel',
-                age: 23,
-                gender: 'male'
-            },{
-                name: 'Samuel',
-                age: 23,
-                gender: 'male'
-            },{
-                name: 'Samuel',
-                age: 23,
-                gender: 'male'
-            }]);
-
+//            players.add([{
+//                name: 'Siri',
+//                age: 12,
+//                gender: 'female'
+//            }, {
+////                name: 'Alexander Hamilton Tabachnik',
+//                name: 'Alexander',
+//                age: 23,
+//                gender: 'male'
+//            }, {
+//                name: 'StephaniekjshdgkjhsgdkHJAGSKJDH',
+//                age: 21,
+//                gender: 'female'
+//            },{
+//                name: 'Siri',
+//                age: 12,
+//                gender: 'female'
+//            }, {
+//                name: 'Samuel',
+//                age: 23,
+//                gender: 'male'
+//            },{
+//                name: 'Samuel',
+//                age: 23,
+//                gender: 'male'
+//            },{
+//                name: 'Samuel',
+//                age: 23,
+//                gender: 'male'
+//            }]);
 
             var story = new Story({
                 title: "A Series of Unfortunate Events",
@@ -120,29 +124,15 @@ require([
                 ])
             });
 
-            socket.on('connect', function() {
-                sessionId = socket.socket.sessionid
-            });
             var view = new MasterView({
                 playerCollection: players,
                 story: story,
-                gameRoomEvents: this.gameRoomEvents
+                gameRoomEvents: this.gameRoomEvents,
+                socketEvents: this.dispatcher
             });
             $("#global-container").html(view.render().el).show();
-//            players.fetch({
-//                success: function(tasks){
-//                    $("#container").html(view.render().el).show();
-//                },
-//                error: function(model, error) {
-//                    // TODO: handle errors nicer
-//                    alert(error);
-//                }
-//            });
         }
     });
-
-    // Preload CSS Sprite
-    //$('<img/>').attr('src', "./css/glyphicons.png");
 
     var router = new Router();
     Backbone.history.start();

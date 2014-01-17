@@ -14,7 +14,10 @@ define([
 
         initialize: function(models, obj) {
             _(this).extend(obj);
-            this.gameRoomEvents.on('gameRoom:playerJoined', this.addPlayer.bind(this));
+            this.gameRoomEvents.on('gameRoom:playerJoined', this.resetPlayers.bind(this));
+            this.gameRoomEvents.on('players:resetPlayers', this.resetPlayers.bind(this));
+            this.gameRoomEvents.on('players:addPlayer', this.addPlayer.bind(this));
+            this.gameRoomEvents.on('players:removePlayer', this.removePlayer.bind(this));
         },
 
         nextOrder: function () {
@@ -29,10 +32,23 @@ define([
             return player.get('order');
         },
 
-        addPlayer: function(obj) {
-            this.add({
-                name: obj.name
-            })
+        resetPlayers: function(players) {
+//            for (var i = 0; i < players.length; i++) {
+//                $('#players').append('<span id="' + players[i].id + '">' +
+//                    players[i].name + ' ' + (players[i].id === sessionId ? '(You)' : '') +
+//                    (players[i].isOnBreak ? '(brb)' : '') + '<br /></span>');
+//
+//
+//            }
+            this.reset(players);
+        },
+
+        addPlayer: function(player) {
+            this.add(player);
+        },
+
+        removePlayer: function(player) {
+            this.remove(player);
         }
 
     });
