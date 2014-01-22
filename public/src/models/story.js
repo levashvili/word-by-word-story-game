@@ -15,6 +15,7 @@ define([
 
         defaults: {
             title: "",
+            text: "",
             paragraphs: new ParagraphsCollection(),
             editableContent: [],
             timestamp: 0,
@@ -48,23 +49,7 @@ define([
                 number: this.attributes.paragraphs.length + 1,
                 placeholder: 'Start typing here...'
             });
-//            var paragraphs = this.attributes.paragraphs.slice(0);
-
-//            paragraphs.push(obj);
-
-//            if($.trim(_(paragraphs).last()) === '') {
-//                paragraphs.pop();
-//            }
-//
-//            if(paragraphText && typeof(paragraphText) == 'string') {
-//                paragraphs.push(paragraphText);
-//            } else {
-//                paragraphs.push('');
-//            }
-//
-//            this.set("paragraphs", paragraphs);
             this.trigger('change:paragraphs');
-            //this.change();
         },
 
         setEditableText: function(paragraphNum, text) {

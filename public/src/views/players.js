@@ -13,7 +13,13 @@ define([
         template: _.template(PlayersTemplate),
 
         initialize: function(){
-            this.collection.on('reset', this.render, this);
+            this.collection.on('reset', function() {
+                var avatarModel = this.collection.get(this.collection.getAvatarId());
+                if(avatarModel) {
+                    avatarModel.set('isAvatar', true);
+                }
+                this.render();
+            }, this);
         },
 
         render: function(){

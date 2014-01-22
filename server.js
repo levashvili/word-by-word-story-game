@@ -30,12 +30,12 @@ http.listen(port);/* Server config */
 
 var connections = [];
 var gameRoom = new GameRoom.GameRoom(1);
-var emitToAllConnections = function() {
+var emitToAllConnections = function(event, data) {
     _(connections).each(function(connection, index, connections) {
         console.log("element is " + util.inspect(connection));
         if(io.sockets.socket(connection.sessionId)) {
             console.log("emitting to " + util.inspect(connection));
-            io.sockets.socket(connection.sessionId).emit('players', gameRoom.getPlayers());
+            io.sockets.socket(connection.sessionId).emit(event, data);
         }
     })
 };
@@ -49,12 +49,20 @@ io.on("connection", function(socket) {
     });
 
     socket.emit('players', gameRoom.getPlayers());
+    socket.emit('story', gameRoom.getStoryText());
 
     socket.on('player', function(player) {
-        console.log("received playerEvent " + util.inspect(player));
+        console.log("received player event " + util.inspect(player));
         gameRoom.addPlayer(player);
-        emitToAllConnections();
+        emitToAllConnections('players', gameRoom.getPlayers());
     });
+
+    socket.on('story', function(text) {
+        console.log("received story event " + util.inspect(text));
+        if(gameRoom.appendText(playerId, text)) {
+            emitToAllConnections('story', text);
+        }
+    })
 
     socket.on('disconnect', function () {
 
@@ -62,7 +70,7 @@ io.on("connection", function(socket) {
         connections = _.reject(connections, function(connection) {
             connection.sessionId == socket.id;
         });
-        emitToAllConnections();
+        emitToAllConnections('players', gameRoom.getPlayers());
     });
 });
 

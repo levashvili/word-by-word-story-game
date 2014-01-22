@@ -285,6 +285,26 @@ suite.addBatch({
         'and remove a player': function(gameRoom) {
             gameRoom.removePlayer(1);
             assert.lengthOf(gameRoom.getPlayers(), 0);
+        },
+        'a player can have a game turn': function(gameRoom) {
+            gameRoom.addPlayer({
+                id: 1,
+                name: 'Leena',
+                gameTurn: true
+            });
+            assert.equal(gameRoom.getPlayers()[0].gameTurn, true);
+        },
+        'and can add text to story on his turn': function(gameRoom) {
+            gameRoom.appendText(1, 'Once upon a time');
+            assert.equal(gameRoom.getStoryText(), 'Once upon a time ');
+        },
+        'but not if it\'s not his turn': function(gameRoom) {
+            gameRoom.addPlayer({
+                id: 2,
+                name: 'Leam'
+            });
+            gameRoom.appendText(2, 'there lived a young prince');
+            assert.equal(gameRoom.getStoryText(), 'Once upon a time ');
         }
     }
 }).run(); // Run it

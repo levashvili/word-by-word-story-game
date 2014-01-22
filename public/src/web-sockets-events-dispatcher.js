@@ -36,6 +36,12 @@ define([
                 console.log('received players event');
             }.bind(this));
 
+            this.socket.on('story', function(text) {
+                console.log('received story event');
+                this.story.set('text', this.story.get('text') + text);
+
+            }.bind(this));
+
             this.socket.on('error', function (reason) {
                 console.log('Unable to connect to server', reason);
             }.bind(this));

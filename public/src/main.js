@@ -62,38 +62,12 @@ require([
                 gameRoomEvents: this.gameRoomEvents
             });
 
+            this.story = new Story();
+
             this.dispatcher = new SocketEventDispatcher({
                 players: this.players,
+                story: this.story,
                 gameRoomEvents: this.gameRoomEvents
-            });
-
-            this.story = new Story({
-                title: "A Series of Unfortunate Events",
-                paragraphs: new ParagraphsCollection([
-                    {
-                        number: 1,
-                        unEditableText: 'First paragraph. First paragraph. First paragraph. First paragraph. First paragraph. First paragraph. First paragraph. First paragraph. First paragraph. First paragraph. '
-                    },
-                    {
-                        number: 2,
-                        unEditableText: 'Second paragraph. Second paragraph. Second paragraph. Second paragraph. Second paragraph. Second paragraph. Second paragraph. Second paragraph. '
-                    },
-                    {
-                        number: 3,
-                        unEditableText: 'Third paragraph. Third paragraph. Third paragraph. Third paragraph. Third paragraph. Third paragraph. Third paragraph. Third paragraph. Third paragraph. ',
-                        editableText: 'This is editable text.'
-                    },
-                    {
-                        number: 4,
-                        editableText: 'This is more editable text. ',
-                        placeholder: 'Start typing here..'
-                    },
-                    {
-                        number: 5,
-                        editableText: '',
-                        placeholder: 'Start typing here..'
-                    }
-                ])
             });
 
             var view = new MasterView({

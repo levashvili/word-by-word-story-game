@@ -17,8 +17,6 @@ var GameRoom = function(args) {
 
 }
 
-//util.inherits(GameRoom, events.EventEmitter);
-
 _.extend(GameRoom.prototype, events.EventEmitter, {
 
     initialize: function(args) {
@@ -61,16 +59,16 @@ _.extend(GameRoom.prototype, events.EventEmitter, {
         this.players = _.reject(this.players, function(player){ return player.id == id; });
     },
 
-    getPlayerIdsArray: function() {
-        var playerIds = [];
-        for(var index = 0; index < this.players.length; index++) {
-            playerIds[index] = this.players[index].id;
+    appendText: function(playerId, text) {
+        var player = _.find(this.players, function(player) {
+            return player.id == playerId;
+        });
+        if(player && player.gameTurn) {
+            this.storyText = this.storyText + text + ' ';
+            return true;
+        } else {
+            return false;
         }
-        return playerIds;
-    },
-
-    getId: function() {
-        console.log("id of this game room is " + this.id);
     },
 
     getPlayers: function() {
@@ -83,63 +81,8 @@ _.extend(GameRoom.prototype, events.EventEmitter, {
 
     getStoryText: function() {
         return this.storyText;
-    },
-
-    getGameTurnPlayerId: function() {
-        return this.gameTurnPlayerId;
-    },
-
-    getNextPlayerId: function() {
-        /*
-         turn goes to next player who is not on break,
-         if there is only one such player in the game, and he has had his turn already,
-         move to next player who is on break
-
-         if the turn belongs to a player who is on break, and another player returns from break,
-         or joins game, move turn to that player
-         */
-        var numberOfPlayers = this.players.length;
-        //if no players, exit
-        if(numberOfPlayers == 0) {
-            return -1;
-        }
-
-        var gameTurnPlayerId = (this.gameTurnPlayerId) ? this.gameTurnPlayerId : _(this.players).first().id;
-        var nextPlayerId = null;
-        var gameTurnPlayerIndex = _(this.players).pluck('id').indexOf(gameTurnPlayerId);
-        var indexOfId = 0;
-        var indexOfIndex = 2;
-        var indexOfIsOnBreak = 1
-        var playersZip = _.zip(_(this.players).pluck('id'), _(this.players).pluck('isOnBreak'),
-            _.range(0, numberOfPlayers));
-        var otherPlayersZip = _(playersZip).filter(function(playerArr){ return playerArr[indexOfId]!=gameTurnPlayerId;});
-        var otherPlayersZipGroup = _(otherPlayersZip).groupBy(
-            function(playerArr) {return (playerArr[indexOfIndex] > gameTurnPlayerIndex) ? 0 : 1;}
-        );
-        //var otherPlayersArrGrouped = _.zip(_(this.players).pluck('id'), _(this.players).pluck('isOnBreak'),
-        //    _.range(0, numberOfPlayers)).filter(function(playerArr){ return playerArr[indexOfId]!=gameTurnPlayerId;}).groupBy(
-        //        function(playerArr) {return playerArr[indexOfIndex] > gameTurnPlayerIndex;}
-        //    );
-        var otherPlayersArrSorted = _.union(otherPlayersZipGroup[0], otherPlayersZipGroup[1]).filter(function(elem){return _(elem).isArray()});
-        //next player not on break
-        var nextPlayer = _(otherPlayersArrSorted).find(function(playerArr) {return !playerArr[indexOfIsOnBreak];});
-        if(!nextPlayer) { //there is no such player
-            //get the first player
-            nextPlayer = _(otherPlayersArrSorted).first();
-        }
-
-        if(nextPlayer) {
-            nextPlayerId = nextPlayer[indexOfId];
-        } else {
-            nextPlayerId = this.gameTurnPlayerId;
-        }
-
-        return nextPlayerId;
-    },
-
-    getCurrentTurnPlayerId: function() {
-        return (this.currentPlayerIndex >= 0) ? this.players[this.currentPlayerIndex].id : null;
     }
+
 });
 
 
