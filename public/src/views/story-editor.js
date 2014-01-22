@@ -49,7 +49,12 @@ define([
                 gameTurn: this.gameTurn
             }));
             this.$el.find('#story-toolbar')[0].appendChild(this.children.storyEditorToolbar.render().el);
+            this.previousSpan = this.editableSpan;
+
             this.editableSpan = $(this.$el.find('#editable-span')[0]);
+            if(this.previousSpan) {
+                this.editableSpan.html(this.previousSpan.html());
+            }
             this.editableSpan.focus();
             this.editableSpan.on('keydown', this.submitText.bind(this));
             this.$el.show();
