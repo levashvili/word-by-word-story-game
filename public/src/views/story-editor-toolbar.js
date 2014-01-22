@@ -2,40 +2,37 @@ define([
     'jquery',
     'underscore',
     'backbone',
-    'text!templates/story-editor-toolbar.html'
-], function($, _, Backbone, StoryEditorTemplate){
+    'text!templates/story-editor-toolbar.html',
+    'models/player'
+], function($, _, Backbone, StoryEditorTemplate, Player){
 
     var View = Backbone.View.extend({
 
         template: _.template(StoryEditorTemplate),
 
-        //gameRoomEvents: _.extend({}, Backbone.Events),
+        model: new Player(),
 
         initialize: function (obj) {
             _(this).extend(obj);
+            this.collection.on('reset', function() {
+                this.model = this.collection.myAvatar();
+                if(!this.model) {
+                    this.model = new Player();
+                }
+                this.render();
+            }.bind(this));
         },
 
         render: function () {
             this.$el.hide();
-            this.$el.html(this.template({}));
+            this.$el.html(this.template(this.model.toJSON()));
+
             this.newParagraphButton = $(this.$el.find("#new-paragraph")[0]);
             this.playPauseButton = $(this.$el.find("#play-pause")[0]);
             this.enterNameInput = $(this.$el.find("#enter-name-input")[0]);
-            this.enterNameForm = $(this.$el.find('#enter-name')[0]);
-
             this.newParagraphButton.on('click', this.addNewParagraph.bind(this));
-            this.playPauseButton.on('click', this.playPause.bind(this));
-            this.playPauseButton.isPlay = true;
-            this.playPauseButton.makePlay = function() {
-                $(this.find("span")[0]).removeClass("glyphicon-pause").addClass("glyphicon-play");
-                this.isPlay = true;
-            };
-            this.playPauseButton.makePause = function() {
-                $(this.find("span")[0]).removeClass("glyphicon-play").addClass("glyphicon-pause");
-                this.isPlay = false;
-            };
 
-            this.enterNameInput.on('blur', this.hideEnterName.bind(this));
+            this.playPauseButton.on('click', this.playPause.bind(this));
             this.enterNameInput.on('keydown', this.joinGame.bind(this));
 
             this.$el.show();
@@ -44,40 +41,25 @@ define([
 
         addNewParagraph: function() {
 
-            this.model.addParagraph({
-                editableText: '',
-                placeholder: 'Start typing here...'
-            });
         },
 
         playPause: function() {
-            if(this.playPauseButton.isPlay) {
-                this.enterNameForm.slideToggle('fast');
-                this.enterNameForm.removeClass("hidden");
-                this.enterNameInput.focus();
+            var takingBreak = (this.model.attributes.takingBreak) ? false : true;
+
+            if(takingBreak) {
+                this.socketEvents.takeBreak();
             } else {
-                this.playPauseButton.makePlay();
+                this.socketEvents.returnFromBreak();
             }
-
-        },
-
-        hideEnterName: function() {
-            this.enterNameForm.hide('slow');
-            //this.$el.find('#enter-name')[0].classList.add("hidden");
         },
 
         joinGame: function(event) {
             var playerName = this.enterNameInput.val();
             if(event.which == 13 && playerName !== "") {
-                this.playPauseButton.makePause();
-                this.hideEnterName();
-                this.gameRoomEvents.trigger('gameRoom:playerJoined', {
-                    name: playerName
-                });
+
                 this.socketEvents.joinGame(playerName);
             }
         }
-
     });
 
     return View;

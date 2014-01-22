@@ -15,6 +15,7 @@ define([
                     collection: this.playerCollection
                 }),
                 storyEditor: new StoryEditor({
+                    collection:this.playerCollection,
                     model: this.story,
                     gameRoomEvents: this.gameRoomEvents,
                     socketEvents: this.socketEvents

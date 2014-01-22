@@ -3,7 +3,7 @@ var assert = require("assert");
 var suite = vows.describe('gameRoom-test');
 var _ = require("underscore");
 var util = require("util");
-var g = require("../gameRoom");
+var GameRoom = require("../gameRoom");
 var events = require("events");
 var eventEmitter = new events.EventEmitter();
 
@@ -47,40 +47,6 @@ function applyOptions(context, options) {
         }
     }
 }
-
-var vows = {
-    assertNumberOfPlayers: function (numberPlayers) {
-        return function (players) {
-        assert.lengthOf(players, numberPlayers);
-        };
-    },
-
-    assertStoryText: function(text) {
-        return function (storyText) {
-        assert.equal(storyText, text);
-        };
-    },
-
-    assertPlayerId: function(id) {
-        return function (playerId) {
-        assert.equal(playerId, id);
-        }
-    },
-
-    receiveGameRoomEvent: function() {
-        return function(data) {
-            //console.log("receiving event: " + util.inspect(data));
-            assert.isArray(data);
-        }
-    },
-
-    receiveTimeoutEvent: function() {
-        return function(data) {
-            //console.log("receiving event: " + util.inspect(data));
-            assert.equal(data[0].name, "timeoutEvent");
-        }
-    }
-};
 
 var contexts = {
     assertProperPlayerTurn: function(playerId) {
@@ -223,253 +189,364 @@ var topicActions = {
         }
     }
 };
-suite.addBatch({
-    'create new game room - ': {
-        topic: topicActions.createGameRoom({
-            players: [{id:'id1'},{id:'id2'},{id:'id3'}],
-            storyText: "Once upon a time, in the kingdom of Dawn",
-            gameTurnPlayerId: 'id1',
-            id:1
-        }),
-        'assert number of players - ': {
-            topic: topicActions.getPlayers(),
-            'should be 3': vows.assertNumberOfPlayers(3)
-        },
-        'assert story text - ': {
-            topic: topicActions.getStoryText(),
-            'should be correct text': vows.assertStoryText('Once upon a time, in the kingdom of Dawn')
-        },
-        'assert proper player turn - ': {
-            topic: topicActions.getGameTurnPlayerId(),
-            'should be id1': vows.assertPlayerId('id1')
-        }
-    },
-    'game room with 3 players - ': {
-        topic: topicActions.createGameRoom({
-            players: [{id:1},{id:2},{id:3}],
-            storyText: "Once upon a time, in the kingdom of Dawn",
-            gameTurnPlayerId: 1,
-            id:1
-        }),
-        'player 1 submits word - ': {
-            topic: topicActions.playerSubmitsWord(1, "there"),
-            'assert proper player turn - ': {
-                topic: topicActions.getGameTurnPlayerId(),
-                'should be 2': vows.assertPlayerId(2)
-            },
-            'assert story text - ': {
-                topic: topicActions.getStoryText(),
-                'should be correct text': vows.assertStoryText('Once upon a time, in the kingdom of Dawn there')
-            }
-        }
 
+var vows = {
+    assertNumberOfPlayers: function (numberPlayers) {
+        return function (players) {
+            assert.lengthOf(players, numberPlayers);
+        };
     },
-    'going back to beginning of player queue - ': {
-        topic: topicActions.createGameRoom({
-            players: [{id:1},{id:2},{id:3}],
-            storyText: "Once upon a time, in the kingdom of Dawn",
-            gameTurnPlayerId: 3,
-            id:1
-        }),
-        'player 3 submits word - ': contexts.playerSubmitsWord({
-            playerId: 3,
-            expectedNextPlayerId: 1,
-            word: "there"
-        })
+
+    assertStoryText: function(text) {
+        return function (storyText) {
+            assert.equal(storyText, text);
+        };
     },
-    'player leaves game on his turn - ': {
-        topic: topicActions.createGameRoom({
-            players: [{id:1},{id:2},{id:3}],
-            storyText: "Once upon a time, in the kingdom of Dawn",
-            gameTurnPlayerId: 3,
-            id:1
-        }),
-        'player 3 leaves game - ': contexts.playerLeavesGame({
-            playerId: 3,
-            expectedNextPlayerId: 1,
-            expectedNumberOfPlayers: 2
-        })
+
+    assertPlayerId: function(id) {
+        return function (playerId) {
+            assert.equal(playerId, id);
+        }
     },
-    'player takes break on his turn - ': {
-        topic: topicActions.createGameRoom({
-            players: [{id:1},{id:2},{id:3}],
-            storyText: "Once upon a time, in the kingdom of Dawn",
-            gameTurnPlayerId: 3,
-            id:1
-        }),
-        'player 3 takes break - ': contexts.playerTakesBreak({
-            playerId: 3,
-            expectedNextPlayerId: 1,
-            expectedNumberOfPlayers: 3
-        })
+
+    receiveGameRoomEvent: function() {
+        return function(data) {
+            //console.log("receiving event: " + util.inspect(data));
+            assert.isArray(data);
+        }
     },
-    'player submits word not on his turn - ': {
-        topic: topicActions.createGameRoom({
-            players: [{id:1},{id:2},{id:3}],
-            storyText: "Once upon a time, in the kingdom of Dawn",
-            gameTurnPlayerId: 3,
-            id:1
-        }),
-        'player 2 submits word - ': contexts.playerSubmitsWord({
-            playerId: 2,
-            word: "there",
-            expectedNextPlayerId: 3,
-            expectedNumberOfPlayers: 3,
-            expectedStoryText: "Once upon a time, in the kingdom of Dawn"
-        })
-    },
-    'new player joins': {
-        topic: topicActions.createGameRoom({
-            players: [{id:1},{id:2},{id:3}],
-            storyText: "Once upon a time, in the kingdom of Dawn",
-            gameTurnPlayerId: 3,
-            id:1
-        }),
-        'new player joins - ': contexts.newPlayerJoins({
-            playerId: 4,
-            expectedNextPlayerId: 3,
-            expectedNumberOfPlayers: 4,
-            expectedStoryText: "Once upon a time, in the kingdom of Dawn"
-        })
-    },
-    'capture event after new player joins': {
-        topic: topicActions.createGameRoom({
-            players: [{id:'id1'},{id:'id2'},{id:'id3'}],
-            storyText: "Once upon a time, in the kingdom of Dawn",
-            gameTurnPlayerId: 'id3',
-            id:1
-        }),
-        'new player joins - ': contexts.newPlayerJoins({
-            playerId: 'id4',
-            doEventCapture: true
-        })
-    },
-    'capture event after player submits word - ': {
-        topic: topicActions.createGameRoom({
-            players: [{id:'id1'},{id:'id2'},{id:'id3'}],
-            storyText: "Once upon a time, in the kingdom of Dawn",
-            gameTurnPlayerId: 'id1',
-            id:1
-        }),
-        'player submits word - ': contexts.playerSubmitsWord({
-            playerId: 'id1',
-            word: "there",
-            doEventCapture: true
-        })
-    },
-    'adding player with same id twice - ': {
-        topic: topicActions.createGameRoom({
-            players: [{id:1},{id:2},{id:3}],
-            storyText: "Once upon a time, in the kingdom of Dawn",
-            gameTurnPlayerId: 1,
-            id:1
-        }),
-        'player joins with existing id - ': contexts.newPlayerJoins({
-            playerId: 3,
-            expectedNumberOfPlayers: 3,
-            expectedNextPlayerId: 1,
-            expectedStoryText: "Once upon a time, in the kingdom of Dawn"
-        })
-    },
-    'player leaves with non-existent player id - ': {
-        topic: topicActions.createGameRoom({
-            players: [{id:1},{id:2},{id:3}],
-            storyText: "Once upon a time, in the kingdom of Dawn",
-            gameTurnPlayerId: 1,
-            id:1
-        }),
-        'player leaves with id 4 - ': contexts.playerLeavesGame({
-            playerId: 4,
-            expectedNumberOfPlayers: 3,
-            expectedNextPlayerId: 1,
-            expectedStoryText: "Once upon a time, in the kingdom of Dawn"
-        })
-    },
-    'player leaves with non-existent player id - test callback - ': {
-        topic: topicActions.createGameRoom({
-            players: [{id:1},{id:2},{id:3}],
-            storyText: "Once upon a time, in the kingdom of Dawn",
-            gameTurnPlayerId: 1,
-            id:1
-        }),
-        'player leaves with id 4 - ': contexts.playerLeavesGame({
-            playerId: 4,
-            doEventCapture: true,
-            expectedNoEventTimeout: 2000 //in case we expect event not to happen
-        })
-    },
-    'one player on break - ': {
-        topic: topicActions.createGameRoom({
-            players: [{id:1, isOnBreak:true}],
-            storyText: "Once upon a time, in the kingdom of Dawn",
-            gameTurnPlayerId: 1,
-            id:1
-        }),
-        'another player joins - ': contexts.newPlayerJoins({
-            playerId: 2,
-            expectedNextPlayerId: 2,
-            expectedNumberOfPlayers: 2,
-            expectedStoryText: "Once upon a time, in the kingdom of Dawn"
-        })
-    },
-    'two players, first player on break, another submits word - ': {
-        topic: topicActions.createGameRoom({
-            players: [{id:1, isOnBreak:true}, {id:2, isOnBreak:false}],
-            storyText: "Once upon a time, in the kingdom of Dawn",
-            gameTurnPlayerId: 2,
-            id:1
-        }),
-        'second player submits word - ': contexts.playerSubmitsWord({
-            playerId: 2,
-            expectedNextPlayerId: 1
-        })
-    },
-    'two players, one on break, turn with player on break - ': {
-        topic: topicActions.createGameRoom({
-            players: [{id:1, isOnBreak:true}, {id:2, isOnBreak:false}],
-            storyText: "Once upon a time, in the kingdom of Dawn",
-            gameTurnPlayerId: 1,
-            id:1
-        }),
-        'third player joins - ': contexts.newPlayerJoins({
-            playerId: 3,
-            expectedNextPlayerId: 3
-        })
-    },
-    'three players, two on break, turn with player on break - ': {
-        topic: topicActions.createGameRoom({
-            players: [{id:1, isOnBreak:true}, {id:2, isOnBreak:false}, {id:3, isOnBreak:true}],
-            storyText: "Once upon a time, in the kingdom of Dawn",
-            gameTurnPlayerId: 1,
-            id:1
-        }),
-        'third player returns from break - ': contexts.playerReturnsFromBreak({
-            playerId: 3,
-            expectedNextPlayerId: 3
-        })
-    },
-    'new player joins after the only player leaves game - ': {
-        topic: topicActions.createGameRoom({
-            players: [{id:1}],
-            storyText: "",
-            gameTurnPlayerId: 1,
-            id:1
-        }),
-        'player leaves game - ': contexts.playerLeavesGame({
-            playerId: 1,
-            subContexts: {
-                'new player joins - ': contexts.newPlayerJoins({
-                    playerId: 2,
-                    expectedNextPlayerId: 2,
-                    expectedNumberOfPlayers: 1
-                })
-            }
-        })
+
+    receiveTimeoutEvent: function() {
+        return function(data) {
+            //console.log("receiving event: " + util.inspect(data));
+            assert.equal(data[0].name, "timeoutEvent");
+        }
     }
-});
+};
 
+suite.addBatch({
+    'when dividing a number by zero': {
+        topic: function () { return 42 / 0 },
+
+        'we get Infinity': function (topic) {
+            assert.equal (topic, Infinity);
+        }
+    },
+    'but when dividing zero by zero': {
+        topic: function () { return 0 / 0 },
+
+        'we get a value which': {
+            'is not a number': function (topic) {
+                assert.isNaN (topic);
+            },
+            'is not equal to itself': function (topic) {
+                assert.notEqual (topic, topic);
+            }
+        }
+    },
+
+    'when creating a game room': {
+        topic: function() {return new GameRoom.GameRoom()},
+        'we get an object': function(gameRoom) {
+//            console.log(util.inspect(topic));
+            assert.isObject(gameRoom);
+        },
+        'that has a getPlayers method': function(gameRoom) {
+            assert.isFunction(gameRoom.getPlayers);
+        },
+        'that has a addPlayer method': function(gameRoom) {
+            assert.isFunction(gameRoom.addPlayer);
+        },
+        'that has a removePlayer method': function(gameRoom) {
+            assert.isFunction(gameRoom.removePlayer);
+        },
+        'we can get a list of players': function(gameRoom) {
+            assert.isArray(gameRoom.getPlayers());
+        },
+        'list of players is empty initially': function(gameRoom) {
+            assert.isEmpty(gameRoom.getPlayers());
+        },
+        'we can add a player to it with id and name': function(gameRoom) {
+            gameRoom.addPlayer({
+                id: 1,
+                name: 'John'
+            });
+            assert.lengthOf(gameRoom.getPlayers(), 1);
+            assert.equal(gameRoom.getPlayers()[0].name, 'John');
+        },
+        'and update a player': function(gameRoom) {
+            gameRoom.addPlayer({
+                id: 1,
+                name: 'Leena'
+            });
+            assert.lengthOf(gameRoom.getPlayers(), 1);
+            assert.equal(gameRoom.getPlayers()[0].name, 'Leena');
+        },
+        'and remove a player': function(gameRoom) {
+            gameRoom.removePlayer(1);
+            assert.lengthOf(gameRoom.getPlayers(), 0);
+        }
+    }
+}).run(); // Run it
+//suite.addBatch({
+//    'create new game room - ': {
+//        topic: topicActions.createGameRoom({
+//            players: [{id:'id1'},{id:'id2'},{id:'id3'}],
+//            storyText: "Once upon a time, in the kingdom of Dawn",
+//            gameTurnPlayerId: 'id1',
+//            id:1
+//        }),
+//        'assert number of players - ': {
+//            topic: topicActions.getPlayers(),
+//            'should be 3': vows.assertNumberOfPlayers(3)
+//        },
+//        'assert story text - ': {
+//            topic: topicActions.getStoryText(),
+//            'should be correct text': vows.assertStoryText('Once upon a time, in the kingdom of Dawn')
+//        },
+//        'assert proper player turn - ': {
+//            topic: topicActions.getGameTurnPlayerId(),
+//            'should be id1': vows.assertPlayerId('id1')
+//        }
+//    },
+//    'game room with 3 players - ': {
+//        topic: topicActions.createGameRoom({
+//            players: [{id:1},{id:2},{id:3}],
+//            storyText: "Once upon a time, in the kingdom of Dawn",
+//            gameTurnPlayerId: 1,
+//            id:1
+//        }),
+//        'player 1 submits word - ': {
+//            topic: topicActions.playerSubmitsWord(1, "there"),
+//            'assert proper player turn - ': {
+//                topic: topicActions.getGameTurnPlayerId(),
+//                'should be 2': vows.assertPlayerId(2)
+//            },
+//            'assert story text - ': {
+//                topic: topicActions.getStoryText(),
+//                'should be correct text': vows.assertStoryText('Once upon a time, in the kingdom of Dawn there')
+//            }
+//        }
+//
+//    },
+//    'going back to beginning of player queue - ': {
+//        topic: topicActions.createGameRoom({
+//            players: [{id:1},{id:2},{id:3}],
+//            storyText: "Once upon a time, in the kingdom of Dawn",
+//            gameTurnPlayerId: 3,
+//            id:1
+//        }),
+//        'player 3 submits word - ': contexts.playerSubmitsWord({
+//            playerId: 3,
+//            expectedNextPlayerId: 1,
+//            word: "there"
+//        })
+//    },
+//    'player leaves game on his turn - ': {
+//        topic: topicActions.createGameRoom({
+//            players: [{id:1},{id:2},{id:3}],
+//            storyText: "Once upon a time, in the kingdom of Dawn",
+//            gameTurnPlayerId: 3,
+//            id:1
+//        }),
+//        'player 3 leaves game - ': contexts.playerLeavesGame({
+//            playerId: 3,
+//            expectedNextPlayerId: 1,
+//            expectedNumberOfPlayers: 2
+//        })
+//    },
+//    'player takes break on his turn - ': {
+//        topic: topicActions.createGameRoom({
+//            players: [{id:1},{id:2},{id:3}],
+//            storyText: "Once upon a time, in the kingdom of Dawn",
+//            gameTurnPlayerId: 3,
+//            id:1
+//        }),
+//        'player 3 takes break - ': contexts.playerTakesBreak({
+//            playerId: 3,
+//            expectedNextPlayerId: 1,
+//            expectedNumberOfPlayers: 3
+//        })
+//    },
+//    'player submits word not on his turn - ': {
+//        topic: topicActions.createGameRoom({
+//            players: [{id:1},{id:2},{id:3}],
+//            storyText: "Once upon a time, in the kingdom of Dawn",
+//            gameTurnPlayerId: 3,
+//            id:1
+//        }),
+//        'player 2 submits word - ': contexts.playerSubmitsWord({
+//            playerId: 2,
+//            word: "there",
+//            expectedNextPlayerId: 3,
+//            expectedNumberOfPlayers: 3,
+//            expectedStoryText: "Once upon a time, in the kingdom of Dawn"
+//        })
+//    },
+//    'new player joins': {
+//        topic: topicActions.createGameRoom({
+//            players: [{id:1},{id:2},{id:3}],
+//            storyText: "Once upon a time, in the kingdom of Dawn",
+//            gameTurnPlayerId: 3,
+//            id:1
+//        }),
+//        'new player joins - ': contexts.newPlayerJoins({
+//            playerId: 4,
+//            expectedNextPlayerId: 3,
+//            expectedNumberOfPlayers: 4,
+//            expectedStoryText: "Once upon a time, in the kingdom of Dawn"
+//        })
+//    },
+//    'capture event after new player joins': {
+//        topic: topicActions.createGameRoom({
+//            players: [{id:'id1'},{id:'id2'},{id:'id3'}],
+//            storyText: "Once upon a time, in the kingdom of Dawn",
+//            gameTurnPlayerId: 'id3',
+//            id:1
+//        }),
+//        'new player joins - ': contexts.newPlayerJoins({
+//            playerId: 'id4',
+//            doEventCapture: true
+//        })
+//    },
+//    'capture event after player submits word - ': {
+//        topic: topicActions.createGameRoom({
+//            players: [{id:'id1'},{id:'id2'},{id:'id3'}],
+//            storyText: "Once upon a time, in the kingdom of Dawn",
+//            gameTurnPlayerId: 'id1',
+//            id:1
+//        }),
+//        'player submits word - ': contexts.playerSubmitsWord({
+//            playerId: 'id1',
+//            word: "there",
+//            doEventCapture: true
+//        })
+//    },
+//    'adding player with same id twice - ': {
+//        topic: topicActions.createGameRoom({
+//            players: [{id:1},{id:2},{id:3}],
+//            storyText: "Once upon a time, in the kingdom of Dawn",
+//            gameTurnPlayerId: 1,
+//            id:1
+//        }),
+//        'player joins with existing id - ': contexts.newPlayerJoins({
+//            playerId: 3,
+//            expectedNumberOfPlayers: 3,
+//            expectedNextPlayerId: 1,
+//            expectedStoryText: "Once upon a time, in the kingdom of Dawn"
+//        })
+//    },
+//    'player leaves with non-existent player id - ': {
+//        topic: topicActions.createGameRoom({
+//            players: [{id:1},{id:2},{id:3}],
+//            storyText: "Once upon a time, in the kingdom of Dawn",
+//            gameTurnPlayerId: 1,
+//            id:1
+//        }),
+//        'player leaves with id 4 - ': contexts.playerLeavesGame({
+//            playerId: 4,
+//            expectedNumberOfPlayers: 3,
+//            expectedNextPlayerId: 1,
+//            expectedStoryText: "Once upon a time, in the kingdom of Dawn"
+//        })
+//    },
+//    'player leaves with non-existent player id - test callback - ': {
+//        topic: topicActions.createGameRoom({
+//            players: [{id:1},{id:2},{id:3}],
+//            storyText: "Once upon a time, in the kingdom of Dawn",
+//            gameTurnPlayerId: 1,
+//            id:1
+//        }),
+//        'player leaves with id 4 - ': contexts.playerLeavesGame({
+//            playerId: 4,
+//            doEventCapture: true,
+//            expectedNoEventTimeout: 2000 //in case we expect event not to happen
+//        })
+//    },
+//    'one player on break - ': {
+//        topic: topicActions.createGameRoom({
+//            players: [{id:1, isOnBreak:true}],
+//            storyText: "Once upon a time, in the kingdom of Dawn",
+//            gameTurnPlayerId: 1,
+//            id:1
+//        }),
+//        'another player joins - ': contexts.newPlayerJoins({
+//            playerId: 2,
+//            expectedNextPlayerId: 2,
+//            expectedNumberOfPlayers: 2,
+//            expectedStoryText: "Once upon a time, in the kingdom of Dawn"
+//        })
+//    },
+//    'two players, first player on break, another submits word - ': {
+//        topic: topicActions.createGameRoom({
+//            players: [{id:1, isOnBreak:true}, {id:2, isOnBreak:false}],
+//            storyText: "Once upon a time, in the kingdom of Dawn",
+//            gameTurnPlayerId: 2,
+//            id:1
+//        }),
+//        'second player submits word - ': contexts.playerSubmitsWord({
+//            playerId: 2,
+//            expectedNextPlayerId: 1
+//        })
+//    },
+//    'two players, one on break, turn with player on break - ': {
+//        topic: topicActions.createGameRoom({
+//            players: [{id:1, isOnBreak:true}, {id:2, isOnBreak:false}],
+//            storyText: "Once upon a time, in the kingdom of Dawn",
+//            gameTurnPlayerId: 1,
+//            id:1
+//        }),
+//        'third player joins - ': contexts.newPlayerJoins({
+//            playerId: 3,
+//            expectedNextPlayerId: 3
+//        })
+//    },
+//    'three players, two on break, turn with player on break - ': {
+//        topic: topicActions.createGameRoom({
+//            players: [{id:1, isOnBreak:true}, {id:2, isOnBreak:false}, {id:3, isOnBreak:true}],
+//            storyText: "Once upon a time, in the kingdom of Dawn",
+//            gameTurnPlayerId: 1,
+//            id:1
+//        }),
+//        'third player returns from break - ': contexts.playerReturnsFromBreak({
+//            playerId: 3,
+//            expectedNextPlayerId: 3
+//        })
+//    },
+//    'new player joins after the only player leaves game - ': {
+//        topic: topicActions.createGameRoom({
+//            players: [{id:1}],
+//            storyText: "",
+//            gameTurnPlayerId: 1,
+//            id:1
+//        }),
+//        'player leaves game - ': contexts.playerLeavesGame({
+//            playerId: 1,
+//            subContexts: {
+//                'new player joins - ': contexts.newPlayerJoins({
+//                    playerId: 2,
+//                    expectedNextPlayerId: 2,
+//                    expectedNumberOfPlayers: 1
+//                })
+//            }
+//        })
+//    }
+////    'only player leaves - ': {
+////        topic: topicActions.createGameRoom({
+////            players: [{id:1}],
+////            storyText: "",
+////            gameTurnPlayerId: 1,
+////            id:1
+////        }),
+////        'player leaves game - ': contexts.playerLeavesGame({
+////            playerId: 1,
+////            expectedNumberOfPlayers: 0
+////        })
+////    }
+//});
+//
 //suite.export(module);
-suite.run();
+//suite.run();
 
 
 

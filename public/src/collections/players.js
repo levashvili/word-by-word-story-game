@@ -12,12 +12,10 @@ define([
         // Save all of the player items under the `"player"` namespace.
         localStorage: new Backbone.LocalStorage('players-backbone'),
 
+        avatarId: null,
+
         initialize: function(models, obj) {
             _(this).extend(obj);
-            this.gameRoomEvents.on('gameRoom:playerJoined', this.resetPlayers.bind(this));
-            this.gameRoomEvents.on('players:resetPlayers', this.resetPlayers.bind(this));
-            this.gameRoomEvents.on('players:addPlayer', this.addPlayer.bind(this));
-            this.gameRoomEvents.on('players:removePlayer', this.removePlayer.bind(this));
         },
 
         nextOrder: function () {
@@ -32,25 +30,17 @@ define([
             return player.get('order');
         },
 
-        resetPlayers: function(players) {
-//            for (var i = 0; i < players.length; i++) {
-//                $('#players').append('<span id="' + players[i].id + '">' +
-//                    players[i].name + ' ' + (players[i].id === sessionId ? '(You)' : '') +
-//                    (players[i].isOnBreak ? '(brb)' : '') + '<br /></span>');
-//
-//
-//            }
-            this.reset(players);
+        myAvatar: function() {
+            return this.get(this.avatarId);
         },
 
-        addPlayer: function(player) {
-            this.add(player);
+        setAvatarId: function(id) {
+            this.avatarId = id;
         },
 
-        removePlayer: function(player) {
-            this.remove(player);
+        getAvatarId: function() {
+            return this.avatarId;
         }
-
     });
 
     return PlayersCollection;

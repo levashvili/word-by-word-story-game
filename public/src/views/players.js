@@ -14,8 +14,6 @@ define([
 
         initialize: function(){
             this.collection.on('reset', this.render, this);
-            this.collection.on('add', this.render, this);
-            this.collection.on('remove', this.render, this);
         },
 
         render: function(){
@@ -25,23 +23,8 @@ define([
             }));
             this.$el.show();
             return this;
-//            this.playersList = $(this.$el.find('ul')[0]);
-//            this.leftScrollButton = $(this.$el.find('#left-scroll')[0]);
-//            this.rightScrollButton = $(this.$el.find('#right-scroll')[0]);
-//
-//            this.leftScrollButton.on('click', this.scrollLeft.bind(this));
-//            this.leftScrollButton.on('click', this.scrollRight.bind(this));
-////            this.$el.html(this.template({}));
-////            $.after($(this.$el.find("#left-scroll")[0]), '<ul></ul>');
-//            this.collection.each(this.add, this);
-//            return this;
-        },
-
-        add: function(model) {
-            var child = new PlayerView({model: model});
-
-            this.playersList.append(child.render().$el).show();
         }
+
     });
     return View;
 });

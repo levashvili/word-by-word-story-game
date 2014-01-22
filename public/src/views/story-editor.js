@@ -5,8 +5,9 @@ define([
     'text!templates/story-editor.html',
     'views/story-text',
     'views/story-editor-toolbar',
-    'views/story-paragraph'
-], function($, _, Backbone, StoryEditorTemplate, StoryTextView, StoryEditorToolbar, ParagraphView){
+    'views/story-paragraph',
+    'models/player'
+], function($, _, Backbone, StoryEditorTemplate, StoryTextView, StoryEditorToolbar, ParagraphView, Player){
 
     var View = Backbone.View.extend({
 
@@ -32,9 +33,8 @@ define([
             this.listenTo(this.model, 'change:paragraphs', this.render);
 
             this.children = {
-                //storyTextView: new StoryTextView({model: this.model}),
                 storyEditorToolbar: new StoryEditorToolbar({
-                    model: this.model,
+                    collection: this.collection,
                     gameRoomEvents: this.gameRoomEvents,
                     socketEvents: this.socketEvents
                 })

@@ -34,7 +34,8 @@ require([
     'collections/players',
     'models/story',
     'collections/paragraphs',
-    'web-sockets-events-dispatcher'
+    'web-sockets-events-dispatcher',
+    'models/player'
 ], function($,
             Backbone,
             LocalStorage,
@@ -43,7 +44,8 @@ require([
             PlayerCollection,
             Story,
             ParagraphsCollection,
-            SocketEventDispatcher
+            SocketEventDispatcher,
+            Player
     ) {
 
     var Router = Backbone.Router.extend({
@@ -56,46 +58,16 @@ require([
 
             this.gameRoomEvents = _.extend({}, Backbone.Events);
 
+            this.players = new PlayerCollection(null, {
+                gameRoomEvents: this.gameRoomEvents
+            });
+
             this.dispatcher = new SocketEventDispatcher({
+                players: this.players,
                 gameRoomEvents: this.gameRoomEvents
             });
 
-            var players = new PlayerCollection(null, {
-                gameRoomEvents: this.gameRoomEvents
-            });
-
-//            players.add([{
-//                name: 'Siri',
-//                age: 12,
-//                gender: 'female'
-//            }, {
-////                name: 'Alexander Hamilton Tabachnik',
-//                name: 'Alexander',
-//                age: 23,
-//                gender: 'male'
-//            }, {
-//                name: 'StephaniekjshdgkjhsgdkHJAGSKJDH',
-//                age: 21,
-//                gender: 'female'
-//            },{
-//                name: 'Siri',
-//                age: 12,
-//                gender: 'female'
-//            }, {
-//                name: 'Samuel',
-//                age: 23,
-//                gender: 'male'
-//            },{
-//                name: 'Samuel',
-//                age: 23,
-//                gender: 'male'
-//            },{
-//                name: 'Samuel',
-//                age: 23,
-//                gender: 'male'
-//            }]);
-
-            var story = new Story({
+            this.story = new Story({
                 title: "A Series of Unfortunate Events",
                 paragraphs: new ParagraphsCollection([
                     {
@@ -125,8 +97,8 @@ require([
             });
 
             var view = new MasterView({
-                playerCollection: players,
-                story: story,
+                playerCollection: this.players,
+                story: this.story,
                 gameRoomEvents: this.gameRoomEvents,
                 socketEvents: this.dispatcher
             });
