@@ -2,16 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e751f12d-1dce-4660-921e-7753d44146a1" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/gameRoom-test.js" afterPath="$PROJECT_DIR$/test/gameRoom-test.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gameRoom.js" afterPath="$PROJECT_DIR$/gameRoom.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/src/main.js" afterPath="$PROJECT_DIR$/public/src/main.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/src/templates/players.html" afterPath="$PROJECT_DIR$/public/src/templates/players.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/src/views/players.js" afterPath="$PROJECT_DIR$/public/src/views/players.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server.js" afterPath="$PROJECT_DIR$/server.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/src/templates/story-editor.html" afterPath="$PROJECT_DIR$/public/src/templates/story-editor.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/src/views/story-editor.js" afterPath="$PROJECT_DIR$/public/src/views/story-editor.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/src/models/story.js" afterPath="$PROJECT_DIR$/public/src/models/story.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/src/web-sockets-events-dispatcher.js" afterPath="$PROJECT_DIR$/public/src/web-sockets-events-dispatcher.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/css/style.css" afterPath="$PROJECT_DIR$/public/css/style.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/css/style.less" afterPath="$PROJECT_DIR$/public/css/style.less" />
     </list>
     <ignored path="Chat.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -93,7 +86,7 @@
       <file leaf-file-name="gameRoom.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/gameRoom.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="88" column="28" selection-start="2265" selection-end="2265" vertical-scroll-proportion="0.8986486" vertical-offset="829" max-vertical-offset="1185">
+            <state line="106" column="11" selection-start="3461" selection-end="3461" vertical-scroll-proportion="0.15948276" vertical-offset="1291" max-vertical-offset="1815">
               <folding>
                 <element signature="e#0#43#0" expanded="false" />
                 <element signature="e#135#198#0" expanded="false" />
@@ -118,6 +111,15 @@
                 <element signature="e#4247#6701#0" expanded="false" />
                 <element signature="e#6715#7551#0" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="style.less" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/css/style.less">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="47" column="0" selection-start="782" selection-end="782" vertical-scroll-proportion="-4.9166665" vertical-offset="587" max-vertical-offset="1635">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -151,7 +153,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/public/tests/spec/views/players-spec.js" />
         <option value="$PROJECT_DIR$/public/src/templates/story-editor-toolbar.html" />
         <option value="$PROJECT_DIR$/public/src/models/player.js" />
         <option value="$PROJECT_DIR$/public/src/views/story-editor-toolbar.js" />
@@ -166,6 +167,7 @@
         <option value="$PROJECT_DIR$/public/src/views/story-editor.js" />
         <option value="$PROJECT_DIR$/public/src/models/story.js" />
         <option value="$PROJECT_DIR$/server.js" />
+        <option value="$PROJECT_DIR$/public/css/style.less" />
         <option value="$PROJECT_DIR$/gameRoom.js" />
       </list>
     </option>
@@ -740,11 +742,11 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32972136" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.30087847" sideWeight="0.61300814" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.30087847" sideWeight="0.88617885" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33658537" sideWeight="0.64787704" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.38699186" sideWeight="0.5937042" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.38699186" sideWeight="0.40629575" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.11382114" sideWeight="0.40629575" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32972136" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -832,13 +834,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/node_modules/vows/lib/vows/suite.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="136" column="0" selection-start="4465" selection-end="4465" vertical-scroll-proportion="0.0" vertical-offset="1923" max-vertical-offset="5895">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/.WebStorm7/system/extLibs/nodejs-v0.10.20-src/core-modules-sources/lib/module.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="452" column="5" selection-start="12699" selection-end="12699" vertical-scroll-proportion="0.19254659" vertical-offset="6433" max-vertical-offset="7860">
@@ -871,20 +866,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="5" column="7" selection-start="361" selection-end="361" vertical-scroll-proportion="-3.125" vertical-offset="0" max-vertical-offset="210">
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/gameRoom-test.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="314" column="53" selection-start="10775" selection-end="10775" vertical-scroll-proportion="-10.230769" vertical-offset="1369" max-vertical-offset="5595">
-          <folding>
-            <element signature="n#!!block;n#extend#0" expanded="false" />
-            <element signature="n#!!block;n#clone#0" expanded="false" />
-            <element signature="n#!!block;n#applyOptions#0" expanded="false" />
-            <element signature="e#1865#4226#0" expanded="false" />
-            <element signature="e#4247#6701#0" expanded="false" />
-            <element signature="e#6715#7551#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -948,9 +929,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/public/css/style.less">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="47" column="0" selection-start="782" selection-end="782" vertical-scroll-proportion="-4.9166665" vertical-offset="587" max-vertical-offset="1635">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/gameRoom-test.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="314" column="53" selection-start="10775" selection-end="10775" vertical-scroll-proportion="-10.230769" vertical-offset="1369" max-vertical-offset="5595">
+          <folding>
+            <element signature="n#!!block;n#extend#0" expanded="false" />
+            <element signature="n#!!block;n#clone#0" expanded="false" />
+            <element signature="n#!!block;n#applyOptions#0" expanded="false" />
+            <element signature="e#1865#4226#0" expanded="false" />
+            <element signature="e#4247#6701#0" expanded="false" />
+            <element signature="e#6715#7551#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/gameRoom.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="88" column="28" selection-start="2265" selection-end="2265" vertical-scroll-proportion="0.8986486" vertical-offset="829" max-vertical-offset="1185">
+        <state line="106" column="11" selection-start="3461" selection-end="3461" vertical-scroll-proportion="0.15948276" vertical-offset="1291" max-vertical-offset="1815">
           <folding>
             <element signature="e#0#43#0" expanded="false" />
             <element signature="e#135#198#0" expanded="false" />

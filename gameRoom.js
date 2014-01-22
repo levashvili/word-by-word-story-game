@@ -37,6 +37,27 @@ _.extend(GameRoom.prototype, events.EventEmitter, {
     },
 
     addPlayer: function(player) {
+        var gameTurn = {
+            gameTurn: false
+        }
+        //see if game turn belongs to another player
+        var gameTurnPlayer = _.find(this.players, function(existingPlayer){
+            return (existingPlayer.gameTurn && existingPlayer.id !== player.id);
+        });
+        //if not, set this player as game turn player
+        if(!gameTurnPlayer) {
+            gameTurn = {
+                gameTurn:true
+            }
+        }
+        //if that player is on break
+        if(gameTurnPlayer && gameTurnPlayer.takingBreak) {
+            gameTurnPlayer.gameTurn = false;
+            gameTurn = {
+                gameTurn: true
+            }
+        }
+
         var existing = _.find(this.players, function(existingPlayer){
             return existingPlayer.id == player.id;
         });
@@ -44,18 +65,39 @@ _.extend(GameRoom.prototype, events.EventEmitter, {
         var defaults = {
             "id": null,
             "name":  "",
-            "takingBreak": false,
-            "gameTurn": false
+            "takingBreak": false
         };
 
         if(existing) {
-            _.extend(existing, player)
+            //if taking a break and has game turn
+            if(player.takingBreak && existing.gameTurn) {
+                //transfer game turn to next player who is not on break
+                _.each(_(this.players).where({takingBreak: false}), function(existingPlayer, index, players) {
+                    //if player to be removed has the turn
+                    if(existingPlayer.id == existing.id) {
+                        //transfer turn to next player in line
+                        players[(index + 1) % players.length].gameTurn = true;
+                    }
+                });
+                gameTurn = {
+                    gameTurn: false
+                };
+            }
+            _.extend(existing, player, gameTurn)
         } else {
-            this.players.push(_.extend(defaults, player));
+            this.players.push(_.extend(defaults, player, gameTurn));
         }
     },
 
     removePlayer: function(id) {
+        //for a subset of players that are not on break
+        _.each(_(this.players).where({takingBreak: false}), function(player, index, players) {
+            //if player to be removed has the turn
+            if(player.id == id && player.gameTurn) {
+                //transfer turn to next player in line
+                players[(index + 1) % players.length].gameTurn = true;
+            }
+        });
         this.players = _.reject(this.players, function(player){ return player.id == id; });
     },
 
