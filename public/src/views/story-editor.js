@@ -30,7 +30,7 @@ define([
             this.$el.hide();
             this.collection.on('reset', function() {
                 var avatar = this.collection.get(this.collection.getAvatarId());
-                if(avatar && avatar.gameTurn) {
+                if(avatar && avatar.get('gameTurn')) {
                     this.gameTurn = true;
                 } else {
                     this.gameTurn = false;
@@ -49,9 +49,19 @@ define([
                 gameTurn: this.gameTurn
             }));
             this.$el.find('#story-toolbar')[0].appendChild(this.children.storyEditorToolbar.render().el);
-
+            this.editableSpan = $(this.$el.find('#editable-span')[0]);
+            this.editableSpan.focus();
+            this.editableSpan.on('keydown', this.submitText.bind(this));
             this.$el.show();
             return this;
+        },
+
+        submitText: function(event) {
+            var text = this.editableSpan.html();
+            if(event.which == 13 && text !== "") {
+                event.preventDefault();
+                this.socketEvents.submitText(text);
+            }
         }
 
     });

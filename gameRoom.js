@@ -107,6 +107,15 @@ _.extend(GameRoom.prototype, events.EventEmitter, {
         });
         if(player && player.gameTurn) {
             this.storyText = this.storyText + text + ' ';
+            //shift turn to next player
+            _.each(_(this.players).where({takingBreak: false}), function(player, index, players) {
+                //if player to be removed has the turn
+                if(player.id == playerId && player.gameTurn) {
+                    //transfer turn to next player in line
+                    player.gameTurn = false;
+                    players[(index + 1) % players.length].gameTurn = true;
+                }
+            });
             return true;
         } else {
             return false;

@@ -56,14 +56,8 @@ define([
             console.log("emitted newPlayerJoins event");
         },
 
-        submitWord: function(word) {
-            socket.emit('playerEvent', {
-                name: 'playerSubmitsWord',
-                data: {
-                    word: word,
-                    id: this.player.attributes.id
-                }
-            });
+        submitText: function(text) {
+            this.socket.emit('story', text);
         },
 
         takeBreak: function() {

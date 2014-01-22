@@ -59,8 +59,9 @@ io.on("connection", function(socket) {
 
     socket.on('story', function(text) {
         console.log("received story event " + util.inspect(text));
-        if(gameRoom.appendText(playerId, text)) {
+        if(gameRoom.appendText(socket.id, text)) {
             emitToAllConnections('story', text);
+            emitToAllConnections('players', gameRoom.getPlayers());
         }
     })
 
