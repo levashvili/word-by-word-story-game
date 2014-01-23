@@ -16,7 +16,7 @@
     "name": "StoryGame2",
     "subdomain": "word-by-word-story-game",
     "scripts": {
-        "start": "node static-server.js"
+        "start": "node server.js"
     },
     "version": "0.0.0-1",
     "engines": {
