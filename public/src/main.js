@@ -35,7 +35,9 @@ require([
     'models/story',
     'collections/paragraphs',
     'web-sockets-events-dispatcher',
-    'models/player'
+    'models/player',
+    'views/welcome',
+    'views/navigation'
 ], function($,
             Backbone,
             LocalStorage,
@@ -45,7 +47,9 @@ require([
             Story,
             ParagraphsCollection,
             SocketEventDispatcher,
-            Player
+            Player,
+            WelcomeView,
+            NavigationView
     ) {
 
     var Router = Backbone.Router.extend({
@@ -70,13 +74,18 @@ require([
                 gameRoomEvents: this.gameRoomEvents
             });
 
-            var view = new MasterView({
+            var masterView = new MasterView({
                 playerCollection: this.players,
                 story: this.story,
                 gameRoomEvents: this.gameRoomEvents,
                 socketEvents: this.dispatcher
             });
-            $("#global-container").html(view.render().el).show();
+
+            var welcomeView = new WelcomeView();
+            var navigationView = new NavigationView();
+
+            $("#navigation").html(navigationView.render().el).show();
+            $("#welcome").html(welcomeView.render().el).show();
         }
     });
 

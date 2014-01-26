@@ -6440,19 +6440,6 @@ td.visible-print {
 body {
   background-color: gainsboro !important;
 }
-textarea {
-  resize: none;
-}
-.inlineBlock {
-  display: inline-block;
-}
-.topAligned {
-  vertical-align: top;
-}
-/*.player-list {*/
-/*margin: 0px !important;*/
-/*padding: 0px !important;*/
-/*}*/
 .players {
   border: 1px solid gainsboro;
   background-color: gainsboro;
@@ -6489,37 +6476,57 @@ textarea {
   padding: 0em 0.5em 0.3em 0.5em;
   color: #999999;
 }
-.inline-text {
-  width: 30px !important;
-  display: inline !important;
-  padding: 0px !important;
-  margin: 0px !important;
-  font-color: text-primary !important;
+.story-body {
+  height: 30em !important;
+  word-wrap: break-word !important;
+  overflow-y: auto !important;
 }
-#game-room-players {
-  width: 100% !important;
+#navigation nav {
+  background-color: gainsboro !important;
+  font-family: 'Coming Soon', cursive;
+}
+#navigation .col {
+  padding: 1em 0em;
+  border-bottom: 1px solid white;
+}
+#navigation .nav-pills li a {
+  border-radius: 9em;
+}
+#welcome-view {
+  background-color: gainsboro;
+  text-align: center;
+  font-family: 'Coming Soon', cursive;
+}
+#welcome-view .page-header {
+  border-bottom: none;
+}
+#welcome-view h1 {
+  font-family: 'Coming Soon', cursive !important;
+}
+#welcome-view .btn-lg {
+  border-radius: 9em;
+}
+.btn-left-lg {
+  border-radius: 4.5em 0em 0em 4.5em !important;
+  padding: 2.5em 0.9em;
+  display: inline-block;
+  text-align: center;
+  margin-right: 1px;
+}
+.btn-right-lg {
+  border-radius: 4.5em 0em 0em 4.5em !important;
+  padding: 2.5em 0.9em;
+  text-align: center;
+  margin-right: 1px;
+  border-radius: 0em 4.5em 4.5em 0em !important;
+  padding: 2.5em 1.2em 2.5em 1em;
+  display: inline-block;
+  margin-right: 0;
+  margin-left: 1px;
 }
 #story-editor {
   width: 100% !important;
 }
 #global-container {
   padding: 0px;
-}
-.player-name {
-  background-color: #ffffff !important;
-  text-align: center;
-  padding: 10px;
-  border: 1px indianred;
-}
-.player-name img {
-  width: 50px;
-  height: 50px;
-  display: block;
-  margin: auto;
-}
-.left-scroll {
-  float: left;
-}
-.right-scroll {
-  float: right;
 }
