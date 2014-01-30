@@ -11,28 +11,26 @@ isPlaying: true/false
 isOnBreak: true/false
 */
 
-var GameRoom = function(args) {
+var StoryCircle = function(args) {
 
     this.initialize.apply(this, arguments);
 
 }
 
-_.extend(GameRoom.prototype, events.EventEmitter, {
+_.extend(StoryCircle.prototype, events.EventEmitter, {
 
     initialize: function(args) {
         this.players = [];
         this.storyText = "";
-        //index of the current player (whose turn it is) in the players array
-        //-1 means the game hasn't started yet
-        this.currentPlayerIndex = -1;
-        this.gameTurnPlayerId = null;
         events.EventEmitter.call(this);
-        this.id = arguments[0];
-        //var sources = [];
-        //sources.push(arg);
-        if(typeof arguments[0] == 'object') {
-            _.extend(this, arguments[0]);
-        }
+        this.id = args.storyCircleId;
+        this.name = args.storyCircleName;
+        this.maxNumPlayers = args.maxNumPlayers;
+        this.addPlayer({
+            "id": args.playerId,
+            "name":  args.playerName
+        });
+
         console.log("new instance of game room created: " + util.inspect(this));
     },
 
@@ -123,18 +121,25 @@ _.extend(GameRoom.prototype, events.EventEmitter, {
     },
 
     getPlayers: function() {
-        //deep clone players
-        if(this.currentPlayerIndex >= 0 && this.players.length >= 1) {
-            this.players[this.currentPlayerIndex].gameTurn = "true";
-        }
         return JSON.parse(JSON.stringify(this.players));
     },
 
     getStoryText: function() {
         return this.storyText;
-    }
+    },
 
+    getId: function() {
+        return this.id;
+    },
+
+    getName: function() {
+        return this.name;
+    },
+
+    getMaxNumPlayers: function() {
+        return this.maxNumPlayers;
+    }
 });
 
 
-exports.GameRoom = GameRoom;
+exports.StoryCircle = StoryCircle;

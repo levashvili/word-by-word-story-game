@@ -1,0 +1,9 @@
+<h1>Active Story Circles <small>Choose one to join!</small></h1>
+<div class="container">
+    <div class="row">
+        <div class="col col-lg-6 col-md-6 col-sm-6, col-xs-6 col-lg-offset-3 col-md-offset-3 col-sm-offset-3 col-xs-offset-3">
+            <div class="row"><% _.each(storyCircles, function(circle, index, circles) {
+                    %><div class="col col-lg-3 col-md-4 col-sm-4 col-xs-3"><a id="<%= circle.attributes.id %>" href="#" class="thumbnail"><img class="img-circle" src="../../images/square-tile.png" alt="..."><strong class="text"><%=circle.attributes.storyCircleName%></strong></a></div><%}) %></div>
+        </div>
+    </div>
+</div>

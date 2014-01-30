@@ -5,6 +5,10 @@ body {
   background-color: gainsboro !important;
 }
 
+h1 {
+  font-family: 'Coming Soon', cursive !important;
+  text-align: center;
+}
 //navigation
 .navigation-view {
 
@@ -64,7 +68,7 @@ body {
 #navigation {
   nav {
     background-color: gainsboro !important;
-
+    margin-bottom: 3em;
     font-family: 'Coming Soon', cursive;
   }
   .col {
@@ -80,20 +84,89 @@ body {
   }
 }
 
+#create-story-circle {
 
+  font-family: 'Coming Soon', cursive;
+  label {
+//    width: 6em;
+  }
+  input {
+    border-radius: 1.5em;
+  }
+  .help-block {
+    padding-left: 0.5em;
+  }
+  button {
+    border-radius: 1.5em;
+  }
+}
 
 #welcome-view {
   .page-header {
     border-bottom: none;
   }
-  h1 {
-    font-family: 'Coming Soon', cursive !important;
-  }
+  padding-top: 0;
   background-color: gainsboro;
   text-align: center;
   font-family: 'Coming Soon', cursive;
   .btn-lg {
     border-radius: 9em;
+  }
+
+}
+
+#story-circles-view {
+  font-family: 'Coming Soon', cursive;
+  a {
+    text-decoration: none;
+    border-radius: 20em;
+    position: relative;
+    display: inline-block;
+    background-color: #FEC3C3;
+
+  }
+
+  a:hover {
+    border: 2px solid lightcoral;
+  }
+  a img
+  {
+    opacity: 1;
+    filter: alpha(opacity=100);
+    -o-transition: opacity 1.5s linear;
+    -webkit-transition: opacity 1.5s linear;
+    -moz-transition: opacity 1.5s linear;
+  }
+  a:hover img
+  {
+    /*60 80*/
+    opacity: .40;
+    filter: alpha(opacity=50);
+    -o-transition: opacity .1s linear;
+    -webkit-transition: opacity .1s linear;
+    -moz-transition: opacity 1.5s linear;
+  }
+
+  a .text
+  {
+    opacity: .60;
+    position: absolute;
+    font-size:18px;
+    font-weight:bold;
+    text-align:center;
+    display: block;
+    padding: 0;
+    margin: 0;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%); /* IE 9 */
+    -webkit-transform: translate(-50%,-50%); /* Safari and Chrome */
+  }
+
+  a:hover .text
+  {
+    display: block;
   }
 
 }
@@ -126,8 +199,9 @@ body {
   margin-left: 1px;
 }
 
-#story-editor {
-  width: 100% !important;
+#story-circle-editor-view {
+  font-family: 'Coming Soon', cursive;
+  text-align: center;
 }
 
 #global-container {

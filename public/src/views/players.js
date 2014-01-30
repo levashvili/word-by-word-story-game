@@ -1,8 +1,7 @@
 define([
     'backbone',
-    'views/player',
     'text!templates/players.html'
-], function(Backbone, PlayerView, PlayersTemplate) {
+], function(Backbone, PlayersTemplate) {
 
     var View = Backbone.View.extend({
 

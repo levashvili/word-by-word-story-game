@@ -42,9 +42,21 @@ define([
 
             }.bind(this));
 
+            this.socket.on('storyCircle', function(storyCircle) {
+                console.log('received story circle event');
+                this.storyCircles.add(storyCircle);
+            }.bind(this));
+
+            this.socket.on('storyCircles', function(storyCircles) {
+                console.log('received story circles event');
+                this.storyCircles.reset(storyCircles);
+            }.bind(this));
+
             this.socket.on('error', function (reason) {
                 console.log('Unable to connect to server', reason);
             }.bind(this));
+
+//            this.storyCircles.on('add', this.createStoryCircle);
 
         },
 
@@ -73,6 +85,14 @@ define([
             this.socket.emit('player', {
                 id: this.players.getAvatarId(),
                 takingBreak: false
+            });
+        },
+
+        createStoryCircle: function(attributes) {
+            this.socket.emit('storyCircle', {
+                playerName: attributes.playerName,
+                storyCircleName: attributes.storyCircleName,
+                maxNumPlayers: attributes.maxNumPlayers
             });
         }
     });

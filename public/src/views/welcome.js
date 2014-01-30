@@ -2,8 +2,9 @@ define([
     'jquery',
     'underscore',
     'backbone',
-    'text!templates/welcome.html'
-], function($, _, Backbone, WelcomeTemplate){
+    'text!templates/welcome.html',
+    'views/create-story-circle'
+], function($, _, Backbone, WelcomeTemplate, CreateStoryCircleView){
 
     var View = Backbone.View.extend({
 
@@ -13,6 +14,15 @@ define([
 
         template: _.template(WelcomeTemplate),
 
+        masterView: null,
+
+        events: {
+            'click #create-circle': function() {
+                this.masterView.openCreateStoryCircleView();
+            },
+            'click #join-circle': function() { alert('joining circle');}
+        },
+
         initialize: function (obj) {
             _(this).extend(obj);
 
@@ -20,6 +30,7 @@ define([
 
         render: function () {
             this.$el.html(this.template({}));
+            this.$el.show();
             return this;
         }
     });

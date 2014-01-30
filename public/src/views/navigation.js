@@ -15,6 +15,15 @@ define([
             role: 'navigation'
         },
 
+        events: {
+            'click #nav-story-circles': function() {
+                this.masterView.openStoryCirclesView();
+            },
+            'click #nav-home': function() {
+                this.masterView.openWelcomeView();
+            }
+        },
+
         template: _.template(NavigationTemplate),
 
         gameTurn: false,

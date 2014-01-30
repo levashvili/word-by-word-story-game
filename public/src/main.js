@@ -6,6 +6,7 @@ require.config({
         underscore: '../lib/underscore/underscore',
         backbone: '../lib/backbone/backbone',
         localStorage: '../lib/backbone/backbone.localStorage',
+        webSocketsStorage: '../lib/backbone/backbone.webSocketsStorage',
         bootstrap: '../lib/bootstrap/js/bootstrap',
         text: '../lib/require/text',
         socket_io: '../lib/socket.io/socket.io'
@@ -21,6 +22,10 @@ require.config({
         localStorage: {
             deps: ["backbone"],
             exports: "localStorage"
+        },
+        webSocketsStorage: {
+            deps: ["backbone"],
+            exports: "webSocketsStorage"
         }
     }
 });
@@ -28,28 +33,20 @@ require.config({
 require([
     'jquery',
     'backbone',
-    'localStorage',
     'socket_io',
     'views/master-view',
     'collections/players',
     'models/story',
-    'collections/paragraphs',
     'web-sockets-events-dispatcher',
-    'models/player',
-    'views/welcome',
-    'views/navigation'
+    'collections/story-circles'
 ], function($,
             Backbone,
-            LocalStorage,
             SocketIO,
             MasterView,
             PlayerCollection,
             Story,
-            ParagraphsCollection,
             SocketEventDispatcher,
-            Player,
-            WelcomeView,
-            NavigationView
+            StoryCirclesCollection
     ) {
 
     var Router = Backbone.Router.extend({
@@ -68,24 +65,40 @@ require([
 
             this.story = new Story();
 
+            this.storyCircles = new StoryCirclesCollection([{
+                playerName: "Leena",
+                storyCircleName: "Circle1",
+                maxNumPlayers: 6
+            },{
+                playerName: "Leena",
+                storyCircleName: "Circle2",
+                maxNumPlayers: 6
+            },{
+                playerName: "Leena",
+                storyCircleName: "Circle3",
+                maxNumPlayers: 6
+            },{
+                playerName: "Leena",
+                storyCircleName: "Circle4",
+                maxNumPlayers: 6
+            }]);
+
             this.dispatcher = new SocketEventDispatcher({
                 players: this.players,
                 story: this.story,
+                storyCircles: this.storyCircles,
                 gameRoomEvents: this.gameRoomEvents
             });
 
             var masterView = new MasterView({
                 playerCollection: this.players,
                 story: this.story,
+                storyCircles: this.storyCircles,
                 gameRoomEvents: this.gameRoomEvents,
                 socketEvents: this.dispatcher
             });
 
-            var welcomeView = new WelcomeView();
-            var navigationView = new NavigationView();
-
-            $("#navigation").html(navigationView.render().el).show();
-            $("#welcome").html(welcomeView.render().el).show();
+            $("body").html(masterView.render().el).show();
         }
     });
 
