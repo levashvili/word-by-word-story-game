@@ -24,13 +24,13 @@ var
     , io = require("socket.io").listen(http)
     , _ = require("underscore")
     , StoryCircle = require("./storyCircle")
+    , SessionManager = require("./sessionManager")
     , util = require('util');
 
 http.listen(port);/* Server config */
 
-var connections = [];
-var storyCircles = [];
-var getStoryCircles = function() {
+
+var getStoryCirclesData = function(storyCircles) {
     var circles = [];
     _.each(storyCircles, function(circle) {
        circles.push({
@@ -41,6 +41,9 @@ var getStoryCircles = function() {
     });
     return circles;
 };
+
+var sessionManager = new sessionManager.SessionManager([]);
+
 var generateUid = function (separator) {
     /// <summary>
     ///    Creates a unique id for identification purposes.
@@ -58,12 +61,12 @@ var generateUid = function (separator) {
     return (S4() + S4() + delim + S4() + delim + S4() + delim + S4() + delim + S4() + S4() + S4());
 };
 
-var emitToAllConnections = function(event, data) {
-    _(connections).each(function(connection, index, connections) {
-        console.log("element is " + util.inspect(connection));
-        if(io.sockets.socket(connection.sessionId)) {
-            console.log("emitting to " + util.inspect(connection));
-            io.sockets.socket(connection.sessionId).emit(event, data);
+var emitToSessions = function(event, data, sessionIds) {
+    _(sessionIds).each(function(sessionId) {
+        console.log("element is " + sessionId);
+        if(io.sockets.socket(sessionId)) {
+            console.log("emitting to " + sessionId);
+            io.sockets.socket(sessionId).emit(event, data);
         }
     })
 };
@@ -71,21 +74,13 @@ var emitToAllConnections = function(event, data) {
 /* Socket.IO events */
 
 io.on("connection", function(socket) {
-    connections.push({
-        sessionId: socket.id,
-        playerId: socket.id
+
+    socket.on('subscribe:global', function() {
+        sessionManager.addSession(socket.id);
+        socket.emit('global:storyCircles:reset', getStoryCirclesData(sessionManager.getAllStoryCircles()));
     });
 
-//    socket.emit('players', gameRoom.getPlayers());
-//    socket.emit('story', gameRoom.getStoryText());
-//
-//    socket.on('player', function(player) {
-//        console.log("received player event " + util.inspect(player));
-//        gameRoom.addPlayer(player);
-//        emitToAllConnections('players', gameRoom.getPlayers());
-//    });
-    socket.emit('storyCircles', getStoryCircles());
-    socket.on('storyCircle', function(storyCircle) {
+    socket.on('global:storyCircles:add', function(storyCircle) {
         console.log("received story circle event " + util.inspect(storyCircle));
         var circle = new StoryCircle.StoryCircle({
             playerId: socket.id,
@@ -94,29 +89,62 @@ io.on("connection", function(socket) {
             storyCircleName: storyCircle.storyCircleName,
             maxNumPlayers: storyCircle.maxNumPlayers
         });
-        storyCircles.push(circle);
-        emitToAllConnections('storyCircle', {
+
+        sessionManager.addStoryCircle(socket.id, circle);
+
+        emitToSessions('global:storyCircles:add', {
             id: circle.getId(),
             storyCircleName: circle.getName(),
             maxNumPlayers: circle.getMaxNumPlayers()
-        });
+        }, sessionManager.getAllSessions());
     });
 
-//    socket.on('story', function(text) {
-//        console.log("received story event " + util.inspect(text));
-//        if(gameRoom.appendText(socket.id, text)) {
-//            emitToAllConnections('story', text);
-//            emitToAllConnections('players', gameRoom.getPlayers());
-//        }
-//    })
+    socket.on('subscribe:storyCircle', function(circleId) {
+        sessionManager.subscribeToCircle(socket.id, circleId);
+    });
+
+    socket.on('storyCircle:players:add', function(player) {
+        console.log("received player event " + util.inspect(player));
+        var circle = sessionManager.getStoryCircleBySession(socket.id);
+        if(circle) {
+            circle.addPlayer(player);
+            emitToSessions('storyCircle:players:reset',
+                circle.getPlayers(), sessionManager.getCircleSubscribers(circle.getId()));
+        }
+
+    })
+
+    socket.on('storyCircle:story:append', function(text) {
+        console.log("received story event " + util.inspect(text));
+        var circle = sessionManager.getStoryCircleBySession(socket.id);
+        if(circle) {
+            if(circle.appendText(socket.id, text)) {
+                emitToSessions('storyCircle:story:append', text,
+                    sessionManager.getCircleSubscribers(circle.getId())
+                );
+                emitToSessions('StoryCircle:players:reset',
+                    circle.getPlayers(),
+                    sessionManager.getCircleSubscribers(circle.getId())
+                );
+            }
+
+        }
+    })
 
     socket.on('disconnect', function () {
+        //unSubscribe
+        var circle = sessionManager.getStoryCircleBySession(socket.id);
+        if(circle) {
+            sessionManager.unSubscribeFromCircle(socket.id);
+            if(circle.removePlayer(socket.id)) {
+                emitToSessions('storyCircle:players:reset', circle.getPlayers(),
+                    sessionManager.getCircleSubscribers(circle.getId())
+                );
+            }
+        }
+        sessionManager.unSubscribeGlobally(socket.id);
 
-//        gameRoom.removePlayer(socket.id);
-//        connections = _.reject(connections, function(connection) {
-//            connection.sessionId == socket.id;
-//        });
-//        emitToAllConnections('players', gameRoom.getPlayers());
+
     });
 });
 

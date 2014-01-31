@@ -42,7 +42,8 @@ define([
                 }),
                 storyCirclesView: new StoryCirclesView({
                     collection: this.storyCircles,
-                    masterView: this
+                    masterView: this,
+                    socketEvents: this.socketEvents
                 }),
                 storyEditorView: new StoryEditorView({
                     collection:this.playerCollection,

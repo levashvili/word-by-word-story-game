@@ -2,9 +2,8 @@ define([
     'jquery',
     'underscore',
     'backbone',
-    'text!templates/story-circle-editor.html',
-    'models/player'
-], function($, _, Backbone, StoryEditorTemplate, Player){
+    'text!templates/story-circle-editor.html'
+], function($, _, Backbone, StoryEditorTemplate){
 
     var View = Backbone.View.extend({
 
@@ -16,7 +15,8 @@ define([
 
         initialize: function (obj) {
             _(this).extend(obj);
-
+            this.collection.on('reset', this.render.bind(this));
+            this.model.on('change', this.render.bind(this));
         },
 
         render: function () {

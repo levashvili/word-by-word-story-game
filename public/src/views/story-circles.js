@@ -38,7 +38,8 @@ define([
 
         enterStoryCircle: function(event) {
 //            event.currentTarget.id;
-            this.masterView.openStoryEditorView();
+//            this.masterView.openStoryEditorView();
+            this.socketEvents.enterStoryCircle(event.currentTarget.id);
         }
     });
 

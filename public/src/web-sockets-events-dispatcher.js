@@ -26,9 +26,10 @@ define([
              for that.
              */
             this.socket.on('connect', function () {
-//                this.player.attributes.id = this.socket.socket.sessionid;
-//                console.log('client connected with session id ' + this.player.attributes.id);
                 this.players.setAvatarId(this.socket.socket.sessionid);
+                //subscribe to global events
+                console.log('subscribing to global stream');
+                this.socket.emit('subscribe:global');
             }.bind(this));
 
             this.socket.on('players', function(players) {
@@ -42,13 +43,13 @@ define([
 
             }.bind(this));
 
-            this.socket.on('storyCircle', function(storyCircle) {
-                console.log('received story circle event');
+            this.socket.on('global:storyCircles:add', function(storyCircle) {
+                console.log('received global:storyCircles:add event');
                 this.storyCircles.add(storyCircle);
             }.bind(this));
 
-            this.socket.on('storyCircles', function(storyCircles) {
-                console.log('received story circles event');
+            this.socket.on('global:storyCircles:reset', function(storyCircles) {
+                console.log('received global:storyCircles:reset event');
                 this.storyCircles.reset(storyCircles);
             }.bind(this));
 
@@ -89,11 +90,16 @@ define([
         },
 
         createStoryCircle: function(attributes) {
-            this.socket.emit('storyCircle', {
+            this.socket.emit('global:storyCircles:add', {
                 playerName: attributes.playerName,
                 storyCircleName: attributes.storyCircleName,
                 maxNumPlayers: attributes.maxNumPlayers
             });
+        },
+
+        enterStoryCircle: function(storyCircleId) {
+            console.log('subscribing to story circle ' + storyCircleId);
+            this.socket.emit('subscribe:storyCircle', storyCircleId);
         }
     });
 
