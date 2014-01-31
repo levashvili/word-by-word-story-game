@@ -91,6 +91,13 @@ io.on("connection", function(socket) {
         });
 
         sessionManager.addStoryCircle(socket.id, circle);
+        //player automatically subscribed, send him players and story
+        socket.emit('storyCircle:players:reset',
+            circle.getPlayers()
+        );
+        socket.emit('storyCircle:story:reset',
+            circle.getStoryText()
+        );
 
         emitToSessions('global:storyCircles:add', {
             id: circle.getId(),
@@ -151,6 +158,10 @@ io.on("connection", function(socket) {
                     sessionManager.getCircleSubscribers(circle.getId())
                 );
             }
+            //update circles list in case there are no more subscriptions to this circle
+            emitToSessions('global:storyCircles:reset', getStoryCirclesData(sessionManager.getAllStoryCircles()),
+                sessionManager.getAllSessions()
+            );
         }
         sessionManager.unSubscribeGlobally(socket.id);
 

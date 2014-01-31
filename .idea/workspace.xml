@@ -3,10 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="e751f12d-1dce-4660-921e-7753d44146a1" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server.js" afterPath="$PROJECT_DIR$/server.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/sessionManager-test.js" afterPath="$PROJECT_DIR$/test/sessionManager-test.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sessionManager.js" afterPath="$PROJECT_DIR$/sessionManager.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/storyCircle.js" afterPath="$PROJECT_DIR$/storyCircle.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/src/web-sockets-events-dispatcher.js" afterPath="$PROJECT_DIR$/public/src/web-sockets-events-dispatcher.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/src/views/story-circles.js" afterPath="$PROJECT_DIR$/public/src/views/story-circles.js" />
     </list>
     <ignored path="Chat.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -32,7 +29,7 @@
       <file leaf-file-name="story-circles.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/src/views/story-circles.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="43" column="7" selection-start="1138" selection-end="1138" vertical-scroll-proportion="0.0" vertical-offset="220" max-vertical-offset="795">
+            <state line="41" column="40" selection-start="1087" selection-end="1087" vertical-scroll-proportion="0.0" vertical-offset="395" max-vertical-offset="795">
               <folding />
             </state>
           </provider>
@@ -68,7 +65,7 @@
       <file leaf-file-name="server.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/server.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="18" column="59" selection-start="545" selection-end="545" vertical-scroll-proportion="0.22580644" vertical-offset="200" max-vertical-offset="2565">
+            <state line="161" column="112" selection-start="5609" selection-end="5609" vertical-scroll-proportion="0.66129035" vertical-offset="2210" max-vertical-offset="2730">
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -88,7 +85,7 @@
       <file leaf-file-name="sessionManager.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sessionManager.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="48" column="8" selection-start="1178" selection-end="1178" vertical-scroll-proportion="0.0" vertical-offset="557" max-vertical-offset="2190">
+            <state line="59" column="8" selection-start="1393" selection-end="1393" vertical-scroll-proportion="0.0" vertical-offset="605" max-vertical-offset="2190">
               <folding />
             </state>
           </provider>
@@ -97,7 +94,7 @@
       <file leaf-file-name="storyCircle.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/storyCircle.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="108" column="53" selection-start="3444" selection-end="3444" vertical-scroll-proportion="0.0" vertical-offset="1430" max-vertical-offset="2340">
+            <state line="140" column="4" selection-start="4384" selection-end="4384" vertical-scroll-proportion="0.0" vertical-offset="1997" max-vertical-offset="2340">
               <folding />
             </state>
           </provider>
@@ -138,13 +135,13 @@
         <option value="$PROJECT_DIR$/public/src/templates/story-circle-editor.html" />
         <option value="$PROJECT_DIR$/public/css/style.less" />
         <option value="$PROJECT_DIR$/public/src/views/story-circle-editor.js" />
-        <option value="$PROJECT_DIR$/public/src/views/story-circles.js" />
         <option value="$PROJECT_DIR$/public/src/views/master-view.js" />
         <option value="$PROJECT_DIR$/test/server-test.js" />
         <option value="$PROJECT_DIR$/test/sessionManager-test.js" />
         <option value="$PROJECT_DIR$/sessionManager.js" />
         <option value="$PROJECT_DIR$/public/src/web-sockets-events-dispatcher.js" />
         <option value="$PROJECT_DIR$/storyCircle.js" />
+        <option value="$PROJECT_DIR$/public/src/views/story-circles.js" />
         <option value="$PROJECT_DIR$/server.js" />
       </list>
     </option>
@@ -540,13 +537,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/src/views/story-circles.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="43" column="7" selection-start="1138" selection-end="1138" vertical-scroll-proportion="0.0" vertical-offset="220" max-vertical-offset="795">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/src/views/master-view.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="45" column="51" selection-start="1701" selection-end="1701" vertical-scroll-proportion="0.0" vertical-offset="280" max-vertical-offset="1650">
@@ -582,13 +572,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/sessionManager.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="48" column="8" selection-start="1178" selection-end="1178" vertical-scroll-proportion="0.0" vertical-offset="557" max-vertical-offset="2190">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/src/web-sockets-events-dispatcher.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="114" column="0" selection-start="3789" selection-end="3789" vertical-scroll-proportion="0.0" vertical-offset="1430" max-vertical-offset="1800">
@@ -596,16 +579,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/public/src/views/story-circles.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="41" column="40" selection-start="1087" selection-end="1087" vertical-scroll-proportion="0.0" vertical-offset="395" max-vertical-offset="795">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sessionManager.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="59" column="8" selection-start="1393" selection-end="1393" vertical-scroll-proportion="0.0" vertical-offset="605" max-vertical-offset="2190">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/storyCircle.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="108" column="53" selection-start="3444" selection-end="3444" vertical-scroll-proportion="0.0" vertical-offset="1430" max-vertical-offset="2340">
+        <state line="140" column="4" selection-start="4384" selection-end="4384" vertical-scroll-proportion="0.0" vertical-offset="1997" max-vertical-offset="2340">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/server.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="59" selection-start="545" selection-end="545" vertical-scroll-proportion="0.22580644" vertical-offset="200" max-vertical-offset="2565">
+        <state line="161" column="112" selection-start="5609" selection-end="5609" vertical-scroll-proportion="0.66129035" vertical-offset="2210" max-vertical-offset="2730">
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
