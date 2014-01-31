@@ -32,12 +32,18 @@ define([
                 this.socket.emit('subscribe:global');
             }.bind(this));
 
-            this.socket.on('players', function(players) {
+            this.socket.on('storyCircle:players:reset', function(players) {
                 this.players.reset(players);
                 console.log('received players event');
             }.bind(this));
 
-            this.socket.on('story', function(text) {
+            this.socket.on('storyCircle:story:reset', function(text) {
+                console.log('received story event');
+                this.story.set('text', text);
+
+            }.bind(this));
+
+            this.socket.on('storyCircle:story:append', function(text) {
                 console.log('received story event');
                 this.story.set('text', this.story.get('text') + text);
 
@@ -62,7 +68,7 @@ define([
         },
 
         joinGame: function(name) {
-            this.socket.emit('player', {
+            this.socket.emit('storyCircle:players:add', {
                 id: this.players.getAvatarId(),
                 name: name
             });
@@ -70,12 +76,12 @@ define([
         },
 
         submitText: function(text) {
-            this.socket.emit('story', text);
+            this.socket.emit('storyCircle:story:append', text);
         },
 
         takeBreak: function() {
             console.log('taking break')
-            this.socket.emit('player', {
+            this.socket.emit('storyCircle:players:add', {
                 id: this.players.getAvatarId(),
                 takingBreak: true
             });
@@ -83,7 +89,7 @@ define([
 
         returnFromBreak: function() {
             console.log('returning from break');
-            this.socket.emit('player', {
+            this.socket.emit('storyCircle:players:add', {
                 id: this.players.getAvatarId(),
                 takingBreak: false
             });

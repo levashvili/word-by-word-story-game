@@ -68,6 +68,10 @@ suite.addBatch({
         'we can get storyCircle by session': function(sessionManager) {
             assert.equal(sessionManager.getStoryCircleBySession('1x111').getId(), 'sc1x111');
         },
+        'we can get story circle': function(sessionManager) {
+            assert.isObject(sessionManager.getStoryCircle('sc1x111'));
+            assert.equal(sessionManager.getStoryCircle('sc1x111').getId(), 'sc1x111');
+        },
         'we can un-subscribe from circle': function(sessionManager) {
             sessionManager.unSubscribeFromCircle('1x111');
             assert.lengthOf(sessionManager.getCircleSubscribers('sc1x111'), 1);
@@ -94,6 +98,7 @@ suite.addBatch({
             sessionManager.unSubscribeGlobally('1x116');
             assert.isNull(sessionManager.getSession('1x116'));
         }
+
 
     }
 

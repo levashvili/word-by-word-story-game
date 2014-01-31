@@ -96,7 +96,13 @@ _.extend(StoryCircle.prototype, events.EventEmitter, {
                 players[(index + 1) % players.length].gameTurn = true;
             }
         });
+        var previousPlayersList = this.players;
         this.players = _.reject(this.players, function(player){ return player.id == id; });
+        if(previousPlayersList.length > this.players.length) {
+            return true;
+        } else {
+            return false;
+        }
     },
 
     appendText: function(playerId, text) {

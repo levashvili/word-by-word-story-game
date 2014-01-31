@@ -24,7 +24,7 @@ var
     , io = require("socket.io").listen(http)
     , _ = require("underscore")
     , StoryCircle = require("./storyCircle")
-    , SessionManager = require("./sessionManager")
+    , sessionManager = require("./sessionManager")
     , util = require('util');
 
 http.listen(port);/* Server config */
@@ -101,6 +101,16 @@ io.on("connection", function(socket) {
 
     socket.on('subscribe:storyCircle', function(circleId) {
         sessionManager.subscribeToCircle(socket.id, circleId);
+        var circle = sessionManager.getStoryCircle(circleId);
+        if(circle) {
+            socket.emit('storyCircle:players:reset',
+                circle.getPlayers()
+            );
+            socket.emit('storyCircle:story:reset',
+                circle.getStoryText()
+            );
+        }
+
     });
 
     socket.on('storyCircle:players:add', function(player) {

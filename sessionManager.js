@@ -42,6 +42,17 @@ _.extend(SessionManager.prototype, events.EventEmitter, {
         return session;
     },
 
+    getStoryCircle: function(circleId) {
+        var session = _.find(this.sessions, function(session) {
+            return (session.storyCircle) ? session.storyCircle.getId() == circleId : false;
+        });
+        if(session) {
+            return session.storyCircle;
+        } else {
+            return null;
+        }
+    },
+
     getAllSessions: function() {
         return _.pluck(this.sessions, 'sessionId');
     },
